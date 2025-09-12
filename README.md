@@ -2,7 +2,8 @@
 
 ### Code for Table Generation
 
-```CREATE TABLE patient(
+```
+CREATE TABLE patient(
   id GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   first_name VARCHAR(255) NOT NULL,
   last_name VARCHAR(255) NOT NULL,
@@ -19,21 +20,23 @@
   insurance_policy_number VARCHAR(30) NOT NULL,
  );
  ```
-   ALTER TABLE patient
+ ```
+ALTER TABLE patient
    ADD CONSTRAINT chk_insurance_policy_number
    CHECK (
    (insurance_provider IS NULL AND insurance_policy_number IS NULL)
    OR
    (insurance_provider IS NOT NULL AND policy_number IS NOT NULL)
     );
-   
-CONDITIONAL CONSTRAINT: IF INSURANCE PROVIDER NULL, POLICY NUMBER NULL ALSO
-IF INSURANCE PROVIDER NOT NULL, THEN POLICY NUMBER NOT NULL ALSO
+ ```
 
 
  CREATE TABLE medical(
   medical_record_id GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  patient_id FOREIGN KEY NOT NULL,
+  patient_id INTEGER
+    CONSTRAINT fk_medical_patient 
+    FOREIGN KEY patient_id
+    REFERENCES patient (id),
   flight_number VARCHAR(20) NOT NULL,
   tail_number VARCHAR(45),
   origin VARCHAR(4) NOT NULL,
