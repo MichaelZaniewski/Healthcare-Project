@@ -2,7 +2,7 @@
 
 ### Code for Table Generation
 
-CREATE TABLE patient(
+```CREATE TABLE patient(
   id GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   first_name VARCHAR(255) NOT NULL,
   last_name VARCHAR(255) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE patient(
   insurance_provider VARCHAR(255),
   insurance_policy_number VARCHAR(30) NOT NULL,
  );
- 
+ ```
    ALTER TABLE patient
    ADD CONSTRAINT chk_insurance_policy_number
    CHECK (
