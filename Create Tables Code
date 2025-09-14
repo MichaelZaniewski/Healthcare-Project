@@ -1,0 +1,91 @@
+#Creating Tables
+
+-- ============================
+-- CUSTOMER TABLE
+-- ============================
+CREATE TABLE customer (
+    patient_id              SERIAL PRIMARY KEY,
+    first_name              TEXT    NOT NULL,   
+    last_name               TEXT    NOT NULL,
+    date_of_birth           DATE    NOT NULL,
+    age                     INT     NOT NULL,
+    gender                  TEXT    NOT NULL CHECK (gender IN ('Male','Female')),
+    phone_number            TEXT    NOT NULL,
+    email                   TEXT    NOT NULL,
+    address                 TEXT    NOT NULL,
+    city                    TEXT    NOT NULL,
+    state                   CHAR(2) NOT NULL,
+    zipcode                 CHAR(5) NOT NULL,
+    insurance_provider      TEXT,
+    insurance_policy_number TEXT,
+    CONSTRAINT chk_insurance_consistency
+        CHECK (
+            insurance_provider IS NOT NULL
+            OR insurance_policy_number IS NULL
+        )
+);
+
+-- ============================
+-- VISIT TABLE
+-- ============================
+CREATE TABLE visit (
+    visit_id             SERIAL PRIMARY KEY,
+    patient_id           INT NOT NULL REFERENCES customer(patient_id) ON DELETE CASCADE,
+    age                  INT NOT NULL,
+    gender               TEXT NOT NULL CHECK (gender IN ('Male','Female')),
+    blood_type           TEXT NOT NULL CHECK (blood_type IN ('A+','A-','B+','B-','AB+','AB-','O+','O-')),
+    condition            TEXT NOT NULL,
+    severity             TEXT NOT NULL CHECK (severity IN ('Normal','Mild','Moderate','Severe')),
+    treatment            TEXT NOT NULL,
+    medication           TEXT,
+    dosage               TEXT,
+    frequency            TEXT,
+    test_results         TEXT NOT NULL CHECK (test_results IN ('Positive','Negative','Inconclusive')),
+    doctor               TEXT NOT NULL,
+    hospital             TEXT NOT NULL,
+    room_number          INT NOT NULL,
+    date_of_admission    DATE NOT NULL CHECK (date_of_admission <= DATE '2025-09-13'),
+    date_of_discharge    DATE NOT NULL CHECK (date_of_discharge >= date_of_admission AND date_of_discharge <= DATE '2025-09-13'),
+    follow_up_required   TEXT NOT NULL CHECK (follow_up_required IN ('Y','N'))
+);
+
+-- ============================
+-- BILLING TABLE
+-- ============================
+CREATE TABLE billing (
+    billing_id                  SERIAL PRIMARY KEY,
+    visit_id                    INT NOT NULL UNIQUE REFERENCES visit(visit_id) ON DELETE CASCADE,
+    patient_id                  INT NOT NULL REFERENCES customer(patient_id) ON DELETE CASCADE,
+    billing_date                DATE NOT NULL CHECK (billing_date <= DATE '2025-09-13'),
+    total_charge                INT  NOT NULL CHECK (total_charge > 0),
+    insurance_coverage_amount   INT  NOT NULL CHECK (insurance_coverage_amount >= 0 AND insurance_coverage_amount <= total_charge * 0.9),
+    patient_responsibility_amount INT NOT NULL,
+    payment_plan                TEXT NOT NULL CHECK (payment_plan IN ('Full','Incremental')),
+    expected_payment_date       DATE NOT NULL,
+    actual_payment_date         DATE,
+    payment_status              TEXT NOT NULL CHECK (payment_status IN ('Paid','Late-Paid','In-progress','Late-Unpaid'))
+);
+
+-- ============================
+-- INDEXES
+-- ============================
+
+-- CUSTOMER
+CREATE UNIQUE INDEX idx_customer_email ON customer(email);
+CREATE INDEX idx_customer_insurance ON customer(insurance_provider);
+
+-- VISIT
+CREATE INDEX idx_visit_patient ON visit(patient_id);
+CREATE INDEX idx_visit_condition ON visit(condition);
+CREATE INDEX idx_visit_severity ON visit(severity);
+CREATE INDEX idx_visit_admission_date ON visit(date_of_admission);
+CREATE INDEX idx_visit_condition_date ON visit(condition, date_of_admission);
+CREATE INDEX idx_visit_patient_date ON visit(patient_id, date_of_admission);
+
+-- BILLING
+CREATE INDEX idx_billing_visit ON billing(visit_id);
+CREATE INDEX idx_billing_patient ON billing(patient_id);
+CREATE INDEX idx_billing_status ON billing(payment_status);
+CREATE INDEX idx_billing_date ON billing(billing_date);
+CREATE INDEX idx_billing_patient_date ON billing(patient_id, billing_date);
+CREATE INDEX idx_billing_status_date ON billing(payment_status, billing_date);
