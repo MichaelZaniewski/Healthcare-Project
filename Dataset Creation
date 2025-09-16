@@ -1,6 +1,14 @@
 #Creating the Dataset
 The dataset is comprised of three tables: Patient Information, Visit Information, and Billing Information.
-All data is generated 
+All data is generated.
+
+
 
 Generation Process:
+ChatGPT was used to generate the python script that subsequently generated the dataset.
+
+I designed this synthetic healthcare dataset with ChatGPT as a co-pilot: we debated realistic clinical, operational, and billing rules, then translated them into a single Python generator that produces linked patients, visits, and billing tables plus a validation summary. We separated treatment from medication (with life-like drug names, doses, and frequencies), modeled follow-ups and “Monitoring” (including a small no-show rate for minor conditions), tightened provider continuity (same doctor/hospital preferred; otherwise same hospital or at least same state), and made same-day discharges more common only for mild severities with minor conditions. Billing was kept strictly 1:1 with visits, with sensible coverage and charge behavior, and we moved billing_date into the billing table where it belongs.
+
+
+
 python M:\PROJECT\healthcare_dataset_generator_v12.py --patients 50000 --validate --outdir M:\PROJECT\healthcare_v12out --export-prefix healthcare_v12
