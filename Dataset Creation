@@ -3,4 +3,4 @@ The dataset is comprised of three tables: Patient Information, Visit Information
 All data is generated 
 
 Generation Process:
-python M:\PROJECT\healthcare_dataset_generator_v11.py --patients 50000 --validate --outdir M:\PROJECT\healthcare_v11out --export-prefix healthcare_v11
+python M:\PROJECT\healthcare_dataset_generator_v12.py --patients 50000 --validate --outdir M:\PROJECT\healthcare_v12out --export-prefix healthcare_v12
