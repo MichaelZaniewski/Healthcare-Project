@@ -1,0 +1,6 @@
+#Creating the Dataset
+The dataset is comprised of three tables: Patient Information, Visit Information, and Billing Information.
+All data is generated 
+
+Generation Process:
+python M:\PROJECT\healthcare_dataset_generator_v11.py --patients 50000 --validate --outdir M:\PROJECT\healthcare_v11out --export-prefix healthcare_v11
