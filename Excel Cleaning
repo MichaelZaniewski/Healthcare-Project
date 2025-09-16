@@ -1,0 +1,16 @@
+#Excel Cleaning
+Patients
+- Format date properly YYYY/MM/DD
+- Clean first_name and concatonize into full_name
+- remove ` from zipcodes
+- trim all leading and trailing spaces
+- remove duplicates
+
+Visits
+
+
+Billing
+- changed to full_name
+- Consider removing payment_status and manually calculating it?
+
+i dont need patient_id or full name in billing - removing them
