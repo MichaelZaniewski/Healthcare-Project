@@ -25,7 +25,6 @@ CREATE TABLE patient (
             insurance_provider IS NOT NULL
             OR insurance_policy_number IS NULL
         )
-    
 );
 
 -- ============================
