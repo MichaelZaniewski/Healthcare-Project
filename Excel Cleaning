@@ -12,4 +12,3 @@ Billing
 - changed to full_name
 - Consider removing payment_status and manually calculating it?
 
-i dont need patient_id or full name in billing - removing them
