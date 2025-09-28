@@ -26,3 +26,26 @@ FROM visit
 WHERE follow_up_required = 'Y' 
 GROUP BY condition
 ORDER BY followups DESC 
+
+
+
+For the hospital with the highest patient volume, find the percentage of patients discharged on the same day, after one night, and after multi nights. How do these percentages compare to the rest of the dataset? (CTE's)
+
+WITH Lewis_Inc_Hospital AS (SELECT 'Lewis Inc Hospital' AS scope,
+TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los = 0) / COUNT(*)::NUMERIC),2),'999D99%') AS sameday,
+TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los = 1) / COUNT(*)::NUMERIC),2),'999D99%') AS one_night,
+TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los > 1) / COUNT(*)::NUMERIC),2),'999D99%') AS multi_night
+FROM visit
+WHERE hospital = 'Lewis Inc Hospital'),
+
+National AS (SELECT 'Nationally' AS scope,
+TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los = 0) / COUNT(*)::NUMERIC),2),'999D99%') AS sameday,
+TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los = 1) / COUNT(*)::NUMERIC),2),'999D99%') AS one_night,
+TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los > 1) / COUNT(*)::NUMERIC),2),'999D99%') AS multi_night
+FROM visit)
+
+SELECT scope, sameday, one_night, multi_night
+FROM Lewis_Inc_Hospital
+UNION
+SELECT scope, sameday, one_night, multi_night
+FROM National
