@@ -5,3 +5,24 @@ ALTER TABLE visits
 ADD COLUMN los INT GENERATED ALWAYS AS (
     GREATEST((date_of_discharge::date - date_of_admission::date), 0)
 ) STORED;
+
+easy join
+FROM patient p JOIN billing b ON p.id = b.patient_id JOIN visit v ON b.visit_id = v.visit_id
+
+Exploratory Analysis:
+1) Frequency of LOS 
+------------
+SELECT los, COUNT(*)
+FROM visit
+GROUP BY los
+ORDER BY los ASC
+-------------
+2) Frequency of conditions (and distinct conditions)
+
+3) Frequency of followups
+SELECT 
+condition, count(follow_up_required) as Followups
+FROM visit
+WHERE follow_up_required = 'Y' 
+GROUP BY condition
+ORDER BY followups DESC 
