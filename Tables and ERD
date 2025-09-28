@@ -37,7 +37,7 @@
 | billing_date  | DATE          | actual_payment_date             | DATE          |
 | total_charge  | NUMERIC(12,2) | payment_status                  | TEXT          |
 
-#Create Tables Code:
+
 #Creating Tables
 
 -- ============================
