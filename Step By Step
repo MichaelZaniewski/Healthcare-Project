@@ -33,6 +33,13 @@ FROM visit
 GROUP BY condition
 ORDER BY visits_for DESC
 
+5) Total late payments where insurance_provider IS NOT NULL (92836)
+SELECT SUM(late_paid + late_unpaid)
+FROM (SELECT COUNT(*) FILTER(WHERE payment_status = 'Late-Paid') AS late_paid,
+COUNT(*) FILTER(WHERE payment_status = 'Late-Unpaid') as late_unpaid
+FROM billing b JOIN patient p ON b.patient_id = p.id
+WHERE insurance_provider IS NOT NULL)
+
 
 -------
 For the hospital with the highest patient volume, find the percentage of patients discharged on the same day, after one night, and after multi nights. How do these percentages compare to the rest of the dataset? (CTE's)
