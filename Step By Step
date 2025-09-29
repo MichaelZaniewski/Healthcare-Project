@@ -27,8 +27,14 @@ WHERE follow_up_required = 'Y'
 GROUP BY condition
 ORDER BY followups DESC 
 
+4) Frequency by condition
+SELECT condition, COUNT(visit_id) AS visits_for
+FROM visit
+GROUP BY condition
+ORDER BY visits_for DESC
 
 
+-------
 For the hospital with the highest patient volume, find the percentage of patients discharged on the same day, after one night, and after multi nights. How do these percentages compare to the rest of the dataset? (CTE's)
 
 WITH Lewis_Inc_Hospital AS (SELECT 'Lewis Inc Hospital' AS scope,
@@ -49,3 +55,6 @@ FROM Lewis_Inc_Hospital
 UNION
 SELECT scope, sameday, one_night, multi_night
 FROM National
+------------
+
+
