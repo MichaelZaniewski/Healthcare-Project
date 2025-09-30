@@ -96,3 +96,19 @@ WHERE provider_rank = 1
 
 
 
+CONTUINED 
+-- What is the top insurance provider in the top 5 hospitals
+SELECT hospital, top_hospitals_ranked, cnt_patients
+FROM(SELECT hospital, cnt_patients,
+ROW_NUMBER() OVER (ORDER BY cnt_patients DESC) AS top_hospitals_ranked
+FROM(SELECT hospital, COUNT(*) as cnt_patients
+				FROM visit
+				GROUP BY hospital
+				ORDER BY cnt_patients DESC
+				LIMIT 5)
+)
+
+
+
+
+
