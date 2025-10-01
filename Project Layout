@@ -1,0 +1,21 @@
+Proect Layout
+
+#Section 1: Late Payments and Revenue Cycle (Recommendation: Negotiate with underperforming insurers)
+1) Which insurance providers have the highest share of late payments (paid and unpaid)?
+2) Total financial loss from late/unpaid bills by insurer? Put into context of top 3 hospitals?
+3) Do uninsured/self-pay patients have significantly higher default rates?
+
+#Section 2: Length of Stay Costs (Recommendation: Optimize dischage planning for conditions with high los)
+1) What is the avg cost per day of length of stay?
+2) What conditions drive the longest and most expensive hospital stays?
+3) What is the average cost per day for each condition (total_charge / los)
+4) Are there doctors/hospitals with higher-than-average LOS for the same condition? (inefficient)
+
+#Section 3: Follow-up Visits (Recommendation: Introduce stronger collection strategies for uninsured patients)
+1) Which conditions generate the most follow-ups?
+2) What is the incremental cost of follow-ups compared to initial visits?
+3) Are certain doctors/hospitals driving unnecessary repeat visits? (inefficient)
+
+#Section 4: Payment Plans (Recommendation: Redesign payment plan terms to reduce defaults)
+1) How does the incremental vs full plan affect late payments?
+2) What is the risk-adjusted cost of offering incremental payment options?
