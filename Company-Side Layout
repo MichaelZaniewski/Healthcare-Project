@@ -1,21 +1,43 @@
-Company-Side Project Layout
+#Company-Focused Section
 
-#Section 1: Late Payments and Revenue Cycle (Recommendation: Negotiate with underperforming insurers)
+##Section 1: Late Payments and Revenue Cycle (Recommendation: Negotiate with underperforming insurers)
 1) Which insurance providers have the highest share of late payments (paid and unpaid)?
 2) Total financial loss from late/unpaid bills by insurer? Put into context of top 3 hospitals?
 3) Do uninsured/self-pay patients have significantly higher default rates?
 
-#Section 2: Length of Stay Costs (Recommendation: Optimize dischage planning for conditions with high los)
+##Section 2: Length of Stay Costs (Recommendation: Optimize dischage planning for conditions with high los)
 1) What is the avg cost per day of length of stay?
 2) What conditions drive the longest and most expensive hospital stays?
 3) What is the average cost per day for each condition (total_charge / los)
 4) Are there doctors/hospitals with higher-than-average LOS for the same condition? (inefficient)
 
-#Section 3: Follow-up Visits (Recommendation: Introduce stronger collection strategies for uninsured patients)
+##Section 3: Follow-up Visits (Recommendation: Introduce stronger collection strategies for uninsured patients)
 1) Which conditions generate the most follow-ups?
 2) What is the incremental cost of follow-ups compared to initial visits?
 3) Are certain doctors/hospitals driving unnecessary repeat visits? (inefficient)
 
-#Section 4: Payment Plans (Recommendation: Redesign payment plan terms to reduce defaults)
+##Section 4: Payment Plans (Recommendation: Redesign payment plan terms to reduce defaults)
 1) How does the incremental vs full plan affect late payments?
 2) What is the risk-adjusted cost of offering incremental payment options?
+
+____________________________________________________________________________________________________________________________
+
+#Patient-Focused Section
+##Section 1: Condition-Specific Cost Comparison
+1) What is the avg out-of-pocket expense for each condition (by insurance provider)?
+2) Which hospitals offer the lowest average total charge for common conditions?
+3) Do severe conditions have dramatically difference costs across hospitals/insurers?
+
+##Section 2: Insurance Provider Analysis
+1) Which insurers cover the highest share of cost for high expense conditions (bucket high expense conditions with CASE)
+2) Which insurers have patients with the largest out of pocket costs?
+3) How do patient responsibility percentages compare across insurers?
+
+##Section 3: Hospital Performance
+1) Which hospitals are consistently cheap for same-day, 1-night, and multi-night stays?
+2) Are some hospitals better for specific specialties? ex. Hospital A better for childbirth, B for surgery
+3) Which hospitals have the lowest rates of follow-up visits? (indicating efficiency of treatment)
+
+##Section 4: Patient-Focused Benchmarks
+1) For a patient with insurance, what is the bets provider/hospital combo for minimizing costs by condition?
+2) For uninsured patients, which hospitals are cheapest overall?
