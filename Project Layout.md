@@ -1,7 +1,7 @@
 # Company-Focused Section
 
 ## Section 1: Late Payments and Revenue Cycle (Recommendation: Negotiate with underperforming insurers)
-1) Which insurance providers have the highest share of late payments (paid and unpaid)?
+### 1) Which insurance providers have the highest share of late payments (paid and unpaid)?
 ```
 WITH late AS (SELECT insurance_provider,
 COUNT(*) FILTER (WHERE payment_status = 'Late-Paid') AS late_paid,
@@ -16,7 +16,7 @@ GROUP BY insurance_provider
 ORDER BY total_late DESC
 LIMIT 50
 ```
-2) A) Total financial loss from late/unpaid bills by insurer?
+### 2A) Total financial loss from late/unpaid bills by insurer?
 ```
 SELECT
   p.insurance_provider,
@@ -33,11 +33,13 @@ WHERE p.insurance_provider IS NOT NULL
 GROUP BY p.insurance_provider
 ORDER BY total_late_exposure DESC;
 ```
-B) Put into context of top 3 hospitals. For the top 3 hospitals, what is the most prevelant insurance provider patients have and what is the sum of late payments. 
+### 2B) Put into context of top 3 hospitals. For the top 3 hospitals, what is the most prevelant insurance provider patients have and what is the sum of late payments. 
+
 ```
 CODE HERE
 ```
-3) Do uninsured/self-pay patients have significantly higher default rates?
+
+### 3) Do uninsured/self-pay patients have significantly higher default rates?
 CHATGPT CODE:
 ```
 WITH base AS (
@@ -62,7 +64,9 @@ FROM base
 GROUP BY ins_status
 ORDER BY default_rate_pct DESC;
 ```
+
 MY CODE:
+
 ```
 WITH Top_Hospital AS (SELECT (SELECT hospital
 	FROM visit
@@ -86,7 +90,8 @@ UNION
 SELECT scope, sameday, one_night, multi_night
 FROM National
 ```
-4) What is the rate of late payments by condition? - Improves financial forecasting and collection strategy 
+### 4) What is the rate of late payments by condition? - Improves financial forecasting and collection strategy
+
 ```
 WITH by_condition AS (
   SELECT
@@ -109,9 +114,10 @@ SELECT
   TO_CHAR(ROUND(100*(count_late_paid + count_late_unpaid)/visits,2),'999D99%') AS percent_late
 FROM by_condition
 ORDER BY total_late DESC;
-```  
+```
+
 ## Section 2: Length of Stay Costs (Recommendation: Optimize dischage planning for conditions with high los)
-1) What is the avg cost per day as LOS increases?
+### 1) What is the avg cost per day as LOS increases?
 ```
 SELECT 
     v.los,
@@ -128,12 +134,12 @@ GROUP BY v.los
 ORDER BY v.los;
 ```
 
-3) What conditions drive the longest and most expensive hospital stays?
-4) What is the average cost per day for each condition (total_charge / los)
-5) Are there doctors/hospitals with higher-than-average LOS for the same condition? (inefficient)
+### 3) What conditions drive the longest and most expensive hospital stays?
+### 4) What is the average cost per day for each condition (total_charge / los)
+### 5) Are there doctors/hospitals with higher-than-average LOS for the same condition? (inefficient)
 
 ## Section 3: Follow-up Visits (Recommendation: Introduce stronger collection strategies for uninsured patients)
-1) Which conditions generate the most follow-ups?
+### 1) Which conditions generate the most follow-ups?
 ```
 SELECT 
 condition, count(follow_up_required) as Followups
@@ -141,15 +147,15 @@ FROM visit
 WHERE follow_up_required = 'Y' 
 GROUP BY condition
 ```
-2) What is the incremental cost of follow-ups compared to initial visits?
-3) Are certain doctors/hospitals driving unnecessary repeat visits? (inefficient)
+### 2) What is the incremental cost of follow-ups compared to initial visits?
+### 3) Are certain doctors/hospitals driving unnecessary repeat visits? (inefficient)
 
 ## Section 4: Demographics 
-1) which patient demographics drive the highest revenue for the top 5 hospitals?
-2) What are the most prevalent conditions for age ranges 0-18 (children), 19-64 (adults), 65+ (elderly) and what is the median total of their visits in the last comlpete year of the dataset?
+### 1) which patient demographics drive the highest revenue for the top 5 hospitals?
+### 2) What are the most prevalent conditions for age ranges 0-18 (children), 19-64 (adults), 65+ (elderly) and what is the median total of their visits in the last comlpete year of the dataset?
 
 ## Section 5: Operational Efficiency
-1A) Which hospitals have the highest patient volume. - workload balancing and staffing optimization
+### 1A) Which hospitals have the highest patient volume. - workload balancing and staffing optimization
 ```
 SELECT
 hospital
@@ -158,7 +164,7 @@ GROUP BY hospital
 ORDER BY COUNT(*) DESC
 ```
 
-1B) For the hospital(s) with the highest patient volume, what percentage of patients are discharged the same day vs. multi-day stays?  and compare that to the rest of the dataset. Informs bed availability forcasting 
+### 1B) For the hospital(s) with the highest patient volume, what percentage of patients are discharged the same day vs. multi-day stays?  and compare that to the rest of the dataset. Informs bed availability forcasting 
 ```
 WITH Top_Hospital AS (SELECT (SELECT hospital
 	FROM visit
@@ -186,17 +192,17 @@ ________________________________________________________________________________
 
 # Patient-Focused Section
 ## Section 1: Condition-Specific Cost Comparison
-1) What is the avg out-of-pocket expense by condition?
+### 1) What is the avg out-of-pocket expense by condition?
 ```
 
 ```
    
-2) Which hospitals offer the lowest average total charge for common conditions?
-3) Do severe conditions have dramatically difference costs across hospitals/insurers?
+### 2) Which hospitals offer the lowest average total charge for common conditions?
+### 3) Do severe conditions have dramatically difference costs across hospitals/insurers?
 
 ## Section 2: Insurance Provider Analysis
-1) Which insurers cover the highest share of cost for high expense conditions (bucket high expense conditions with CASE)
-2) Which insurers have the largest out of pocket costs?
+### 1) Which insurers cover the highest share of cost for high expense conditions (bucket high expense conditions with CASE)
+### 2) Which insurers have the largest out of pocket costs?
 
 AVERAGE PATIENT RESPONSIBILITY BY PROVIDER:
 ```
@@ -207,18 +213,18 @@ WHERE p.insurance_provider IS NOT NULL
 GROUP BY p.insurance_provider
 ORDER BY AVG_patient_responsibility DESC
 ```
-3) How do patient responsibility percentages compare across insurers?
+### 3) How do patient responsibility percentages compare across insurers?
 
 ## Section 3: Hospital Performance
-1) Which hospitals are consistently cheap for same-day, 1-night, and multi-night stays?
-2) Which hospitals are most frequently used to treat given conditions?
-3) Are some hospitals better for specific specialties? ex. Hospital A better for childbirth, B for surgery (less followups)
-4) Which hospitals have the lowest rates of follow-up visits? (indicating efficiency of treatment)
+### 1) Which hospitals are consistently cheap for same-day, 1-night, and multi-night stays?
+### 2) Which hospitals are most frequently used to treat given conditions?
+### 3) Are some hospitals better for specific specialties? ex. Hospital A better for childbirth, B for surgery (less followups)
+### 4) Which hospitals have the lowest rates of follow-up visits? (indicating efficiency of treatment)
 
 ## Section 4: Patient-Focused Benchmarks
-1) For a patient with insurance, what is the bets provider/hospital combo for minimizing costs by condition?
-2) For uninsured patients, which hospitals are cheapest overall?
-3) Is there any corelation between patient age and total_charge?
+### 1) For a patient with insurance, what is the bets provider/hospital combo for minimizing costs by condition?
+### 2) For uninsured patients, which hospitals are cheapest overall?
+### 3) Is there any corelation between patient age and total_charge?
 ```
 SELECT
 p.age, SUM(b.total_charge)
