@@ -86,16 +86,46 @@ UNION
 SELECT scope, sameday, one_night, multi_night
 FROM National
 ```
-
-## Section 2: Length of Stay Costs (Recommendation: Optimize dischage planning for conditions with high los)
-1) What is the avg cost per day of length of stay?
+4) What is the rate of late payments by condition? - Improves financial forecasting and collection strategy 
 ```
---Avg LOS per condition
+WITH by_condition AS (
+  SELECT
+    v.condition,
+    COUNT(*) FILTER (WHERE b.payment_status = 'Late-Paid')    AS count_late_paid,
+    COUNT(*) FILTER (WHERE b.payment_status = 'Late-Unpaid')  AS count_late_unpaid,
+    COUNT(*) FILTER (WHERE b.payment_status = 'Paid')         AS count_paid,
+    COUNT(*) FILTER (WHERE b.payment_status = 'In-progress')  AS count_in_progress,
+    COUNT(*)                                                  AS visits
+  FROM billing b
+  JOIN visit v ON v.visit_id = b.visit_id
+  GROUP BY v.condition
+)
 SELECT
-DISTINCT condition, severity, PERCENTILE_CONT(.05) WITHIN GROUP (ORDER BY los) AS median_los
-FROM visit
-GROUP BY condition, severity
-ORDER BY median_los DESC
+  condition,
+  (count_late_paid + count_late_unpaid) AS total_late,
+  count_late_paid,
+  count_late_unpaid,
+  visits,
+  TO_CHAR(ROUND(100*(count_late_paid + count_late_unpaid)/visits,2),'999D99%') AS percent_late
+FROM by_condition
+ORDER BY total_late DESC;
+```  
+## Section 2: Length of Stay Costs (Recommendation: Optimize dischage planning for conditions with high los)
+1) What is the avg cost per day as LOS increases?
+```
+SELECT 
+    v.los,
+    CASE v.los
+        WHEN 0 THEN 'Same Day'
+        WHEN 1 THEN 'One Night'
+        WHEN 2 THEN 'Two Nights'
+        ELSE v.los || ' Nights'
+    END AS los_label,
+    ROUND(AVG(b.total_charge), 0) AS avg_charge
+FROM visit v
+JOIN billing b ON v.visit_id = b.visit_id
+GROUP BY v.los
+ORDER BY v.los;
 ```
 
 3) What conditions drive the longest and most expensive hospital stays?
@@ -114,9 +144,9 @@ GROUP BY condition
 2) What is the incremental cost of follow-ups compared to initial visits?
 3) Are certain doctors/hospitals driving unnecessary repeat visits? (inefficient)
 
-## Section 4: Payment Plans (Recommendation: Redesign payment plan terms to reduce defaults)
-1) How does the incremental vs full plan affect late payments?
-2) What is the risk-adjusted cost of offering incremental payment options?
+## Section 4: Demographics 
+1) which patient demographics drive the highest revenue for the top 5 hospitals?
+2) What are the most prevalent conditions for age ranges 0-18 (children), 19-64 (adults), 65+ (elderly) and what is the median total of their visits in the last comlpete year of the dataset?
 
 ## Section 5: Operational Efficiency
 1A) Which hospitals have the highest patient volume. - workload balancing and staffing optimization
