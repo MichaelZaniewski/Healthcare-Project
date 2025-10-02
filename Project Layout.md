@@ -123,3 +123,10 @@ ________________________________________________________________________________
 ## Section 4: Patient-Focused Benchmarks
 1) For a patient with insurance, what is the bets provider/hospital combo for minimizing costs by condition?
 2) For uninsured patients, which hospitals are cheapest overall?
+
+### Customer Recommendations (Examples)
+Patients with diabetes should prefer Hospital X + Insurance Provider Y for lowest recurring costs
+.
+Cancer patients are better off with Insurance A due to higher coverage, even if charges are higher.
+
+For uninsured patients, Hospital Z consistently delivers lowest-cost same-day care.
