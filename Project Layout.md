@@ -118,6 +118,7 @@ ORDER BY total_late DESC;
 
 ## Section 2: Length of Stay Costs (Recommendation: Optimize dischage planning for conditions with high los)
 ### 1) What is the avg cost per day as LOS increases?
+
 ```
 SELECT 
     v.los,
@@ -135,11 +136,26 @@ ORDER BY v.los;
 ```
 
 ### 3) What conditions drive the longest and most expensive hospital stays?
+
+```
+CODE HERE
+```
+
 ### 4) What is the average cost per day for each condition (total_charge / los)
+
+```
+CODE HERE
+```
+
 ### 5) Are there doctors/hospitals with higher-than-average LOS for the same condition? (inefficient)
+
+```
+CODE HERE
+```
 
 ## Section 3: Follow-up Visits (Recommendation: Introduce stronger collection strategies for uninsured patients)
 ### 1) Which conditions generate the most follow-ups?
+
 ```
 SELECT 
 condition, count(follow_up_required) as Followups
@@ -147,15 +163,35 @@ FROM visit
 WHERE follow_up_required = 'Y' 
 GROUP BY condition
 ```
+
 ### 2) What is the incremental cost of follow-ups compared to initial visits?
+
+```
+CODE HERE
+```
+
 ### 3) Are certain doctors/hospitals driving unnecessary repeat visits? (inefficient)
+
+```
+CODE HERE
+```
 
 ## Section 4: Demographics 
 ### 1) which patient demographics drive the highest revenue for the top 5 hospitals?
+
+```
+CODE HERE
+```
+
 ### 2) What are the most prevalent conditions for age ranges 0-18 (children), 19-64 (adults), 65+ (elderly) and what is the median total of their visits in the last comlpete year of the dataset?
+
+```
+CODE HERE
+```
 
 ## Section 5: Operational Efficiency
 ### 1A) Which hospitals have the highest patient volume. - workload balancing and staffing optimization
+
 ```
 SELECT
 hospital
@@ -165,6 +201,7 @@ ORDER BY COUNT(*) DESC
 ```
 
 ### 1B) For the hospital(s) with the highest patient volume, what percentage of patients are discharged the same day vs. multi-day stays?  and compare that to the rest of the dataset. Informs bed availability forcasting 
+
 ```
 WITH Top_Hospital AS (SELECT (SELECT hospital
 	FROM visit
@@ -189,7 +226,7 @@ SELECT scope, sameday, one_night, multi_night
 FROM National
 ```
 ____________________________________________________________________________________________________________________________
-
+____________________________________________________________________________________________________________________________
 # Patient-Focused Section
 ## Section 1: Condition-Specific Cost Comparison
 ### 1) What is the avg out-of-pocket expense by condition?
