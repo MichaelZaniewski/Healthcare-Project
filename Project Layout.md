@@ -135,19 +135,19 @@ GROUP BY v.los
 ORDER BY v.los;
 ```
 
-### 3) What conditions drive the longest and most expensive hospital stays?
+### 2) What conditions drive the longest and most expensive hospital stays?
 
 ```
 CODE HERE
 ```
 
-### 4) What is the average cost per day for each condition (total_charge / los)
+### 3) What is the average cost per day for each condition (total_charge / los)
 
 ```
 CODE HERE
 ```
 
-### 5) Are there doctors/hospitals with higher-than-average LOS for the same condition? (inefficient)
+### 4) Are there doctors/hospitals with higher-than-average LOS for the same condition? (inefficient)
 
 ```
 CODE HERE
