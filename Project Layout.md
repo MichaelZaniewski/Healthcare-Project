@@ -186,7 +186,31 @@ CODE HERE
 ### 2) What are the most prevalent conditions for age ranges 0-18 (children), 19-64 (adults), 65+ (elderly) and what is the sum total of their visits in the last comlpete year of the dataset?
 
 ```
-CODE HERE
+WITH counts AS (
+  SELECT
+    CASE
+      WHEN v.age <= 17 THEN 'Child'
+      WHEN v.age BETWEEN 18 AND 64 THEN 'Adult'
+      ELSE 'Senior'
+    END AS age_bracket,
+    v.condition,
+    COUNT(*) AS cnt,
+    SUM(b.total_charge) AS sum_total_charge
+  FROM visit v
+  JOIN billing b USING (visit_id)
+  WHERE v.date_of_admission >= DATE '2024-01-01'
+    AND v.date_of_admission <  DATE '2025-01-01'
+  GROUP BY 1, 2
+),
+ranked AS (
+  SELECT *,
+    ROW_NUMBER() OVER (
+      PARTITION BY age_bracket ORDER BY cnt DESC, condition) AS rn
+	  FROM counts)
+SELECT age_bracket, condition, sum_total_charge
+FROM ranked
+WHERE rn = 1
+ORDER BY age_bracket
 ```
 
 ## Section 5: Operational Efficiency
