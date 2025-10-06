@@ -183,7 +183,7 @@ CODE HERE
 CODE HERE
 ```
 
-### 2) What are the most prevalent conditions for age ranges 0-18 (children), 19-64 (adults), 65+ (elderly) and what is the median total of their visits in the last comlpete year of the dataset?
+### 2) What are the most prevalent conditions for age ranges 0-18 (children), 19-64 (adults), 65+ (elderly) and what is the sum total of their visits in the last comlpete year of the dataset?
 
 ```
 CODE HERE
