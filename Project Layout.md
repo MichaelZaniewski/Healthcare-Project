@@ -196,10 +196,10 @@ SELECT  hospital,
       ELSE 'Senior'
     END AS age_bracket, 
 	gender, condition, insurance_status, SUM(total_charge) as sum_revenue, COUNT(*) AS patient_count
-FROM(	SELECT v.hospital, p.gender, v.condition, b.total_charge, v.age, insurance_provider,
-	CASE WHEN insurance_provider IS NULL THEN 'Uninsured' 
-	ELSE 'Insured'
-	END as insurance_status
+FROM (SELECT v.hospital, p.gender, v.condition, b.total_charge, v.age, insurance_provider,
+		CASE WHEN insurance_provider IS NULL THEN 'Uninsured' 
+			ELSE 'Insured'
+			END as insurance_status
 		FROM patient p
 		JOIN visit v ON p.id=v.patient_id JOIN billing b ON v.visit_id=b.visit_id
 		WHERE hospital IN (SELECT hospital FROM top5))
