@@ -180,7 +180,33 @@ CODE HERE
 ### 1) which patient demographics drive the highest revenue for the top 5 hospitals?
 
 ```
-CODE HERE
+-- 1) which patient demographics drive the highest revenue for the top 5 hospitals?
+-- Demographics: age, gender, insurance status (CASE WHEN insurance_provider IS NULL THEN 'Uninsured' ELSE 'insured'
+
+WITH top5 AS (
+  SELECT hospital, COUNT(DISTINCT patient_id) AS cnt_patients
+  FROM visit
+  GROUP BY hospital
+  ORDER BY cnt_patients DESC
+  LIMIT 5)
+
+SELECT  hospital,
+	CASE
+      WHEN age <= 17 THEN 'Child'
+      WHEN age BETWEEN 18 AND 64 THEN 'Adult'
+      ELSE 'Senior'
+    END AS age_bracket, 
+	gender, condition, SUM(total_charge) as sum_revenue, COUNT(*) AS patient_count
+FROM(	SELECT v.hospital, p.gender, v.condition, b.total_charge, v.age
+		FROM patient p
+		JOIN visit v ON p.id=v.patient_id JOIN billing b ON v.visit_id=b.visit_id
+		WHERE hospital IN (SELECT hospital FROM top5))
+GROUP BY hospital, age_bracket, gender, condition
+ORDER BY sum_revenue DESC
+LIMIT 5
+
+
+  
 ```
 
 ### 2) What are the most prevalent conditions for age ranges 0-18 (children), 19-64 (adults), 65+ (elderly) and what is the sum total of their visits in the last comlpete year of the dataset?
