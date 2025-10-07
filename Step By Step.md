@@ -86,7 +86,7 @@ FROM National
 
 
 
--- What is the top insurance provider in the top 5 hospitals IN PROGRESS
+-- What is the top insurance provider in the top 5 hospitals 
 ```
 SELECT * 
 FROM
@@ -107,17 +107,6 @@ WHERE provider_rank = 1
 ```
 
 
-CONTUINED 
--- What is the top insurance provider in the top 5 hospitals
-SELECT hospital, top_hospitals_ranked, cnt_patients
-FROM(SELECT hospital, cnt_patients,
-ROW_NUMBER() OVER (ORDER BY cnt_patients DESC) AS top_hospitals_ranked
-FROM(SELECT hospital, COUNT(*) as cnt_patients
-				FROM visit
-				GROUP BY hospital
-				ORDER BY cnt_patients DESC
-				LIMIT 5)
-)
 
 
 
@@ -138,18 +127,6 @@ ORDER BY median_los DESC
 ```
 
 
-
-
-
-
-2) Which conditions most often require follow up visits? - Helps hospitals anticipate repeat care and allocate resources. 
-```
-SELECT 
-condition, count(follow_up_required) as Followups
-FROM visit
-WHERE follow_up_required = 'Y' 
-GROUP BY condition
-```
 
 
 
@@ -272,24 +249,6 @@ LIMIT 5
 ```
 
 
-X) What is the average total cost per day of a stay in a hospital as LOS increases?
-REALLY LIKE THIS QUESTION
-Have to join visits and billing
-```
-SELECT 
-    v.los,
-    CASE v.los
-        WHEN 0 THEN 'Same Day'
-        WHEN 1 THEN 'One Night'
-        WHEN 2 THEN 'Two Nights'
-        ELSE v.los || ' Nights'
-    END AS los_label,
-    ROUND(AVG(b.total_charge), 0) AS avg_charge
-FROM visit v
-JOIN billing b ON v.visit_id = b.visit_id
-GROUP BY v.los
-ORDER BY v.los;
-```
 
 
 
