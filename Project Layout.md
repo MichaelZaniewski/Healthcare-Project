@@ -148,7 +148,7 @@ CODE HERE
 ```
 
 ## Section 3: Follow-up Visits (Recommendation: Introduce stronger collection strategies for uninsured patients)
-### 1) Which conditions generate the most follow-ups?
+### 1) Which conditions generate the most follow-ups? Helps hospitals anticipate repeat care and allocate resources
 
 ```
 SELECT 
