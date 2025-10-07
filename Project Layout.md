@@ -152,9 +152,41 @@ ORDER BY avg_stay DESC, avg_cost_per_visit DESC, avg_cost_per_day DESC
 ```
 
 ### 4) Are there hospitals with higher-than-average LOS for the same condition? (inefficient)
-
+NOT FINISHED
 ```
-CODE HERE
+SELECT hospital, COUNT (*) as COUNT
+FROM(SELECT
+  hc.hospital,
+  hc.condition,
+  hc.stays,
+  ca.avg_los_condition,
+  hc.avg_los_hospital,
+  (hc.avg_los_hospital - ca.avg_los_condition) AS delta_los,
+  (hc.avg_los_hospital / NULLIF(ca.avg_los_condition, 0)) AS ratio_to_avg
+FROM (
+  SELECT
+    v.hospital,
+    v.condition,
+    ROUND(AVG(v.los),2)::numeric AS avg_los_hospital,
+    COUNT(*)            AS stays
+  FROM visit v
+  GROUP BY v.hospital, v.condition
+) AS hc
+JOIN (
+  SELECT
+    v.condition,
+    ROUND(AVG(v.los),2)::numeric AS avg_los_condition
+  FROM visit v
+  GROUP BY v.condition
+) AS ca
+USING (condition)
+WHERE hc.avg_los_hospital > ca.avg_los_condition
+-- AND hc.stays >= 10   -- optional volume guardrail
+ORDER BY delta_los DESC, hc.stays DESC
+)
+GROUP BY hospital
+ORDER BY count DESC
+
 ```
 
 ## Section 3: Follow-up Visits (Recommendation: Introduce stronger collection strategies for uninsured patients)
