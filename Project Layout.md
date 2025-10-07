@@ -132,13 +132,23 @@ ORDER BY v.los;
 ### 2) What conditions drive the longest and most expensive hospital stays?
 
 ```
-CODE HERE
+SELECT condition, LOS, SUM(total_charge) AS sum_total_charge
+FROM visit v 
+JOIN billing b ON v.visit_id=b.visit_id 
+GROUP BY condition, LOS
+ORDER BY LOS DESC, sum_total_charge DESC
 ```
 
-### 3) What is the average cost per day for each condition (total_charge / los)
-
+### 3) What is the average LOS for each condition and what is the average cost per visit and day?
 ```
-CODE HERE
+SELECT condition, 
+	ROUND(AVG(LOS),0) AS avg_stay, 
+	ROUND(AVG(total_charge),0) AS AVG_cost_per_visit, 
+	ROUND(AVG(total_charge) / AVG(LOS),0) AS avg_cost_per_day
+FROM visit v 
+JOIN billing b ON v.visit_id=b.visit_id 
+GROUP BY condition
+ORDER BY avg_stay DESC, avg_cost_per_visit DESC, avg_cost_per_day DESC
 ```
 
 ### 4) Are there doctors/hospitals with higher-than-average LOS for the same condition? (inefficient)
