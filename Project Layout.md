@@ -151,7 +151,7 @@ GROUP BY condition
 ORDER BY avg_stay DESC, avg_cost_per_visit DESC, avg_cost_per_day DESC
 ```
 
-### 4) Are there doctors/hospitals with higher-than-average LOS for the same condition? (inefficient)
+### 4) Are there hospitals with higher-than-average LOS for the same condition? (inefficient)
 
 ```
 CODE HERE
