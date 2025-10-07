@@ -16,7 +16,7 @@ GROUP BY insurance_provider
 ORDER BY total_late DESC
 LIMIT 50
 ```
-### 2A) Total financial loss from late/unpaid bills by insurer?
+### 2) Total financial loss from late/unpaid bills by insurer?
 ```
 SELECT
   p.insurance_provider,
@@ -33,12 +33,6 @@ WHERE p.insurance_provider IS NOT NULL
 GROUP BY p.insurance_provider
 ORDER BY total_late_exposure DESC;
 ```
-### 2B) Put into context of top 3 hospitals. For the top 3 hospitals, what is the most prevelant insurance provider patients have and what is the sum of late payments. 
-
-```
-CODE HERE
-```
-
 ### 3) Do uninsured/self-pay patients have significantly higher default rates?
 CHATGPT CODE:
 ```
