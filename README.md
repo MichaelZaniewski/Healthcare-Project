@@ -1,4 +1,4 @@
-# Healthcare Analytics Proect Part 1: Company-Side Improvements
+# Healthcare Analytics Project Part 1: Company-Side
 
 ### Background
 The U.S. healthcare system generates massive volumes of data spanning patients, treatments, and billing — yet real datasets are often inaccessible due to privacy laws like HIPAA. This project was created to bridge that gap by providing a safe, realistic environment for healthcare analytics and data visualization.
