@@ -1,5 +1,5 @@
-#Tables Explained:
-###Patients
+# Tables Explained:
+### Patients
 | column name     | data type | column name               | data type  |
 | --------------- | --------- | ------------------------- | ---------- |
 | id              | SERIAL    | email                     | TEXT       |
@@ -12,7 +12,7 @@
 | phone_number    | TEXT      | blood_type                | TEXT       |
 
 
-###Visits
+### Visits
 | column name     | data type | column name          | data type |
 | --------------- | --------- | -------------------- | --------- |
 | visit_id        | SERIAL    | medication           | TEXT      |
@@ -27,7 +27,7 @@
 | treatment       | TEXT      | follow_up_required   | CHAR(1)   |
 
 
-###Billing
+### Billing
 | column name   | data type     | column name                     | data type     |
 | ------------- | ------------- | ------------------------------- | ------------- |
 | billing_id    | SERIAL        | insurance_coverage_amount       | NUMERIC(12,2) |
@@ -38,7 +38,7 @@
 | total_charge  | NUMERIC(12,2) | payment_status                  | TEXT          |
 
 
-#Creating Tables
+# Creating Tables
 
 -- ============================
 -- patient TABLE
