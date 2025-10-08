@@ -152,7 +152,6 @@ ORDER BY avg_stay DESC, avg_cost_per_visit DESC, avg_cost_per_day DESC
 ```
 
 ### 4) Are there hospitals with higher-than-average LOS for the same condition? (inefficient)
-NOT FINISHED
 ```
 SELECT hospital, COUNT (*) as COUNT
 FROM(SELECT
