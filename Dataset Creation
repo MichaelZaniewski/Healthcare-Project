@@ -11,9 +11,6 @@ I designed this synthetic healthcare dataset with ChatGPT as a co-pilot: we deba
 
 
 
-python M:\PROJECT\healthcare_dataset_generator_v12.py --patients 50000 --validate --outdir M:\PROJECT\healthcare_v12out --export-prefix healthcare_v12
-
-
 The Healthcare Dataset Generator is the engine behind this project’s analytics. It programmatically creates a large, realistic U.S.-based healthcare dataset that mirrors the complexity of real hospital systems — while containing no real or sensitive data. Each run produces unique, randomized data built on controlled logic, meaning no two datasets are ever the same.
 
 
@@ -54,3 +51,8 @@ The Healthcare Dataset Generator is the engine behind this project’s analytics
 - Insurance-policy integrity.
 - Proper follow-up scaling and doctor/hospital consistency.
 - No future or invalid dates.
+
+
+
+
+python M:\PROJECT\healthcare_dataset_generator_v12.py --patients 50000 --validate --outdir M:\PROJECT\healthcare_v12out --export-prefix healthcare_v12
