@@ -197,18 +197,90 @@ condition, count(follow_up_required) as Followups
 FROM visit
 WHERE follow_up_required = 'Y' 
 GROUP BY condition
+ORDER BY followups DESC
 ```
 
 ### 2) What is the incremental cost of follow-ups compared to initial visits?
 
 ```
-CODE HERE
+WITH labeled AS (
+  SELECT
+    v.condition,
+    v.patient_id,
+    v.visit_id,
+    v.date_of_admission,
+    ROW_NUMBER() OVER (
+      PARTITION BY v.patient_id, v.condition
+      ORDER BY v.date_of_admission, v.visit_id
+    ) AS rn,
+    b.total_charge
+  FROM visit v
+  JOIN billing b USING (visit_id)
+)
+SELECT
+  condition,
+  ROUND(AVG(total_charge) FILTER (WHERE rn = 1)::numeric, 2) AS avg_initial_visit_cost,
+  ROUND(AVG(total_charge) FILTER (WHERE rn > 1)::numeric, 2) AS avg_follow_up_cost,
+  ROUND(
+    (AVG(total_charge) FILTER (WHERE rn > 1)
+     - AVG(total_charge) FILTER (WHERE rn = 1))::numeric, 2
+  ) AS incremental_cost,
+  COUNT(*) FILTER (WHERE rn = 1) AS initial_visits,
+  COUNT(*) FILTER (WHERE rn > 1) AS follow_up_visits,
+  ROUND(
+    (AVG(total_charge) FILTER (WHERE rn > 1))
+    / NULLIF(AVG(total_charge) FILTER (WHERE rn = 1), 0)::numeric, 3
+  ) AS followup_to_initial_ratio
+FROM labeled
+GROUP BY condition
+ORDER BY incremental_cost DESC NULLS LAST;
 ```
 
-### 3) Are certain doctors/hospitals driving unnecessary repeat visits? (inefficient)
+### 3) Are certain doctors driving unnecessary repeat visits? (inefficient)
 
 ```
-CODE HERE
+WITH base AS (
+  SELECT v.patient_id, v.condition, v.doctor, v.hospital, v.visit_id,
+         v.date_of_admission,
+         COALESCE(v.date_of_discharge, v.date_of_admission + (v.los - 1))::date AS date_of_discharge
+  FROM visit v
+
+),
+ordered AS (
+  SELECT b.*,
+         LEAD(b.date_of_admission) OVER (PARTITION BY b.patient_id, b.condition
+                                         ORDER BY b.date_of_admission, b.visit_id) AS next_admit_date,
+         LEAD(b.doctor)  OVER (PARTITION BY b.patient_id, b.condition
+                                ORDER BY b.date_of_admission, b.visit_id) AS next_doctor,
+         LEAD(b.hospital) OVER (PARTITION BY b.patient_id, b.condition
+                                ORDER BY b.date_of_admission, b.visit_id) AS next_hospital
+  FROM base b
+),
+bouncebacks AS (
+  SELECT
+    o.patient_id, o.condition,
+    o.doctor  AS discharging_doctor,
+    o.hospital AS discharging_hospital,
+    o.date_of_discharge, o.next_admit_date,
+    (o.next_admit_date - o.date_of_discharge) AS days_to_return,
+    CASE WHEN o.next_admit_date IS NOT NULL
+           AND o.next_admit_date >  o.date_of_discharge
+           AND o.next_admit_date <= o.date_of_discharge + INTERVAL '7 days'
+         THEN 1 ELSE 0 END AS is_bounceback_7d
+  FROM ordered o
+  WHERE o.next_admit_date IS NOT NULL
+)
+SELECT
+  discharging_doctor AS doctor,
+  COUNT(*)                                   AS index_visits_with_followup,
+  SUM(is_bounceback_7d)                      AS bouncebacks_7d,
+  ROUND( (SUM(is_bounceback_7d)::numeric / NULLIF(COUNT(*),0)), 3) AS bounceback_rate_7d
+FROM bouncebacks
+GROUP BY discharging_doctor
+HAVING COUNT(*) >= 20          
+ORDER BY bounceback_rate_7d DESC, bouncebacks_7d DESC, index_visits_with_followup DESC, doctor
+LIMIT 5;
+
 ```
 
 ## Section 4: Demographics 
