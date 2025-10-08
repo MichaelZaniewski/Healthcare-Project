@@ -7,7 +7,7 @@ The dataset simulates how hospitals operate day-to-day: patients are admitted fo
 
 The ultimate goal of this project is to analyze patterns in care quality, hospital efficiency, and payment behavior using SQL — demonstrating how data-driven insights can improve both operational performance and patient outcomes.
 
-⚙️ ### Dataset Generator Overview
+### ⚙️ Dataset Generator Overview
 
 This project includes a fully custom Healthcare Dataset Generator that creates realistic, U.S.-based healthcare data for analysis — entirely synthetic, with built-in randomness so no two datasets are ever the same.
 
