@@ -59,31 +59,6 @@ GROUP BY ins_status
 ORDER BY default_rate_pct DESC;
 ```
 
-MY CODE:
-
-```
-WITH Top_Hospital AS (SELECT (SELECT hospital
-	FROM visit
-	GROUP BY hospital
-	ORDER BY count(*) DESC
-	LIMIT 1) AS scope,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los = 0) / COUNT(*)::NUMERIC),2),'999D99%') AS sameday,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los = 1) / COUNT(*)::NUMERIC),2),'999D99%') AS one_night,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los > 1) / COUNT(*)::NUMERIC),2),'999D99%') AS multi_night
-FROM visit),
-
-National AS (SELECT 'Nationally' AS scope,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los = 0) / COUNT(*)::NUMERIC),2),'999D99%') AS sameday,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los = 1) / COUNT(*)::NUMERIC),2),'999D99%') AS one_night,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los > 1) / COUNT(*)::NUMERIC),2),'999D99%') AS multi_night
-FROM visit)
-
-SELECT scope, sameday, one_night, multi_night
-FROM Top_Hospital
-UNION
-SELECT scope, sameday, one_night, multi_night
-FROM National
-```
 ### 4) What is the rate of late payments by condition? - Improves financial forecasting and collection strategy
 
 ```
@@ -346,7 +321,7 @@ ORDER BY age_bracket
 ```
 
 ## Section 5: Operational Efficiency
-### 1A) Which hospitals have the highest patient volume. - workload balancing and staffing optimization
+### 1) Which hospitals have the highest patient volume. - workload balancing and staffing optimization
 
 ```
 SELECT
@@ -356,7 +331,7 @@ GROUP BY hospital
 ORDER BY COUNT(*) DESC
 ```
 
-### 1B) For the hospital(s) with the highest patient volume, what percentage of patients are discharged the same day vs. multi-day stays?  and compare that to the rest of the dataset. Informs bed availability forcasting 
+### 2) For the hospital with the highest patient volume, compare the discharge rates to the rest of the dataset. Informs bed availability forcasting 
 
 ```
 WITH Top_Hospital AS (SELECT (SELECT hospital
@@ -381,6 +356,8 @@ UNION
 SELECT scope, sameday, one_night, multi_night
 FROM National
 ```
+
+
 ____________________________________________________________________________________________________________________________
 ____________________________________________________________________________________________________________________________
 # Patient-Focused Section
