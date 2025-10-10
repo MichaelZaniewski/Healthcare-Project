@@ -40,7 +40,7 @@ It’s an analytics-ready foundation for exploring trends in patient outcomes, b
   
 ### Limitations
 - Synthetica data—despite realistic rules— may not capture true clinical variation like seasonal spikes. Real‑world behavior (patients, providers, payers) can differ.
-- 
+- Simplified payer behavior. Denials, appeals, carve‑outs, and clawbacks are not modeled, so “revenue at risk” may be conservative or optimistic.
   
 ### Caveats
 - "Unnecessary repeat visits" should be risk-adjusted to avoid penalizing complex-case physicians.
