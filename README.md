@@ -1,6 +1,7 @@
 ![HEALTHCARE](https://github.com/user-attachments/assets/be123116-11b6-4910-92df-735d27852e1d)
 
 # Healthcare Analytics Project Part 1: Company-Focused
+A data analytics project focused on helping healthcare organizations identify inefficiencies, optimize revenue cycles, and improve hospital performance through data-driven insights derived from a realistic synthetic healthcare dataset.
 
 ### Background
 The U.S. healthcare system generates massive volumes of data spanning patients, treatments, and billing — yet real datasets are often inaccessible due to privacy laws like HIPAA. This project was created to bridge that gap by providing a safe, realistic environment for healthcare analytics and data visualization.
