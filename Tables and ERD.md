@@ -40,9 +40,7 @@
 
 # Creating Tables
 
--- ============================
--- patient TABLE
--- ============================
+```
 CREATE TABLE patient (
     patient_id              SERIAL PRIMARY KEY,
     first_name              TEXT    NOT NULL,   
@@ -66,10 +64,9 @@ CREATE TABLE patient (
             OR insurance_policy_number IS NULL
         )
 );
+```
 
--- ============================
--- VISIT TABLE
--- ============================
+```
 CREATE TABLE visit (
     visit_id             SERIAL PRIMARY KEY,
     patient_id           INT NOT NULL REFERENCES patient(patient_id) ON DELETE CASCADE,
@@ -90,10 +87,9 @@ CREATE TABLE visit (
     date_of_discharge    DATE NOT NULL,
     follow_up_required   TEXT NOT NULL
 );
+```
 
--- ============================
--- BILLING TABLE
--- ============================
+```
 CREATE TABLE billing (
     billing_id                  SERIAL PRIMARY KEY,
     visit_id                    INT NOT NULL UNIQUE REFERENCES visit(visit_id) ON DELETE CASCADE,
@@ -107,6 +103,6 @@ CREATE TABLE billing (
     actual_payment_date         DATE,
     payment_status              TEXT NOT NULL
 );
-
+```
 
 
