@@ -8,6 +8,9 @@ A data analytics project focused on helping healthcare organizations identify in
 
 The ultimate goal of this project is to analyze patterns in care quality, hospital efficiency, and payment behavior using SQL — demonstrating how data-driven insights can improve both operational performance and patient outcomes.
 
+EDA, strategies in Excel and SQL used to inspect, clean, and quality-check the dataset can be found [here](LINK HERE)
+Targeted SQL queries used to answer business questions and extract insights can be found [here](LINK HERE)
+
 
 ## ⚙️ Dataset Generator and Structure Overview
 
