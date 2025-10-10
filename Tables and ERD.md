@@ -38,7 +38,7 @@
 | total_charge  | NUMERIC(12,2) | payment_status                  | TEXT          |
 
 
-# Creating Tables
+### Create Tables Code
 
 ```
 CREATE TABLE patient (
