@@ -8,8 +8,8 @@ A data analytics project focused on helping healthcare organizations identify in
 
 The ultimate goal of this project is to analyze patterns in care quality, hospital efficiency, and payment behavior using SQL — demonstrating how data-driven insights can improve both operational performance and patient outcomes.
 
-EDA, strategies in Excel and SQL used to inspect, clean, and quality-check the dataset can be found [here](LINK HERE)
-Targeted SQL queries used to answer business questions and extract insights can be found [here](LINK HERE)
+- EDA, strategies in Excel and SQL used to inspect, clean, and quality-check the dataset can be found [here](LINK HERE)
+- Targeted SQL queries used to answer business questions and extract insights can be found [here](LINK HERE)
 
 
 ## ⚙️ Dataset Generator and Structure Overview
@@ -29,3 +29,19 @@ Payment behavior, insurance coverage, and follow-up care evolve dynamically.
 All data passes a validation system ensuring consistent ages, conditions, and relationships.
 
 It’s an analytics-ready foundation for exploring trends in patient outcomes, billing efficiency, and hospital performance — without exposing real patient data.
+
+
+
+## Assumptions, Limitations, and a Caveats
+
+### Assumptions
+- Follow‑ups are correctly linked to the original visit. “Follow‑up” ties back to the initial episode for the same patient and condition.
+- Business rules remained stable. Payer rules, common care pathways, and charging practices did not change during the analysis window to invalidate comparisons.
+  
+### Limitations
+- Synthetica data—despite realistic rules— may not capture true clinical variation like seasonal spikes. Real‑world behavior (patients, providers, payers) can differ.
+- 
+  
+### Caveats
+- "Unnecessary repeat visits" should be risk-adjusted to avoid penalizing complex-case physicians.
+- Pilot before scaling. Treat recommendations as a starting playbook; run small tests, measure results, and expand what works.
