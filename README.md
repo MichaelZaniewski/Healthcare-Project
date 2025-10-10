@@ -19,7 +19,8 @@ The dataset simulates how hospitals operate day-to-day: patients are admitted fo
 
 
 ## ⚙️ Dataset Generator and Structure Overview
--  Link out to other repo holding dataset generator
+
+To view the dataset generator, click [here](https://github.com/MichaelZaniewski/Healthcare-Dataset-Generator/blob/main/README.md)
 
 This project includes a fully custom Healthcare Dataset Generator that creates realistic, U.S.-based healthcare data for analysis — entirely synthetic, with built-in randomness so no two datasets are ever the same.
 
