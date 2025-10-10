@@ -4,21 +4,14 @@
 A data analytics project focused on helping healthcare organizations identify inefficiencies, optimize revenue cycles, and improve hospital performance through data-driven insights derived from a realistic synthetic healthcare dataset.
 
 ## Background and Overview
-The U.S. healthcare system generates massive volumes of data spanning patients, treatments, and billing — yet real datasets are often inaccessible due to privacy laws like HIPAA. This project was created to bridge that gap by providing a safe, realistic environment for healthcare analytics and data visualization.
+
 
 The ultimate goal of this project is to analyze patterns in care quality, hospital efficiency, and payment behavior using SQL — demonstrating how data-driven insights can improve both operational performance and patient outcomes.
 
-## Data Structure and Info
-
-The dataset simulates how hospitals operate day-to-day: patients are admitted for various conditions, receive treatments of differing severities, and are billed through diverse insurance and payment plans. Each record is generated using probabilistic logic to mimic real-world complexity — from follow-up visits and recurring conditions to late payments and same-day discharges.
-
-
-
-
-
-
 
 ## ⚙️ Dataset Generator and Structure Overview
+
+The dataset simulates how hospitals operate day-to-day: patients are admitted for various conditions, receive treatments of differing severities, and are billed through diverse insurance and payment plans. Each record is generated using probabilistic logic to mimic real-world complexity — from follow-up visits and recurring conditions to late payments and same-day discharges.
 
 To view the dataset generator, click [here](https://github.com/MichaelZaniewski/Healthcare-Dataset-Generator/blob/main/README.md)
 
