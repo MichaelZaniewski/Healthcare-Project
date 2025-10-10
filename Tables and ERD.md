@@ -1,4 +1,11 @@
-# Tables Explained:
+# ERD, Tables Explained, Create Code:
+
+### ERD
+![ERD](https://github.com/user-attachments/assets/f0ebb341-3835-4c0b-9470-e874e4964a91)
+
+
+
+
 ### Patients
 | column name     | data type | column name               | data type  |
 | --------------- | --------- | ------------------------- | ---------- |
