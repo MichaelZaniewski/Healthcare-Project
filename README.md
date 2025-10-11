@@ -32,7 +32,7 @@ It’s an analytics-ready foundation for exploring trends in patient outcomes, b
 
 
 
-## Assumptions, Limitations, and a Caveats
+## Assumptions, Limitations, and Caveats
 
 ### Assumptions
 - Follow‑ups are correctly linked to the original visit. “Follow‑up” ties back to the initial episode for the same patient and condition.
