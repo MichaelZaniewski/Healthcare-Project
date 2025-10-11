@@ -8,17 +8,17 @@ A data analytics project focused on helping healthcare organizations identify in
 
 The ultimate goal of this project is to analyze patterns in care quality, hospital efficiency, and payment behavior using SQL — demonstrating how data-driven insights can improve both operational performance and patient outcomes.
 
-- EDA, strategies in Excel and SQL used to inspect, clean, and quality-check the dataset can be found [here](LINK HERE)
+- EDA strategies in Excel and SQL used to inspect, clean, and quality-check the dataset can be found [here](LINK HERE)
 - Targeted SQL queries used to answer business questions and extract insights can be found [here](LINK HERE)
 
 
 ## ⚙️ Dataset Generator and Structure Overview
 
+This project includes a fully custom Healthcare Dataset Generator that creates realistic, U.S.-based healthcare data for analysis — entirely synthetic, with built-in randomness so no two datasets are ever the same.
+
 The dataset simulates how hospitals operate day-to-day: patients are admitted for various conditions, receive treatments of differing severities, and are billed through diverse insurance and payment plans. Each record is generated using probabilistic logic to mimic real-world complexity — from follow-up visits and recurring conditions to late payments and same-day discharges.
 
 To view the dataset generator, click [here](https://github.com/MichaelZaniewski/Healthcare-Dataset-Generator/blob/main/README.md)
-
-This project includes a fully custom Healthcare Dataset Generator that creates realistic, U.S.-based healthcare data for analysis — entirely synthetic, with built-in randomness so no two datasets are ever the same.
 
 Each dataset models real-world hospital operations through three linked tables: Patients, Visits, and Billing.
 
