@@ -27,6 +27,17 @@ Generator Logic
 
 To download or learn more about the dataset generator, click [here](https://github.com/MichaelZaniewski/Healthcare-Dataset-Generator/blob/main/README.md)
 
+## Executive Summary
+### Overview of Findings
+Paragraph form of main takeaway/how companies should leverage the findings
+
+### Findings
+- Finding 1
+- 2
+- 3
+- 4
+- 5
+
 ## Assumptions, Limitations, and Caveats
 
 ### Assumptions
