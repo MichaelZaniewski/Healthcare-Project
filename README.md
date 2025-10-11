@@ -14,23 +14,18 @@ The ultimate goal of this project is to analyze patterns in care quality, hospit
 
 ## ⚙️ Dataset Generator and Structure Overview
 
-This project includes a fully custom Healthcare Dataset Generator that creates realistic, U.S.-based healthcare data for analysis — entirely synthetic, with built-in randomness so no two datasets are ever the same.
+This project includes a fully custom Healthcare Dataset Generator that creates realistic, U.S.-based healthcare data for analysis — entirely synthetic, with built-in randomness so no two datasets are ever the same. It’s an analytics-ready foundation for exploring trends in patient outcomes, billing efficiency, and hospital performance — without exposing real patient data.
 
 The dataset simulates how hospitals operate day-to-day: patients are admitted for various conditions, receive treatments of differing severities, and are billed through diverse insurance and payment plans. Each record is generated using probabilistic logic to mimic real-world complexity — from follow-up visits and recurring conditions to late payments and same-day discharges.
 
-To view the dataset generator, click [here](https://github.com/MichaelZaniewski/Healthcare-Dataset-Generator/blob/main/README.md)
-
 Each dataset models real-world hospital operations through three linked tables: Patients, Visits, and Billing.
 
-Condition, treatment, and billing logic follow medically realistic patterns.
+Generator Logic
+- Condition, treatment, and billing logic follow medically realistic patterns.
+- Payment behavior, insurance coverage, and follow-up care evolve dynamically.
+- All data passes a validation system ensuring consistent ages, conditions, billing rules, and table relationships.
 
-Payment behavior, insurance coverage, and follow-up care evolve dynamically.
-
-All data passes a validation system ensuring consistent ages, conditions, and relationships.
-
-It’s an analytics-ready foundation for exploring trends in patient outcomes, billing efficiency, and hospital performance — without exposing real patient data.
-
-
+To download or learn more about the dataset generator, click [here](https://github.com/MichaelZaniewski/Healthcare-Dataset-Generator/blob/main/README.md)
 
 ## Assumptions, Limitations, and Caveats
 
