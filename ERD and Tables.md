@@ -52,19 +52,19 @@ CREATE TABLE patient (
     patient_id              SERIAL PRIMARY KEY,
     first_name              TEXT    NOT NULL,   
     last_name               TEXT    NOT NULL,
-    full_name               TEXT    NOT NULL,
+    name                    TEXT    NOT NULL,
     date_of_birth           DATE    NOT NULL,
     age                     INT     NOT NULL,
     gender                  TEXT    NOT NULL,
     phone_number            TEXT    NOT NULL,
     email                   TEXT    NOT NULL,
     address                 TEXT    NOT NULL,
-    city                    TEXT    NOT NULL,
     state                   CHAR(2) NOT NULL,
     zipcode                 CHAR(5) NOT NULL,
     insurance_provider      TEXT,
     insurance_policy_number TEXT,
     blood_type              TEXT NOT NULL,
+    city                    TEXT    NOT NULL,
     CONSTRAINT chk_insurance_consistency
         CHECK (
             insurance_provider IS NOT NULL
@@ -77,7 +77,7 @@ CREATE TABLE patient (
 CREATE TABLE visit (
     visit_id             SERIAL PRIMARY KEY,
     patient_id           INT NOT NULL REFERENCES patient(patient_id) ON DELETE CASCADE,
-    full_name            TEXT NOT NULL,
+    name                 TEXT NOT NULL,
     age                  INT NOT NULL,
     gender               TEXT NOT NULL,
     condition            TEXT NOT NULL,
