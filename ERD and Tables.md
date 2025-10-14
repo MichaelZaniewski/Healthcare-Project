@@ -11,28 +11,28 @@
 | --------------- | --------- | ------------------------- | ---------- |
 | patient_id      | SERIAL    | email                     | TEXT       |
 | first_name      | TEXT      | address                   | TEXT       |
-| last_name       | TEXT      | city                      | TEXT       |
-| full_name       | TEXT      | state                     | TEXT       |
-| date_of_birth   | DATE      | zipcode                   | VARCHAR(5) |
-| age             | INT       | insurance_provider        | TEXT       |
-| gender          | TEXT      | insurance_policy_number   | TEXT       |
-| phone_number    | TEXT      | blood_type                | TEXT       |
+| last_name       | TEXT      | state                     | TEXT (3)   |
+| full_name       | TEXT      | zipcode                   | VARCHAR(5) |
+| date_of_birth   | DATE      | insurance_provider        | TEXT       |                          
+| age             | INT       | insurance_policy_number   | TEXT       |
+| gender          | TEXT      | blood_type                | TEXT       |
+| phone_number    | TEXT      | city                      | TEXT       |
 
 
 ### Visits
 | column name     | data type | column name          | data type |
 | --------------- | --------- | -------------------- | --------- |
-| visit_id        | SERIAL    | medication           | TEXT      |
-| patient_id      | INT       | dosage               | TEXT      |
-| full_name       | TEXT      | frequency            | TEXT      |
-| date_of_birth   | DATE      | test_results         | TEXT      |
-| age             | INT       | doctor               | TEXT      |
-| gender          | TEXT      | hospital             | TEXT      |
-| blood_type      | TEXT      | room_number          | INT       |
-| condition       | TEXT      | date_of_admission    | DATE      |
-| severity        | TEXT      | date_of_discharge    | DATE      |
-| treatment       | TEXT      | follow_up_required   | CHAR(1)   |
-
+| visit_id        | SERIAL    | dosage               | TEXT      |
+| patient_id      | INT       | frequency            | TEXT      |
+| name            | TEXT      | test_results         | TEXT      |
+| date_of_birth   | DATE      | doctor               | TEXT      |
+| age             | INT       | hospital             | TEXT      |
+| gender          | TEXT      | room_number          | INT       |
+| blood_type      | TEXT      | date_of_admission    | DATE      |
+| condition       | TEXT      | date_of_discharge    | DATE      |
+| severity        | TEXT      | follow_up_required   | CHAR(1)   |
+| treatment       | TEXT      | hospital_zipcode     | VARCHAR(5)|
+| medication      | TEXT      | hospital_state       | TEXT (3)  |
 
 ### Billing
 | column name   | data type     | column name                     | data type     |
@@ -40,7 +40,7 @@
 | billing_id    | SERIAL        | insurance_coverage_amount       | NUMERIC(12,2) |
 | visit_id      | INT           | patient_responsibility_amount   | NUMERIC(12,2) |
 | patient_id    | INT           | payment_plan                    | TEXT          |
-| full_name     | TEXT          | expected_payment_date           | DATE          |
+| name          | TEXT          | expected_payment_date           | DATE          |
 | billing_date  | DATE          | actual_payment_date             | DATE          |
 | total_charge  | NUMERIC(12,2) | payment_status                  | TEXT          |
 
