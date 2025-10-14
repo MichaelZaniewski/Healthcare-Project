@@ -9,7 +9,7 @@
 ### Patients
 | column name     | data type | column name               | data type  |
 | --------------- | --------- | ------------------------- | ---------- |
-| id              | SERIAL    | email                     | TEXT       |
+| patient_id      | SERIAL    | email                     | TEXT       |
 | first_name      | TEXT      | address                   | TEXT       |
 | last_name       | TEXT      | city                      | TEXT       |
 | full_name       | TEXT      | state                     | TEXT       |
