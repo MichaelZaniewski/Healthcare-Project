@@ -35,14 +35,14 @@
 | medication      | TEXT      | hospital_state       | TEXT (3)  |
 
 ### Billing
-| column name   | data type     | column name                     | data type     |
-| ------------- | ------------- | ------------------------------- | ------------- |
-| billing_id    | SERIAL        | insurance_coverage_amount       | NUMERIC(12,2) |
-| visit_id      | INT           | patient_responsibility_amount   | NUMERIC(12,2) |
-| patient_id    | INT           | payment_plan                    | TEXT          |
-| name          | TEXT          | expected_payment_date           | DATE          |
-| billing_date  | DATE          | actual_payment_date             | DATE          |
-| total_charge  | NUMERIC(12,2) | payment_status                  | TEXT          |
+| column name               | data type       | column name                     | data type     |
+| ------------------------- | --------------- | ------------------------------- | ------------- |
+| billing_id                | SERIAL          | patient_responsibility_amount   | NUMERIC(12,2) |
+| visit_id                  | INT             | payment_plan                    | TEXT          |
+| patient_id                | INT             | expected_payment_date           | DATE          |
+| name                      | TEXT            | actual_payment_date             | DATE          |
+| billing_date              | DATE            | payment_status                  | TEXT          |
+| insurance_coverage_amount | NUMERIC(12,2)   | total_charge                    | NUMERIC(12,2) |
 
 
 ### Create Tables Code
