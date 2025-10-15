@@ -5,8 +5,10 @@
 
 <img width="393" height="713" alt="Section 1 Q1" src="https://github.com/user-attachments/assets/2e873a8b-220f-4de7-8fbf-2ce8298f65bb" />
 
-- Functions: Leveraged CTEs to pre-aggregate Late-Paid and Late-Unpaid transactions, applying FILTER() for conditional counts within the same query. Joined to the patient table for accurate insurer association and used GROUP BY and ORDER BY DESC to rank the top 20 insurance providers by total late payments.
-- Insights Gained: Brown LLC and Williams LLC stand out with 355 and 268 late payments respectively — far exceeding other insurers. The distribution shows a gradual 10-20 count increase between providers, suggesting a consistent increase until a sharp jump to the top two, indicating potential systemic delays or claim-processing inefficiencies within those insurers’ payment systems.
+- Functions:
+     - Leveraged CTEs to pre-aggregate Late-Paid and Late-Unpaid transactions, applying FILTER() for conditional counts within the same query. Joined to the patient table for accurate insurer association and used GROUP BY and ORDER BY DESC to rank the top 20 insurance providers by total late payments.
+- Insights Gained:
+     - Brown LLC and Williams LLC stand out with 355 and 268 late payments respectively — far exceeding other insurers. The distribution shows a gradual 10-20 count increase between providers, suggesting a consistent increase until a sharp jump to the top two, indicating potential systemic delays or claim-processing inefficiencies within those insurers’ payment systems.
   
 ```
 WITH late AS (SELECT insurance_provider,
@@ -25,7 +27,8 @@ LIMIT 20
 ### 2) Total financial loss from late/unpaid bills by insurer?
 <img width="1127" height="713" alt="Section 1 Q2" src="https://github.com/user-attachments/assets/69d53451-3893-44b1-9492-d406f1cbaead" />
 
-- Calculation Logic: Calculated how much money hospitals risk losing due to late or unpaid bills from each insurance provider. The totals include both amounts that were eventually paid late and amounts still outstanding, giving a full picture of revenue delays and exposure.
+- Calculation Logic:
+     - Calculated how much money hospitals risk losing due to late or unpaid bills from each insurance provider. The totals include both amounts that were eventually paid late and amounts still outstanding, giving a full picture of revenue delays and exposure.
 - Insights Gained:
      - Brown LLC again leads with the highest total late exposure ($2.58M) and outstanding debt ($0.93M), followed by Williams LLC ($1.7M exposure, $0.73M debt) and Thompson and Sons ($1.25M exposure, $0.47M debt) — mirroring their high late-payment counts from the previous query.
      - The repeating presence of the same insurers in both metrics suggests persistent claim-processing or reimbursement delays, possibly structural issues in payer operations rather than random billing inefficiencies.
@@ -52,8 +55,10 @@ LIMIR 20;
 ### 3) Do uninsured/self-pay patients have significantly higher default rates?
 <img width="592" height="121" alt="Section 1 Q3" src="https://github.com/user-attachments/assets/93d5ab4b-9724-4f08-8c6d-512f8647577c" />
 
-- Functions: Used a CTE (`base`) to centralize joins and keep the final query readable. Applied a JOIN between `patient` and `billing` to associate each bill with insurance status, then a CASE expression to bucket records into Insured vs Uninsured. Counted late-unpaid bills with COUNT(*) FILTER (WHERE …), calculated the default rate with a safe divide using NULLIF, and formatted the percentage via TO_CHAR. Finally, ordered by the default rate to compare groups at a glance.
-- Insights Gained: Uninsured patients default at 20.36% vs 11.89% for Insured, about 1.7× higher. Although uninsured patients account for 22% of all bills, they represent 33% of all late-unpaid bills, indicating a disproportionate share of defaults and a clear area for targeted interventions, for instance a detailed payment-plan entrollment. 
+- Functions:
+     - Used a CTE (`base`) to centralize joins and keep the final query readable. Applied a JOIN between `patient` and `billing` to associate each bill with insurance status, then a CASE expression to bucket records into Insured vs Uninsured. Counted late-unpaid bills with COUNT(*) FILTER (WHERE …), calculated the default rate with a safe divide using NULLIF, and formatted the percentage via TO_CHAR. Finally, ordered by the default rate to compare groups at a glance.
+- Insights Gained:
+     - Uninsured patients default at 20.36% vs 11.89% for Insured, about 1.7× higher. Although uninsured patients account for 22% of all bills, they represent 33% of all late-unpaid bills, indicating a disproportionate share of defaults and a clear area for targeted interventions, for instance a detailed payment-plan entrollment. 
   
 ```
 WITH base AS (
@@ -82,8 +87,9 @@ ORDER BY default_rate_pct DESC;
 ### 4) What is the rate of late payments by condition? - Improves financial forecasting and collection strategy
 <img width="856" height="614" alt="Section 1 Q4" src="https://github.com/user-attachments/assets/4874b873-0f50-413e-ac59-bcc657cb061a" />
 
-- Insights Gained: Conditions tied to intensive/ongoing care show the highest late payment rates: Cancer(49%, - 12,117 late), Kidney Failure(47%, - 8,259 late), Stroke(46% - 8,094 late). Cancer is the condition that sees the most visits and the most late payments. On the other end of the spectrum, heart disease is notible at 44% late but significantly fewer visits, flagging a small, high-risk cohort.
-- How to Use This Information: Forcasting and Collections.
+- Insights Gained:
+     - Conditions tied to intensive/ongoing care show the highest late payment rates: Cancer(49%, - 12,117 late), Kidney Failure(47%, - 8,259 late), Stroke(46% - 8,094 late). Cancer is the condition that sees the most visits and the most late payments. On the other end of the spectrum, heart disease is notible at 44% late but significantly fewer visits, flagging a small, high-risk cohort.
+- How to Use This Information: Forcasting and Collections
      - Forcast delayed cashflow by condition.
      - Tighten pre-authorization and financial counseling to confirm guaranteed payment for conditions like cancer or kidney failure where treatment is expensive and late payments are common.
      - Tailor reminders and installment options early.
@@ -116,8 +122,10 @@ ORDER BY total_late DESC;
 ### 1) What is the avg cost per day as LOS increases?
 <img width="374" height="549" alt="Section 2 Q1" src="https://github.com/user-attachments/assets/1dcc4a72-2bb1-454e-baf9-d88962182065" />
 
-- Insights Gained: Average cost per visit rises sharply from $5,678 (same-day) to over $63,000 for 8–10-night stays, reflecting the heavy resource demands of extended hospitalizations. However, charges decline beyond 10 nights, which may indicate smaller sample sizes.
-- Use Case: This analysis can strengthen financial forecasting and budgeting models, allowing hospitals to predict expected revenue and patient cost by LOS. Administrators can use it to identify where length-of-stay efficiency has the greatest financial impact and to inform staffing, bed management, and insurance negotiations tied to high-cost, multi-day hospitalizations.
+- Insights Gained:
+     - Average cost per visit rises sharply from $5,678 (same-day) to over $63,000 for 8–10-night stays, reflecting the heavy resource demands of extended hospitalizations. However, charges decline beyond 10 nights, which may indicate smaller sample sizes.
+- Use Case:
+     - This analysis can strengthen financial forecasting and budgeting models, allowing hospitals to predict expected revenue and patient cost by LOS. Administrators can use it to identify where length-of-stay efficiency has the greatest financial impact and to inform staffing, bed management, and insurance negotiations tied to high-cost, multi-day hospitalizations.
   
 ```
 SELECT 
@@ -138,7 +146,8 @@ ORDER BY v.los;
 ### 2) What conditions drive the longest and most expensive hospital stays?
 <img width="479" height="713" alt="Section 2 Q2" src="https://github.com/user-attachments/assets/bbbb4b0f-222d-4021-827f-fa7798249f3b" />
 
-- Methodology: Joined `visit` and `billing` tables to link each medical condition with its total charges and Length of Stay (LOS). Used GROUP BY on both fields to aggregate charges by condition and duration, then ORDERED results by LOS (descending) and total charges to highlight the costliest and longest hospitalizations.
+- Methodology:
+     - Joined `visit` and `billing` tables to link each medical condition with its total charges and Length of Stay (LOS). Used GROUP BY on both fields to aggregate charges by condition and duration, then ORDERED results by LOS (descending) and total charges to highlight the costliest and longest hospitalizations.
 - Insights Gained:
      - Covid appears as the maximum LOS beween 9-14 days, which is in accordance with the years this dataset targets (peak covid). This shows substantial resource utilization for extended respitory cases. The sum total charge for these stays hovers consistently around 3.1M to 3.5M.  
      - Cancer, Kidney Failure, and Stroke show the largest total charges across 8–10 day stays, with totals often exceeding $50–75 million.
@@ -157,8 +166,12 @@ LIMIT 20;
 ### 3) What is the average LOS for each condition and what is the average cost per visit and day?
 <img width="659" height="614" alt="Section 2 Q3" src="https://github.com/user-attachments/assets/b32b9c58-efc0-4565-8a7e-a0245c3eaeea" />
 
+- Functions:
+     - Joined `visit` and `billing` tales to calculate average stay length, average, cost per visit, and average cost per day per condition. Used AVG() with ROUND() for clarity and precision, and derived per-day cost by dividing total charges by average LOS. Results were ordered by LOS and total charge to highlight the costliest and longest conditions first.
 - Insights Gained:
-  
+     - Similar to the previous query, conditions requiring intensive inpatient care (Kidney Failure, Stroke, Cancer, Heart Disease, and COVID) average the longest LOS at 3 nights. The top 4 conditions have the highest average cost per visit and cost per day with a steep drop off with COVID.
+Meanwhile, shorter-duration conditions like asthma, arthritis, and high blood pressure remain costly on a per-day basis ($6K–9K/day) but have fewer total days of care. Common low-acuity conditions such as flu, migraine, and allergies show minimal daily costs under $2K, reflecting low complexity and outpatient management. 
+
 ```
 SELECT condition, 
 	ROUND(AVG(LOS),0) AS avg_stay, 
@@ -173,8 +186,11 @@ ORDER BY avg_stay DESC, avg_cost_per_visit DESC, avg_cost_per_day DESC;
 ### 4) Are there hospitals with higher-than-average LOS for the same condition? (inefficient)
 <img width="454" height="713" alt="Section 2 Q4" src="https://github.com/user-attachments/assets/157f4a21-3c74-4185-857a-293a484721e8" />
 
-- Methodology: Utilized joins and subqueries to calculate the average LOS per condition and compared it to the average LOS per condition in a given hospital. Once compared, count only the hospitals where LOS is greater than the average LOS for that condition. 
-- Insights Gained: Clark, Jackson, and Garcia Hospital has the most instances where LOS is greater than average indicating an inefficient turnover rate.
+- Methodology:
+     - To identify hospitals with unusually long patient stays, the average Length of Stay (LOS) for each condition was first calculated across all hospitals. Then, each hospital’s own average LOS for those same conditions was compared against the broader average. Hospitals with a consistently higher LOS than the condition norm were flagged and ranked by how often this occurred.
+     - This approach highlights where patients tend to remain hospitalized longer than expected. However, longer LOS doesn’t always indicate inefficiency — it can also reflect valid factors such as case severity, hospital specialization, or availability of post-acute care options. For example, a facility focused on complex cancer treatment or rehabilitation may naturally show longer stays than general hospitals.
+- Insights Gained:
+     - Several hospitals, including Clark, Jackson and Garcia Hospital, Malone Group Hospital, and Davis LLC Hospital, appeared most frequently with higher-than-average LOS across conditions. Many of these institutions may serve as regional or specialty centers where complex or chronic patients are treated, explaining the extended durations. At the same time, consistently elevated LOS across a wide range of conditions may signal an inefficient turnover rate.
   
 ```
 SELECT hospital, COUNT (*) as COUNT
