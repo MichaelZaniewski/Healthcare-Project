@@ -348,7 +348,8 @@ SELECT
 hospital, COUNT(*) as count
 FROM visit
 GROUP BY hospital
-ORDER BY count DESC;
+ORDER BY count DESC
+LIMIT 20;
 ```
 
 ### 1B) For the hospital with the highest patient volume, what percentage of patients are discharged the same day vs. multi-day stays?  and compare that to the rest of the dataset. Informs bed availability forcasting 
