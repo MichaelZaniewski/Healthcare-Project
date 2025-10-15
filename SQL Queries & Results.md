@@ -271,8 +271,6 @@ ORDER BY followups DESC;
      - The largest drops are for complex, costly conditions like heart disease, stroke, kidney failure, and cancer. While the smallest cost drops are from mild conditions such as migraines, allergies, and anxiety.
      - The assumption behind this data is that most of the costly procedures (such as cat-scans, X-rays, etc) were done in the initial visit and the follow-up visits are mostly monitoring progress.
   
-  
-  
 ```
 WITH labeled AS (
   SELECT
@@ -310,8 +308,15 @@ ORDER BY incremental_cost DESC NULLS LAST;
 ### 3) Are certain doctors driving unnecessary repeat visits? (inefficient)
 <img width="765" height="220" alt="Section 3 Q3" src="https://github.com/user-attachments/assets/d096e367-97e7-4fed-8017-db3fb0651de7" />
 
-- Insights Gained:
+- Methogoloy: This analysis looks for situations where patients return to the hospital shortly after discharge for the same condition — sometimes called a “bounce-back.”
+     - For every patient, their visits were placed in order by date to track whether they came back to the hospital within 7 days of their last discharge.
+     - Each doctor was then evaluated based on how many of their patients returned within that short window.
+     - Doctors with a high number of quick return visits might appear to have higher repeat rates, possibly signaling inefficient care.
+     - There are important caveats similar to Section 2 Question 4 - Hospitals with longer than average LOS. Some doctors may specialize in complex or chronic conditions like cancer or kidney faulure, where multiple visits are medically necessary and not an inefficient process by the doctor. Higher repeat visit counts could simply reflect that these physicians see sicker patients or manage intensive follow-up care, not poor outcomes.
   
+- Insights Gained:
+     - A handful of doctors show higher than average 7-day return rates, meaning their patients often return sooner after discharge. These could indicate unceccesary or inefficient practices by the practitioner.
+       
 ```
 WITH base AS (
   SELECT v.patient_id, v.condition, v.doctor, v.hospital, v.visit_id,
@@ -362,7 +367,15 @@ LIMIT 5;
 <img width="1088" height="154" alt="Section 4 Q1" src="https://github.com/user-attachments/assets/a9caa156-ce06-49d8-8aea-3192a0bef36b" />
 
 - Insights Gained:
-  
+     - The top 3 hospitals are, from top to bottom, Edwards-Lamb, Lopez, Warren, and Marsh, and Peterson LLC.
+     - Revenue is concencentraited in adult age bracket (18-64), mostly male, insured, with complex conditions of stroke and kidney faulure.
+     - The top hospital shows adult, female, stroke, with a frequency count of 106 as the most revenue generating condition. In second place, adult, male, kidney failure, with a count of 71. In third place, similar to first, adult, male, stroke, count of 66.
+       
+- Use Caes:
+     - Resource Planning: Hospitals should ensure they have proper equiptment and staff to treat their most profitable demographic
+     - Make budgeting easier: Track simple metrics like revenue per patient and average days in the hospital for these groups to predict busy periods and set realistic budgets.
+     - Insurer Strategy: Since most revenue is from insured patients, focus conversations with the biggest insurers covering stroke and kidney care to reduce billing hassles and speed up payment.
+       
 ```
 WITH top5 AS (
   SELECT hospital, COUNT(distinct patient_id) AS cnt_patients
@@ -393,7 +406,15 @@ LIMIT 3;
 ### 2) What are the most prevalent conditions for age ranges 0-18 (children), 19-64 (adults), 65+ (elderly) and what is the sum total of their visits in the last comlpete year of the dataset?
 <img width="457" height="154" alt="Section 4 Q2" src="https://github.com/user-attachments/assets/3546b7f4-41a4-4379-936e-bd9b0524e320" />
 
+- Functions:
+     - Built a CTE(`counts`) that joins `visit` and `billing tables, assigns each record to an age bracket (Child 0–17, Adult 18–64, Senior 65+), and aggregates visit counts and total charges per age bracket and condition for the last full year of the dataset.
+     - Used a second CTE(`ranked`) with ROW_NUMBER() to rank conditions within each age group by visit count and then picked the #1 per group.
+     - Returned the top condition for each age bracket along with its sum of charges to show financial weight, not just frequency.
+       
 - Insights Gained:
+     - Cancer is the most prevalent and costly condition across all age brackets in 2024 with adult cancer cases totaling 130 million. Child and Senior cancer totals approximately 69.5 million each.
+     - Adult oncology represents nearly double the financial volume of pediatric or senior oncology, suggesting the strongest demand for adult oncology capacity (beds, infusion chairs, specialists).
+     - Since prevalence is measured by visit count (not unique patients), high totals likely reflect multiple encounters per patient—consistent with cancer treatment cycles. This supports prioritizing oncology scheduling, care coordination, and payer management across all ages, with the largest operational impact in the adult cohort.
   
 ```
 WITH counts AS (
@@ -427,7 +448,10 @@ ORDER BY age_bracket;
 ### 1A) Which hospitals have the highest patient volume. - workload balancing and staffing optimization
 <img width="454" height="713" alt="Section 5 Q1" src="https://github.com/user-attachments/assets/79f30792-41c5-4780-8df6-25f6e1c833c3" />
 
+- Use Case:
+     - Informs workload balancing and staffing optimization
 - Insights Gained:
+     - The top 3 hospitals with the highest patient volume, are Ferrell Group (2,592), Peterson LLC (2,554), and Woods and Sons (2,545).
   
 ```
 SELECT
@@ -438,10 +462,19 @@ ORDER BY count DESC
 LIMIT 20;
 ```
 
-### 1B) For the hospital with the highest patient volume, what percentage of patients are discharged the same day vs. multi-day stays?  and compare that to the rest of the dataset. Informs bed availability forcasting 
+### 1B) For the hospital with the highest patient volume, what percentage of patients are discharged the same day vs. multi-day stays? Compare to the rest of the dataset. 
 <img width="676" height="121" alt="Section 5 Q2" src="https://github.com/user-attachments/assets/0586ead8-bc49-4f32-b0bd-e1b2fa2f5468" />
 
+- Methodology:
+     1) Find the hospital with the most visits.
+     2) Split all visits into two groups: that hospital vs everyone else (nationally).
+     3) For each group, classify stays by LOS: same-day (0 days), one night (1 day), multi-night (>1 day), and compute each category as a percent of total visits.
+        
 - Insights Gained:
+     - The top hospital is a great representation of the national percentage for LOS across same day, one night, and multi night metrics.
+     - Top hospital: 6.13% same-day, 65.70% one-night, 28.16% multi-night from 2,592 visits.
+     - Nationally: 7.29% same-day, 63.51% one-night, 29.20% multi-night from 262,664 visits.
+     - The top hospital performs fewer same-day and fewer multi-night stays than average, with a heavier tilt toward one-night admissions.
   
 ```
 WITH hosp_counts AS (
