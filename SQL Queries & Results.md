@@ -138,7 +138,12 @@ ORDER BY v.los;
 ### 2) What conditions drive the longest and most expensive hospital stays?
 <img width="479" height="713" alt="Section 2 Q2" src="https://github.com/user-attachments/assets/bbbb4b0f-222d-4021-827f-fa7798249f3b" />
 
+- Methodology: Joined `visit` and `billing` tables to link each medical condition with its total charges and Length of Stay (LOS). Used GROUP BY on both fields to aggregate charges by condition and duration, then ORDERED results by LOS (descending) and total charges to highlight the costliest and longest hospitalizations.
 - Insights Gained:
+     - Covid appears as the maximum LOS beween 9-14 days, which is in accordance with the years this dataset targets (peak covid). This shows substantial resource utilization for extended respitory cases. The sum total charge for these stays hovers consistently around 3.1M to 3.5M.  
+     - Cancer, Kidney Failure, and Stroke show the largest total charges across 8–10 day stays, with totals often exceeding $50–75 million.
+     - Heart Disease maintains consistent costs but at a smaller scale, suggesting shorter or less variable stays.
+     - These results confirm that critical and chronic illnesses are the primary cost drivers for prolonged admissions.
   
 ```
 SELECT condition, LOS, SUM(total_charge) AS sum_total_charge
