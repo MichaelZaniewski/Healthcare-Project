@@ -92,7 +92,7 @@ ORDER BY default_rate_pct DESC;
 <img width="856" height="614" alt="Section 1 Q4" src="https://github.com/user-attachments/assets/4874b873-0f50-413e-ac59-bcc657cb061a" />
 
 - Insights Gained:
-     - Conditions tied to intensive/ongoing care show the highest late payment rates: Cancer(49%, - 12,117 late), Kidney Failure(47%, - 8,259 late), Stroke(46% - 8,094 late). Cancer is the condition that sees the most visits and the most late payments. On the other end of the spectrum, heart disease is notable at 44% late but significantly fewer visits, flagging a small, high-risk cohort.
+     - Conditions tied to intensive/ongoing care show the highest late payment rates: Cancer (49%, - 12,117 late), Kidney failure (47%, - 8,259 late), Stroke (46% - 8,094 late). Cancer is the condition that sees the most visits and the most late payments. On the other end of the spectrum, heart disease is notable at 44% late but significantly fewer visits, flagging a small, high-risk cohort.
        
 - How to Use This Information: Forecasting and Collections
      - Forecast delayed cash flow by condition.
@@ -153,12 +153,12 @@ ORDER BY v.los;
 <img width="479" height="713" alt="Section 2 Q2" src="https://github.com/user-attachments/assets/bbbb4b0f-222d-4021-827f-fa7798249f3b" />
 
 - Methodology:
-     - Joined `visit` and `billing` tables to link each medical condition with its total charges and Length of Stay (LOS). Used GROUP BY on both fields to aggregate charges by condition and duration, then ORDERED results by LOS (descending) and total charges to highlight the costliest and longest hospitalizations.
+     - Joined `visit` and `billing` tables to link each medical condition with its total charges and Length of Stay (LOS). Used GROUP BY on both fields to aggregate charges by condition and duration, then ordered results by LOS (descending) and total charges to highlight the costliest and longest hospitalizations.
        
 - Insights Gained:
-     - COVID appears as the maximum LOS between 9-14 days, which is in accordance with the years this dataset targets (peak COVID). This shows substantial resource utilization for extended respiratory cases. The sum total charge for these stays hovers consistently around 3.1M to 3.5M.  
+     - COVID appears as the maximum LOS between 9-14 days, which is in accordance with the years this dataset targets (peak COVID). This shows substantial resource utilization for extended respiratory cases. The sum of total charges for these stays hovers consistently around 3.1M to 3.5M.  
      - Cancer, Kidney Failure, and Stroke show the largest total charges across 8–10 day stays, with totals often exceeding $50–75 million.
-     - Heart Disease maintains consistent costs but at a smaller scale, suggesting shorter or less variable stays.
+     - Heart disease maintains consistent costs but at a smaller scale, suggesting shorter or less variable stays.
      - These results confirm that critical and chronic illnesses are the primary cost drivers for prolonged admissions.
   
 ```
@@ -177,7 +177,7 @@ LIMIT 20;
      - Joined `visit` and `billing` tables to calculate average stay length, average, cost per visit, and average cost per day per condition. Used AVG() with ROUND() for clarity and precision, and derived per-day cost by dividing total charges by average LOS. Results were ordered by LOS and total charge to highlight the costliest and longest conditions first.
        
 - Insights Gained:
-     - Similar to the previous query, conditions requiring intensive inpatient care (Kidney Failure, Stroke, Cancer, Heart Disease, and COVID) average the longest LOS at 3 nights. The top 4 conditions have the highest average cost per visit and cost per day with a steep drop off with COVID.
+     - Similar to the previous query, conditions requiring intensive inpatient care (Kidney failure, Stroke, Cancer, Heart disease, and COVID) average the longest LOS at 3 nights. The top 4 conditions have the highest average cost per visit and cost per day with a steep drop off with COVID.
 Meanwhile, shorter-duration conditions like asthma, arthritis, and high blood pressure remain costly on a per-day basis ($6K–9K/day) but have fewer total days of care. Common low-acuity conditions such as flu, migraine, and allergies show minimal daily costs under $2K, reflecting low complexity and outpatient management. 
 
 ```
@@ -315,7 +315,7 @@ ORDER BY incremental_cost DESC NULLS LAST;
      - There are important caveats similar to Section 2 Question 4 - Hospitals with longer than average LOS. Some doctors may specialize in complex or chronic conditions like cancer or kidney failure, where multiple visits are medically necessary and not an inefficient process by the doctor. Higher repeat visit counts could simply reflect that these physicians see sicker patients or manage intensive follow-up care, not poor outcomes.
   
 - Insights Gained:
-     - A handful of doctors show higher than average 7-day return rates, meaning their patients often return sooner after discharge. These could indicate unnecessary or inefficient practices by the practitioner.
+     - A handful of doctors show higher-than-average 7-day return rates, meaning their patients often return sooner after discharge. These could indicate unnecessary or inefficient practices by the practitioner.
        
 ```
 WITH base AS (
@@ -368,13 +368,13 @@ LIMIT 5;
 
 - Insights Gained:
      - The top 3 hospitals are, from top to bottom, Edwards-Lamb, Lopez, Warren, and Marsh, and Peterson LLC.
-     - Revenue is concentrated in adult age bracket (18-64), mostly male, insured, with complex conditions of stroke and kidney faulure.
+     - Revenue is concentrated in adult age bracket (18-64), mostly male, insured, with complex conditions of stroke and kidney failure.
      - The top hospital shows adult, female, stroke, with a frequency count of 106 as the most revenue generating condition. In second place, adult, male, kidney failure, with a count of 71. In third place, similar to first, adult, male, stroke, count of 66.
        
-- Use Cases:
-     - Resource Planning: Hospitals should ensure they have proper equipment and staff to treat their most profitable demographic
-     - Make budgeting easier: Track simple metrics like revenue per patient and average days in the hospital for these groups to predict busy periods and set realistic budgets.
-     - Insurer Strategy: Since most revenue is from insured patients, focus conversations with the biggest insurers covering stroke and kidney care to reduce billing hassles and speed up payment.
+- Use Case:
+     - Resource planning: Hospitals should ensure they have proper equipment and staff to treat their most profitable demographic
+     - Simpler budgeting: Track simple metrics like revenue per patient and average days in the hospital for these groups to predict busy periods and set realistic budgets.
+     - Insurer strategy: Since most revenue is from insured patients, focus conversations with the biggest insurers covering stroke and kidney care to reduce billing hassles and speed up payment.
        
 ```
 WITH top5 AS (
@@ -407,7 +407,7 @@ LIMIT 3;
 <img width="457" height="154" alt="Section 4 Q2" src="https://github.com/user-attachments/assets/3546b7f4-41a4-4379-936e-bd9b0524e320" />
 
 - Functions:
-     - Built a CTE(`counts`) that joins `visit` and `billing tables, assigns each record to an age bracket (Child 0–17, Adult 18–64, Senior 65+), and aggregates visit counts and total charges per age bracket and condition for the last full year of the dataset.
+     - Built a CTE(`counts`) that joins `visit` and `billing` tables, assigns each record to an age bracket (Child 0–17, Adult 18–64, Senior 65+), and aggregates visit counts and total charges per age bracket and condition for the last full year of the dataset.
      - Used a second CTE(`ranked`) with ROW_NUMBER() to rank conditions within each age group by visit count and then picked the #1 per group.
      - Returned the top condition for each age bracket along with its sum of charges to show financial weight, not just frequency.
        
