@@ -6,7 +6,7 @@
 WITH late AS (SELECT insurance_provider,
 COUNT(*) FILTER (WHERE payment_status = 'Late-Paid') AS late_paid,
 COUNT(*) FILTER (WHERE payment_status = 'Late-Unpaid') AS late_unpaid
-FROM billing b JOIN patient p ON b.patient_id=p.id
+FROM billing b JOIN patient p ON b.patient_id=p.patient_id
 GROUP BY insurance_provider)
 
 SELECT insurance_provider, SUM(late_paid + late_unpaid) AS total_late
@@ -28,7 +28,7 @@ SELECT
   COUNT(*) FILTER (WHERE b.payment_status = 'Late-Paid')                  AS cnt_late_paid,
   COUNT(*) FILTER (WHERE b.payment_status = 'Late-Unpaid')                AS cnt_late_unpaid
 FROM billing b
-JOIN patient p ON p.id = b.patient_id
+JOIN patient p ON p.patient_id = b.patient_id
 WHERE p.insurance_provider IS NOT NULL
 GROUP BY p.insurance_provider
 ORDER BY total_late_exposure DESC;
@@ -41,7 +41,7 @@ WITH base AS (
     CASE WHEN p.insurance_provider IS NULL THEN 'Uninsured' ELSE 'Insured' END AS ins_status,
     b.payment_status
   FROM patient p
-  JOIN billing b ON p.id = b.patient_id
+  JOIN billing b ON p.patient_id = b.patient_id
 )
 SELECT
   ins_status,
@@ -59,31 +59,6 @@ GROUP BY ins_status
 ORDER BY default_rate_pct DESC;
 ```
 
-MY CODE:
-
-```
-WITH Top_Hospital AS (SELECT (SELECT hospital
-	FROM visit
-	GROUP BY hospital
-	ORDER BY count(*) DESC
-	LIMIT 1) AS scope,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los = 0) / COUNT(*)::NUMERIC),2),'999D99%') AS sameday,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los = 1) / COUNT(*)::NUMERIC),2),'999D99%') AS one_night,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los > 1) / COUNT(*)::NUMERIC),2),'999D99%') AS multi_night
-FROM visit),
-
-National AS (SELECT 'Nationally' AS scope,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los = 0) / COUNT(*)::NUMERIC),2),'999D99%') AS sameday,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los = 1) / COUNT(*)::NUMERIC),2),'999D99%') AS one_night,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los > 1) / COUNT(*)::NUMERIC),2),'999D99%') AS multi_night
-FROM visit)
-
-SELECT scope, sameday, one_night, multi_night
-FROM Top_Hospital
-UNION
-SELECT scope, sameday, one_night, multi_night
-FROM National
-```
 ### 4) What is the rate of late payments by condition? - Improves financial forecasting and collection strategy
 
 ```
@@ -287,8 +262,6 @@ LIMIT 5;
 ### 1) which patient demographics drive the highest revenue for the top 5 hospitals?
 
 ```
--- 1) which patient demographics drive the highest revenue for the top 5 hospitals?
-
 WITH top5 AS (
   SELECT hospital, COUNT(DISTINCT patient_id) AS cnt_patients
   FROM visit
@@ -308,7 +281,7 @@ FROM (SELECT v.hospital, p.gender, v.condition, b.total_charge, v.age, insurance
 			ELSE 'Insured'
 			END as insurance_status
 		FROM patient p
-		JOIN visit v ON p.id=v.patient_id JOIN billing b ON v.visit_id=b.visit_id
+		JOIN visit v ON p.patient_id=v.patient_id JOIN billing b ON v.visit_id=b.visit_id
 		WHERE hospital IN (SELECT hospital FROM top5))
 GROUP BY hospital, age_bracket, gender, condition, insurance_status
 ORDER BY sum_revenue DESC
