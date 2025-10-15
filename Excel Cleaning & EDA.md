@@ -14,7 +14,7 @@
 ### Other important cleaning checks
 - Trim all leading and trailing spaces
 - Filtering for nulls in primary key and essential columns
-- 
+- Normalize caseing
 
 # Exploratory Data Analysis
 Below are the queries used to explore and familiarize with the dataset
