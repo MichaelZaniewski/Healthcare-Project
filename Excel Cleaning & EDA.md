@@ -6,7 +6,7 @@ Patients
 - Clean first_name and concatonize first and last into name
 - trim all leading and trailing spaces
 - remove duplicates
-
+- Search for nulls in pk and other important columns
 
 # Exploratory Data Analysis
 
