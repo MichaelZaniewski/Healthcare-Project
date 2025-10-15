@@ -40,6 +40,10 @@ Paragraph form of main takeaway/how companies should leverage the findings
 - 4
 - 5
 
+### Recommendations
+Section 1 :(Recommendation: Negotiate with underperforming insurers)
+
+
 ## Assumptions, Limitations, and Caveats
 
 ### Assumptions
