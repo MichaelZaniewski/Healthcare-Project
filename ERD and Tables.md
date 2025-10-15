@@ -1,7 +1,7 @@
 # ERD, Tables Explained, Create Code:
 
 ### ERD
-![ERD](https://github.com/user-attachments/assets/f0ebb341-3835-4c0b-9470-e874e4964a91)
+![ERD]("https://github.com/user-attachments/assets/e37c9914-ed7b-4903-9a64-11f0966d41fc")
 
 
 
