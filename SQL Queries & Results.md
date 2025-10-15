@@ -1,6 +1,6 @@
 # SQL Queries & Results
 
-## Section 1: Late Payments and Revenue Cycle (Recommendation: Negotiate with underperforming insurers)
+## Section 1: Late Payments and Revenue Cycle
 ### 1) Which insurance providers have the highest share of late payments (paid and unpaid)?
 
 <img width="393" height="713" alt="Section 1 Q1" src="https://github.com/user-attachments/assets/2e873a8b-220f-4de7-8fbf-2ce8298f65bb" />
@@ -88,7 +88,7 @@ GROUP BY ins_status
 ORDER BY default_rate_pct DESC;
 ```
 
-### 4) What is the rate of late payments by condition? - Improves financial forecasting and collection strategy
+### 4) What is the rate of late payments by condition?
 <img width="856" height="614" alt="Section 1 Q4" src="https://github.com/user-attachments/assets/4874b873-0f50-413e-ac59-bcc657cb061a" />
 
 - Insights Gained:
@@ -238,7 +238,7 @@ LIMIT 20;
 ```
 
 ## Section 3: Follow-up Visits 
-### 1) Which conditions generate the most follow-ups? Helps hospitals anticipate repeat care and allocate resources
+### 1) Which conditions generate the most follow-ups?
 <img width="335" height="581" alt="Section 3 Q1" src="https://github.com/user-attachments/assets/367739da-b168-4639-989e-52cd77b5bd5b" />
 
 - Methodology:
@@ -305,7 +305,7 @@ GROUP BY condition
 ORDER BY incremental_cost DESC NULLS LAST;
 ```
 
-### 3) Are certain doctors driving unnecessary repeat visits? (inefficient)
+### 3) Are certain doctors driving unnecessary repeat visits?
 <img width="765" height="220" alt="Section 3 Q3" src="https://github.com/user-attachments/assets/d096e367-97e7-4fed-8017-db3fb0651de7" />
 
 - Methodology: This analysis looks for situations where patients return to the hospital shortly after discharge for the same condition — sometimes called a “bounce-back.”
@@ -445,7 +445,7 @@ ORDER BY age_bracket;
 ```
 
 ## Section 5: Operational Efficiency
-### 1A) Which hospitals have the highest patient volume. - workload balancing and staffing optimization
+### 1A) Which hospitals have the highest patient volume?
 <img width="454" height="713" alt="Section 5 Q1" src="https://github.com/user-attachments/assets/79f30792-41c5-4780-8df6-25f6e1c833c3" />
 
 - Use Case:
