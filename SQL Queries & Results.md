@@ -5,7 +5,8 @@
 
 <img width="393" height="713" alt="Section 1 Q1" src="https://github.com/user-attachments/assets/2e873a8b-220f-4de7-8fbf-2ce8298f65bb" />
 
-- Insights Gained: 
+- Functions: Leveraged CTEs to pre-aggregate Late-Paid and Late-Unpaid transactions, applying FILTER() for conditional counts within the same query. Joined to the patient table for accurate insurer association and used GROUP BY and ORDER BY DESC to rank the top 20 insurance providers by total late payments.
+- Insights Gained: Brown LLC and Williams LLC stand out with 355 and 268 late payments respectively — far exceeding other insurers. The distribution shows a gradual 10-20 count increase between providers, suggesting a consistent increase until a sharp jump to the top two, indicating potential systemic delays or claim-processing inefficiencies within those insurers’ payment systems.
   
 ```
 WITH late AS (SELECT insurance_provider,
@@ -156,7 +157,8 @@ ORDER BY avg_stay DESC, avg_cost_per_visit DESC, avg_cost_per_day DESC;
 ### 4) Are there hospitals with higher-than-average LOS for the same condition? (inefficient)
 <img width="454" height="713" alt="Section 2 Q4" src="https://github.com/user-attachments/assets/157f4a21-3c74-4185-857a-293a484721e8" />
 
-- Insights Gained:
+- Methodology: Utilized joins and subqueries to calculate the average LOS per condition and compared it to the average LOS per condition in a given hospital. Once compared, count only the hospitals where LOS is greater than the average LOS for that condition. 
+- Insights Gained: Clark, Jackson, and Garcia Hospital has the most instances where LOS is greater than average indicating an inefficient turnover rate.
   
 ```
 SELECT hospital, COUNT (*) as COUNT
@@ -186,7 +188,6 @@ JOIN (
 ) AS ca
 USING (condition)
 WHERE hc.avg_los_hospital > ca.avg_los_condition
--- AND hc.stays >= 10   -- optional volume guardrail
 ORDER BY delta_los DESC, hc.stays DESC
 )
 GROUP BY hospital
