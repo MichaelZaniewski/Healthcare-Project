@@ -1,7 +1,7 @@
 ![HEALTHCARE](https://github.com/user-attachments/assets/be123116-11b6-4910-92df-735d27852e1d)
 
 # Healthcare Analytics Project Part 1: Company-Focused
-A data analytics project focused on helping healthcare organizations identify inefficiencies, optimize revenue cycles, and improve hospital performance through data-driven insights derived from a tailor-made realistic synthetic healthcare dataset generator.
+A data analytics project focused on helping healthcare organizations identify inefficiencies, optimize revenue cycles, and improve hospital performance through data-driven insights derived from a custom realistic synthetic healthcare dataset generator.
 
 ## Background and Overview
 
