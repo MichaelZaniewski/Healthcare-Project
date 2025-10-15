@@ -17,7 +17,7 @@ FROM late
 WHERE insurance_provider IS NOT NULL
 GROUP BY insurance_provider
 ORDER BY total_late DESC
-LIMIT 50
+LIMIT 20
 ```
 ### 2) Total financial loss from late/unpaid bills by insurer?
 <img width="1127" height="713" alt="Section 1 Q2" src="https://github.com/user-attachments/assets/69d53451-3893-44b1-9492-d406f1cbaead" />
@@ -36,7 +36,8 @@ FROM billing b
 JOIN patient p ON p.patient_id = b.patient_id
 WHERE p.insurance_provider IS NOT NULL
 GROUP BY p.insurance_provider
-ORDER BY total_late_exposure DESC;
+ORDER BY total_late_exposure DESC
+LIMIR 20;
 ```
 ### 3) Do uninsured/self-pay patients have significantly higher default rates?
 <img width="592" height="121" alt="Section 1 Q3" src="https://github.com/user-attachments/assets/93d5ab4b-9724-4f08-8c6d-512f8647577c" />
@@ -121,6 +122,7 @@ FROM visit v
 JOIN billing b ON v.visit_id=b.visit_id 
 GROUP BY condition, LOS
 ORDER BY LOS DESC, sum_total_charge DESC
+LIMIT 20;
 ```
 
 ### 3) What is the average LOS for each condition and what is the average cost per visit and day?
@@ -134,7 +136,7 @@ SELECT condition,
 FROM visit v 
 JOIN billing b ON v.visit_id=b.visit_id 
 GROUP BY condition
-ORDER BY avg_stay DESC, avg_cost_per_visit DESC, avg_cost_per_day DESC
+ORDER BY avg_stay DESC, avg_cost_per_visit DESC, avg_cost_per_day DESC;
 ```
 
 ### 4) Are there hospitals with higher-than-average LOS for the same condition? (inefficient)
@@ -173,6 +175,7 @@ ORDER BY delta_los DESC, hc.stays DESC
 )
 GROUP BY hospital
 ORDER BY count DESC
+LIMIT 20;
 
 ```
 
@@ -186,7 +189,7 @@ condition, count(follow_up_required) as Followups
 FROM visit
 WHERE follow_up_required = 'Y' 
 GROUP BY condition
-ORDER BY followups DESC
+ORDER BY followups DESC;
 ```
 
 ### 2) What is the incremental cost of follow-ups compared to initial visits?
@@ -302,7 +305,7 @@ FROM (SELECT v.hospital, p.gender, v.condition, b.total_charge, v.age, insurance
 		WHERE hospital IN (SELECT hospital FROM top5))
 GROUP BY hospital, age_bracket, gender, condition, insurance_status
 ORDER BY sum_revenue DESC
-LIMIT 3
+LIMIT 3;
 ```
 
 ### 2) What are the most prevalent conditions for age ranges 0-18 (children), 19-64 (adults), 65+ (elderly) and what is the sum total of their visits in the last comlpete year of the dataset?
@@ -333,7 +336,7 @@ ranked AS (
 SELECT age_bracket, condition, sum_total_charge
 FROM ranked
 WHERE rn = 1
-ORDER BY age_bracket
+ORDER BY age_bracket;
 ```
 
 ## Section 5: Operational Efficiency
@@ -345,7 +348,7 @@ SELECT
 hospital, COUNT(*) as count
 FROM visit
 GROUP BY hospital
-ORDER BY count DESC
+ORDER BY count DESC;
 ```
 
 ### 1B) For the hospital with the highest patient volume, what percentage of patients are discharged the same day vs. multi-day stays?  and compare that to the rest of the dataset. Informs bed availability forcasting 
