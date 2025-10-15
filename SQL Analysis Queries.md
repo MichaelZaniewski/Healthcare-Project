@@ -1,4 +1,4 @@
-# Company-Focused Section
+# SQL Queries & Outputs
 
 ## Section 1: Late Payments and Revenue Cycle (Recommendation: Negotiate with underperforming insurers)
 ### 1) Which insurance providers have the highest share of late payments (paid and unpaid)?
