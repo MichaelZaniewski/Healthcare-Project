@@ -1,4 +1,6 @@
-#Excel Cleaning
+# Data Cleaning
+
+
 Patients
 - Format date properly YYYY/MM/DD
 - Clean first_name and concatonize first and last into name
@@ -6,3 +8,4 @@ Patients
 - remove duplicates
 
 
+# Exploratory Data Analysis
