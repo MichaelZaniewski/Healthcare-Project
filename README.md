@@ -48,11 +48,20 @@ Paragraph form of main takeaway/how companies should leverage the findings
 As a result, capacity planning should account for steady follow-up demand even when initial visits fluctuate.
 
 ### Recommendations
-Section 1 :(Recommendation: Negotiate with underperforming insurers)
-section 2 (Recommendation: Optimize dischage planning for conditions with high los)
-section 3 (Recommendation: Introduce stronger collection strategies for uninsured patients) 
-## Assumptions, Limitations, and Caveats
+1) Negotiate with underperforming insurers 
+2) Introduce stronger collection strategies for uninsured patients
+3) Create condition-focused pre-authorization & benefits checks for high-risk cohorts
+   - A short, mandatory, front-end checklist before treatment to confirm coverage, authorizations, and patient financial setup. The hospital will provide a transparent estimate of charges, explain copay/coinsurance, available payment plans, and frequent payment reminders for high-risk late-payment conditions to reduce the frequency of late payments.
+   - Rollout first to:
+        -  Oncology (cancer): infusions, imaging, biopsies, radiation therapy.
+        -  Renal (kidney failure): dialysis, inpatient renal procedures, high-cost meds.
+        -  Neuro/Cardiac (stroke): advanced imaging, interventions, rehab placement.
+4) Create a "same day criteria" bundle
+   - A list of minor conditions with low risk-high volume cases (athsma, migraine, dehydration) with eligiblity crieria (stable vitals, pain controlled on oral meds, no red flags, has safe transporation home, support at home) 
+5) Optimize dischage planning for conditions with high los
 
+
+## Assumptions, Limitations, and Caveats
 ### Assumptions
 - Follow‑ups are correctly linked to the original visit. “Follow‑up” ties back to the initial episode for the same patient and condition.
 - Business rules remained stable. Payer rules, common care pathways, and charging practices did not change during the analysis window to invalidate comparisons.
