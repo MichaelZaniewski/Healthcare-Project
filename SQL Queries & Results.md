@@ -116,7 +116,8 @@ ORDER BY total_late DESC;
 ### 1) What is the avg cost per day as LOS increases?
 <img width="374" height="549" alt="Section 2 Q1" src="https://github.com/user-attachments/assets/1dcc4a72-2bb1-454e-baf9-d88962182065" />
 
-- Insights Gained:
+- Insights Gained: Average cost per visit rises sharply from $5,678 (same-day) to over $63,000 for 8–10-night stays, reflecting the heavy resource demands of extended hospitalizations. However, charges decline beyond 10 nights, which may indicate smaller sample sizes.
+- Use Case: This analysis can strengthen financial forecasting and budgeting models, allowing hospitals to predict expected revenue and patient cost by LOS. Administrators can use it to identify where length-of-stay efficiency has the greatest financial impact and to inform staffing, bed management, and insurance negotiations tied to high-cost, multi-day hospitalizations.
   
 ```
 SELECT 
