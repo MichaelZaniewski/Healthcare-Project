@@ -52,7 +52,8 @@ LIMIR 20;
 ### 3) Do uninsured/self-pay patients have significantly higher default rates?
 <img width="592" height="121" alt="Section 1 Q3" src="https://github.com/user-attachments/assets/93d5ab4b-9724-4f08-8c6d-512f8647577c" />
 
-- Insights Gained:
+- Functions: Used a CTE (`base`) to centralize joins and keep the final query readable. Applied a JOIN between `patient` and `billing` to associate each bill with insurance status, then a CASE expression to bucket records into Insured vs Uninsured. Counted late-unpaid bills with COUNT(*) FILTER (WHERE …), calculated the default rate with a safe divide using NULLIF, and formatted the percentage via TO_CHAR. Finally, ordered by the default rate to compare groups at a glance.
+- Insights Gained: Uninsured patients default at 20.36% vs 11.89% for Insured, about 1.7× higher. Although uninsured patients account for 22% of all bills, they represent 33% of all late-unpaid bills, indicating a disproportionate share of defaults and a clear area for targeted interventions, for instance a detailed payment-plan entrollment. 
   
 ```
 WITH base AS (
@@ -81,8 +82,12 @@ ORDER BY default_rate_pct DESC;
 ### 4) What is the rate of late payments by condition? - Improves financial forecasting and collection strategy
 <img width="856" height="614" alt="Section 1 Q4" src="https://github.com/user-attachments/assets/4874b873-0f50-413e-ac59-bcc657cb061a" />
 
-- Insights Gained:
-  
+- Insights Gained: Conditions tied to intensive/ongoing care show the highest late payment rates: Cancer(49%, - 12,117 late), Kidney Failure(47%, - 8,259 late), Stroke(46% - 8,094 late). Cancer is the condition that sees the most visits and the most late payments. On the other end of the spectrum, heart disease is notible at 44% late but significantly fewer visits, flagging a small, high-risk cohort.
+- How to Use This Information: Forcasting and Collections.
+     - Forcast delayed cashflow by condition.
+     - Tighten pre-authorization and financial counseling to confirm guaranteed payment for conditions like cancer or kidney failure where treatment is expensive and late payments are common.
+     - Tailor reminders and installment options early.
+   
 ```
 WITH by_condition AS (
   SELECT
