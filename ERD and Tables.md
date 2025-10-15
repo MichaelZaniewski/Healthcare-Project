@@ -62,12 +62,12 @@ CREATE TABLE patient (
     phone_number            TEXT    NOT NULL,
     email                   TEXT    NOT NULL,
     address                 TEXT    NOT NULL,
+    city                    TEXT    NOT NULL,
     state                   CHAR(2) NOT NULL,
     zipcode                 CHAR(5) NOT NULL,
     insurance_provider      TEXT,
     insurance_policy_number TEXT,
     blood_type              TEXT NOT NULL,
-    city                    TEXT    NOT NULL,
     CONSTRAINT chk_insurance_consistency
         CHECK (
             insurance_provider IS NOT NULL
@@ -92,6 +92,8 @@ CREATE TABLE visit (
     test_results         TEXT NOT NULL CHECK (test_results IN ('Positive','Negative','Inconclusive')),
     doctor               TEXT NOT NULL,
     hospital             TEXT NOT NULL,
+    hospital_state       TEXT NOT NULL,
+    hospital_zipcode     TEXT NOT NULL,
     room_number          INT NOT NULL,
     date_of_admission    DATE NOT NULL,
     date_of_discharge    DATE NOT NULL,
@@ -105,13 +107,13 @@ CREATE TABLE billing (
     visit_id                    INT NOT NULL UNIQUE REFERENCES visit(visit_id) ON DELETE CASCADE,
     patient_id                  INT NOT NULL REFERENCES patient(patient_id) ON DELETE CASCADE,
     billing_date                DATE NOT NULL,
-    total_charge                INT  NOT NULL CHECK (total_charge > 0),
     insurance_coverage_amount   INT  NOT NULL,
     patient_responsibility_amount INT NOT NULL,
     payment_plan                TEXT NOT NULL,
     expected_payment_date       DATE NOT NULL,
     actual_payment_date         DATE,
-    payment_status              TEXT NOT NULL
+    payment_status              TEXT NOT NULL,
+    total_charge                INT  NOT NULL CHECK (total_charge > 0)
 );
 ```
 
