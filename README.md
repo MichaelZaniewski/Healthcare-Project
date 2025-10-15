@@ -42,7 +42,7 @@ Paragraph form of main takeaway/how companies should leverage the findings
 
 ### Recommendations
 Section 1 :(Recommendation: Negotiate with underperforming insurers)
-
+section 2 (Recommendation: Optimize dischage planning for conditions with high los)
 
 ## Assumptions, Limitations, and Caveats
 
