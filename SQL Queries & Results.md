@@ -25,7 +25,14 @@ LIMIT 20
 ### 2) Total financial loss from late/unpaid bills by insurer?
 <img width="1127" height="713" alt="Section 1 Q2" src="https://github.com/user-attachments/assets/69d53451-3893-44b1-9492-d406f1cbaead" />
 
+- Calculation Logic: 
 - Insights Gained:
+     - Brown LLC again leads with the highest total late exposure ($2.58M) and outstanding debt ($0.93M), followed by Williams LLC ($1.7M exposure, $0.73M debt) and Thompson and Sons ($1.25M exposure, $0.47M debt) — mirroring their high late-payment counts from the previous query.
+     - The repeating presence of the same insurers in both metrics suggests persistent claim-processing or reimbursement delays, possibly structural issues in payer operations rather than random billing inefficiencies.
+ - Why It Matters:
+     - These findings identify where hospitals face the most financial risk and helps direct collection efforts or policy negotiations toward insurers with the highest late payment exposure.
+       
+   
   
 ```
 SELECT
