@@ -10,6 +10,15 @@ Patients
 
 # Exploratory Data Analysis
 
+
+Aggregated a LOS column
+```
+ALTER TABLE visits
+ADD COLUMN los INT GENERATED ALWAYS AS (
+    GREATEST((date_of_discharge::date - date_of_admission::date), 0)
+) STORED;
+```
+
 1) Frequency of LOS 
 
 ```
