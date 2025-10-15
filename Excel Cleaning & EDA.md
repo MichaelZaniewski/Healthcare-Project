@@ -1,15 +1,19 @@
-# Data Cleaning
+# Excel Data Cleaning
 
+## Patients
+### Date formatting  
 
-Patients
-- Format date properly YYYY/MM/DD
-- Clean first_name and concatonize first and last into name
-- trim all leading and trailing spaces
-- remove duplicates
-- Search for nulls in pk and other important columns
+### Remove salutation from first name and concatenate into full_name
+
+### Remove duplicates
+
+### Trim all leading and trailing spaces
+
+### Filter for nulls in primary key and essential columns
+
 
 # Exploratory Data Analysis
-
+Below are the queries used to explore and familiarize with the dataset
 
 Aggregated a LOS column
 ```
