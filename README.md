@@ -50,27 +50,26 @@ As a result, capacity planning should account for steady follow-up demand even w
 ### Recommendations
 1) Partner with insurers associated with the most late payments to cut bad debt 
    - Introduce real-time eligibility and cost estimate share up-front to educate patients, allowing them to see their out-of-pocket costs before care and decide the best course of action.
-   - Share data to identify high-risk cohorts requiring special attention.
-  
-2) Introduce stronger collection strategies for uninsured patients
-   - test
-   - test
-     
-3) Create condition-focused pre-authorization & benefits checks for high-risk cohorts
-   - A short, mandatory, front-end checklist before treatment to confirm coverage, authorizations, and patient financial setup. The hospital will provide a transparent estimate of charges, explain copay/coinsurance, available payment plans, and frequent payment reminders for high-risk late-payment conditions to reduce the frequency of late payments.
-   - Rollout first to:
+   - Exchange data with those insurers to flag high-risk conditions and patients who are most likely to fall behind and allocate special attention and education to that cohort.
+   - Align on faster explanations of benefits and clearer member letters so patients know exactly what they owe and when.
+
+2) Preemptive financial clearance with support & stronger collection strategies to reduce defaulting and late payments
+   - Create condition-focused pre-authorization & benefits checks for high-risk cohorts
+     - A short, mandatory, front-end checklist before treatment to confirm coverage, authorizations, and patient financial setup. The hospital will provide a transparent estimate of charges, explain copay/coinsurance, available payment plans, and frequent payment reminders for high-risk late-payment conditions to reduce the frequency of late payments.
+     - Rollout where risk and cost are highest:
         -  Oncology (cancer): infusions, imaging, biopsies, radiation therapy.
         -  Renal (kidney failure): dialysis, inpatient renal procedures, high-cost meds.
         -  Neuro/Cardiac (stroke): advanced imaging, interventions, rehab placement.
+   - Offer a short follow-up call within two to three days to answer billing questions and confirm the plan.
+   - Make it easy to pay: one-click links, saved payment methods, and clear instructions on how to get help
           
-4) Create a "same-day criteria" bundle to reduce one-night stays
-   - For a small list of low-risk, high-volume conditions (asthma, migraine, allergies, flu)
-   - A list of minor conditions with low risk-high volume cases (athsma, migraine, dehydration) with eligiblity crieria (stable vitals, pain controlled on oral meds, no red flags, has safe transporation home, support at home)
-   - test
+3) Create a "same-day criteria" bundle to reduce LOS from one-night to same-day
+   - For a small list of low-risk, high-volume conditions (asthma, migraine, allergies, flu), set clear go-home-today rules. If the patient has stable vitals, controlled pain with medication, no warning signs, a safe ride home, and basic support at home, they meet the critera for same-day release.
+   - Moving appropriate patients home the same day frees beds and reduces cost.
      
-5) Optimize dischage planning for conditions with high los
-   - test
-   - test
+4) Optimize dischage planning for conditions with high los
+   - Since cost rises drastically as LOS increases, plan the discharge path from day 1.
+   - Line up rehab or home-care early (have pregenerated lists to pull from) and remove common blockers: earlier imaging reads, faster transportation scheduling, and clear weekend and holiday handoffs.
 
 
 ## Assumptions, Limitations, and Caveats
