@@ -30,6 +30,8 @@ To download or learn more about the dataset generator, click [here](https://gith
 ## Executive Summary
 ### Overview of Findings
 Paragraph form of main takeaway/how companies should leverage the findings
+  
+  - Highlights where hospitals face the greatest revenue risk, displaying the importance of prioritizing insurer negotiations.
 
 ### Findings
 - Finding 1
