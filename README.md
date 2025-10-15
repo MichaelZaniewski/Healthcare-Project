@@ -46,7 +46,7 @@ Costs also climb quickly as stays get longer, peaking around the eight to ten-ni
    - Follow-ups are typically 35–65% of the cost of initial visits (often ~$30K less for complex cases) and occur more often, so they represent a large share of total care.
 As a result, capacity planning should account for steady follow-up demand even when initial visits fluctuate.
 
-### Recommendations
+## Recommendations
 1) Partner with insurers associated with the most late payments to cut bad debt 
    - Introduce real-time eligibility and cost estimate shared up front to educate patients, allowing them to see their out-of-pocket costs before care and decide the best course of action.
    - Exchange data with those insurers to flag high-risk conditions and patients who are most likely to fall behind, and allocate special attention and education to that cohort.
