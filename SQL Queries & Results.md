@@ -53,7 +53,7 @@ JOIN patient p ON p.patient_id = b.patient_id
 WHERE p.insurance_provider IS NOT NULL
 GROUP BY p.insurance_provider
 ORDER BY total_late_exposure DESC
-LIMIR 20;
+LIMIT 20;
 ```
 ### 3) Do uninsured/self-pay patients have significantly higher default rates?
 <img width="592" height="121" alt="Section 1 Q3" src="https://github.com/user-attachments/assets/93d5ab4b-9724-4f08-8c6d-512f8647577c" />
@@ -62,7 +62,7 @@ LIMIR 20;
      - Used a CTE (`base`) to centralize joins and keep the final query readable. Applied a JOIN between `patient` and `billing` to associate each bill with insurance status, then a CASE expression to bucket records into Insured vs Uninsured. Counted late-unpaid bills with COUNT(*) FILTER (WHERE …), calculated the default rate with a safe divide using NULLIF, and formatted the percentage via TO_CHAR. Finally, ordered by the default rate to compare groups at a glance.
        
 - Insights Gained:
-     - Uninsured patients default at 20.36% vs 11.89% for Insured, about 1.7× higher. Although uninsured patients account for 22% of all bills, they represent 33% of all late-unpaid bills, indicating a disproportionate share of defaults and a clear area for targeted interventions, for instance a detailed payment-plan entrollment. 
+     - Uninsured patients default at 20.36% vs 11.89% for Insured, about 1.7× higher. Although uninsured patients account for 22% of all bills, they represent 33% of all late-unpaid bills, indicating a disproportionate share of defaults and a clear area for targeted interventions, for instance a detailed payment-plan enrollment. 
   
 ```
 WITH base AS (
@@ -92,10 +92,10 @@ ORDER BY default_rate_pct DESC;
 <img width="856" height="614" alt="Section 1 Q4" src="https://github.com/user-attachments/assets/4874b873-0f50-413e-ac59-bcc657cb061a" />
 
 - Insights Gained:
-     - Conditions tied to intensive/ongoing care show the highest late payment rates: Cancer(49%, - 12,117 late), Kidney Failure(47%, - 8,259 late), Stroke(46% - 8,094 late). Cancer is the condition that sees the most visits and the most late payments. On the other end of the spectrum, heart disease is notible at 44% late but significantly fewer visits, flagging a small, high-risk cohort.
+     - Conditions tied to intensive/ongoing care show the highest late payment rates: Cancer(49%, - 12,117 late), Kidney Failure(47%, - 8,259 late), Stroke(46% - 8,094 late). Cancer is the condition that sees the most visits and the most late payments. On the other end of the spectrum, heart disease is notable at 44% late but significantly fewer visits, flagging a small, high-risk cohort.
        
-- How to Use This Information: Forcasting and Collections
-     - Forcast delayed cashflow by condition.
+- How to Use This Information: Forecasting and Collections
+     - Forecast delayed cash flow by condition.
      - Tighten pre-authorization and financial counseling to confirm guaranteed payment for conditions like cancer or kidney failure where treatment is expensive and late payments are common.
      - Tailor reminders and installment options early.
    
@@ -123,7 +123,7 @@ FROM by_condition
 ORDER BY total_late DESC;
 ```
 
-## Section 2: Length of Stay Costs (Recommendation: Optimize dischage planning for conditions with high los)
+## Section 2: Length of Stay Costs
 ### 1) What is the avg cost per day as LOS increases?
 <img width="374" height="549" alt="Section 2 Q1" src="https://github.com/user-attachments/assets/1dcc4a72-2bb1-454e-baf9-d88962182065" />
 
@@ -156,7 +156,7 @@ ORDER BY v.los;
      - Joined `visit` and `billing` tables to link each medical condition with its total charges and Length of Stay (LOS). Used GROUP BY on both fields to aggregate charges by condition and duration, then ORDERED results by LOS (descending) and total charges to highlight the costliest and longest hospitalizations.
        
 - Insights Gained:
-     - Covid appears as the maximum LOS beween 9-14 days, which is in accordance with the years this dataset targets (peak covid). This shows substantial resource utilization for extended respitory cases. The sum total charge for these stays hovers consistently around 3.1M to 3.5M.  
+     - COVID appears as the maximum LOS between 9-14 days, which is in accordance with the years this dataset targets (peak COVID). This shows substantial resource utilization for extended respiratory cases. The sum total charge for these stays hovers consistently around 3.1M to 3.5M.  
      - Cancer, Kidney Failure, and Stroke show the largest total charges across 8–10 day stays, with totals often exceeding $50–75 million.
      - Heart Disease maintains consistent costs but at a smaller scale, suggesting shorter or less variable stays.
      - These results confirm that critical and chronic illnesses are the primary cost drivers for prolonged admissions.
@@ -174,7 +174,7 @@ LIMIT 20;
 <img width="659" height="614" alt="Section 2 Q3" src="https://github.com/user-attachments/assets/b32b9c58-efc0-4565-8a7e-a0245c3eaeea" />
 
 - Functions:
-     - Joined `visit` and `billing` tales to calculate average stay length, average, cost per visit, and average cost per day per condition. Used AVG() with ROUND() for clarity and precision, and derived per-day cost by dividing total charges by average LOS. Results were ordered by LOS and total charge to highlight the costliest and longest conditions first.
+     - Joined `visit` and `billing` tables to calculate average stay length, average, cost per visit, and average cost per day per condition. Used AVG() with ROUND() for clarity and precision, and derived per-day cost by dividing total charges by average LOS. Results were ordered by LOS and total charge to highlight the costliest and longest conditions first.
        
 - Insights Gained:
      - Similar to the previous query, conditions requiring intensive inpatient care (Kidney Failure, Stroke, Cancer, Heart Disease, and COVID) average the longest LOS at 3 nights. The top 4 conditions have the highest average cost per visit and cost per day with a steep drop off with COVID.
@@ -191,7 +191,7 @@ GROUP BY condition
 ORDER BY avg_stay DESC, avg_cost_per_visit DESC, avg_cost_per_day DESC;
 ```
 
-### 4) Are there hospitals with higher-than-average LOS for the same condition? (inefficient)
+### 4) Are there hospitals with higher-than-average LOS for the same condition?
 <img width="454" height="713" alt="Section 2 Q4" src="https://github.com/user-attachments/assets/157f4a21-3c74-4185-857a-293a484721e8" />
 
 - Methodology:
@@ -267,9 +267,9 @@ ORDER BY followups DESC;
      - This approach provides a clear view of how costs evolve throughout a patient’s treatment journey and helps hospitals understand where most long-term care expenses are concentrated.
        
 - Insights Gained:
-     - In this dataset, followups are cheaper than initial visits across all conditions.
+     - In this dataset, follow-ups are cheaper than initial visits across all conditions.
      - The largest drops are for complex, costly conditions like heart disease, stroke, kidney failure, and cancer. While the smallest cost drops are from mild conditions such as migraines, allergies, and anxiety.
-     - The assumption behind this data is that most of the costly procedures (such as cat-scans, X-rays, etc) were done in the initial visit and the follow-up visits are mostly monitoring progress.
+     - The assumption behind this data is that most of the costly procedures (such as CAT scans, X-rays, etc) were done in the initial visit and the follow-up visits are mostly monitoring progress.
   
 ```
 WITH labeled AS (
@@ -308,14 +308,14 @@ ORDER BY incremental_cost DESC NULLS LAST;
 ### 3) Are certain doctors driving unnecessary repeat visits? (inefficient)
 <img width="765" height="220" alt="Section 3 Q3" src="https://github.com/user-attachments/assets/d096e367-97e7-4fed-8017-db3fb0651de7" />
 
-- Methogoloy: This analysis looks for situations where patients return to the hospital shortly after discharge for the same condition — sometimes called a “bounce-back.”
+- Methodology: This analysis looks for situations where patients return to the hospital shortly after discharge for the same condition — sometimes called a “bounce-back.”
      - For every patient, their visits were placed in order by date to track whether they came back to the hospital within 7 days of their last discharge.
      - Each doctor was then evaluated based on how many of their patients returned within that short window.
      - Doctors with a high number of quick return visits might appear to have higher repeat rates, possibly signaling inefficient care.
-     - There are important caveats similar to Section 2 Question 4 - Hospitals with longer than average LOS. Some doctors may specialize in complex or chronic conditions like cancer or kidney faulure, where multiple visits are medically necessary and not an inefficient process by the doctor. Higher repeat visit counts could simply reflect that these physicians see sicker patients or manage intensive follow-up care, not poor outcomes.
+     - There are important caveats similar to Section 2 Question 4 - Hospitals with longer than average LOS. Some doctors may specialize in complex or chronic conditions like cancer or kidney failure, where multiple visits are medically necessary and not an inefficient process by the doctor. Higher repeat visit counts could simply reflect that these physicians see sicker patients or manage intensive follow-up care, not poor outcomes.
   
 - Insights Gained:
-     - A handful of doctors show higher than average 7-day return rates, meaning their patients often return sooner after discharge. These could indicate unceccesary or inefficient practices by the practitioner.
+     - A handful of doctors show higher than average 7-day return rates, meaning their patients often return sooner after discharge. These could indicate unnecessary or inefficient practices by the practitioner.
        
 ```
 WITH base AS (
@@ -368,11 +368,11 @@ LIMIT 5;
 
 - Insights Gained:
      - The top 3 hospitals are, from top to bottom, Edwards-Lamb, Lopez, Warren, and Marsh, and Peterson LLC.
-     - Revenue is concencentraited in adult age bracket (18-64), mostly male, insured, with complex conditions of stroke and kidney faulure.
+     - Revenue is concentrated in adult age bracket (18-64), mostly male, insured, with complex conditions of stroke and kidney faulure.
      - The top hospital shows adult, female, stroke, with a frequency count of 106 as the most revenue generating condition. In second place, adult, male, kidney failure, with a count of 71. In third place, similar to first, adult, male, stroke, count of 66.
        
-- Use Caes:
-     - Resource Planning: Hospitals should ensure they have proper equiptment and staff to treat their most profitable demographic
+- Use Cases:
+     - Resource Planning: Hospitals should ensure they have proper equipment and staff to treat their most profitable demographic
      - Make budgeting easier: Track simple metrics like revenue per patient and average days in the hospital for these groups to predict busy periods and set realistic budgets.
      - Insurer Strategy: Since most revenue is from insured patients, focus conversations with the biggest insurers covering stroke and kidney care to reduce billing hassles and speed up payment.
        
@@ -403,7 +403,7 @@ ORDER BY sum_revenue DESC
 LIMIT 3;
 ```
 
-### 2) What are the most prevalent conditions for age ranges 0-18 (children), 19-64 (adults), 65+ (elderly) and what is the sum total of their visits in the last comlpete year of the dataset?
+### 2) What are the most prevalent conditions for age ranges 0-18 (children), 19-64 (adults), 65+ (elderly) and what is the sum total of their visits in the last complete year of the dataset?
 <img width="457" height="154" alt="Section 4 Q2" src="https://github.com/user-attachments/assets/3546b7f4-41a4-4379-936e-bd9b0524e320" />
 
 - Functions:
@@ -471,7 +471,7 @@ LIMIT 20;
      3) For each group, classify stays by LOS: same-day (0 days), one night (1 day), multi-night (>1 day), and compute each category as a percent of total visits.
         
 - Insights Gained:
-     - The top hospital is a great representation of the national percentage for LOS across same day, one night, and multi night metrics.
+     - The top hospital is a great representation of the national percentage for LOS across same-day, one-night, and multi-night metrics.
      - Top hospital: 6.13% same-day, 65.70% one-night, 28.16% multi-night from 2,592 visits.
      - Nationally: 7.29% same-day, 63.51% one-night, 29.20% multi-night from 262,664 visits.
      - The top hospital performs fewer same-day and fewer multi-night stays than average, with a heavier tilt toward one-night admissions.
