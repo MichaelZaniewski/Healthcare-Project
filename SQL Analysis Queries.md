@@ -323,13 +323,13 @@ ORDER BY age_bracket
 
 ```
 SELECT
-hospital
+hospital, COUNT(*) as count
 FROM visit
 GROUP BY hospital
-ORDER BY COUNT(*) DESC
+ORDER BY count DESC
 ```
 
-### 1B) For the hospital(s) with the highest patient volume, what percentage of patients are discharged the same day vs. multi-day stays?  and compare that to the rest of the dataset. Informs bed availability forcasting 
+### 1B) For the hospital with the highest patient volume, what percentage of patients are discharged the same day vs. multi-day stays?  and compare that to the rest of the dataset. Informs bed availability forcasting 
 
 ```
 WITH Top_Hospital AS (SELECT (SELECT hospital
