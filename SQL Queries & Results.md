@@ -5,6 +5,8 @@
 
 <img width="393" height="713" alt="Section 1 Q1" src="https://github.com/user-attachments/assets/2e873a8b-220f-4de7-8fbf-2ce8298f65bb" />
 
+- Insights Gained: 
+  
 ```
 WITH late AS (SELECT insurance_provider,
 COUNT(*) FILTER (WHERE payment_status = 'Late-Paid') AS late_paid,
@@ -22,6 +24,8 @@ LIMIT 20
 ### 2) Total financial loss from late/unpaid bills by insurer?
 <img width="1127" height="713" alt="Section 1 Q2" src="https://github.com/user-attachments/assets/69d53451-3893-44b1-9492-d406f1cbaead" />
 
+- Insights Gained:
+  
 ```
 SELECT
   p.insurance_provider,
@@ -42,6 +46,8 @@ LIMIR 20;
 ### 3) Do uninsured/self-pay patients have significantly higher default rates?
 <img width="592" height="121" alt="Section 1 Q3" src="https://github.com/user-attachments/assets/93d5ab4b-9724-4f08-8c6d-512f8647577c" />
 
+- Insights Gained:
+  
 ```
 WITH base AS (
   SELECT 
@@ -69,6 +75,8 @@ ORDER BY default_rate_pct DESC;
 ### 4) What is the rate of late payments by condition? - Improves financial forecasting and collection strategy
 <img width="856" height="614" alt="Section 1 Q4" src="https://github.com/user-attachments/assets/4874b873-0f50-413e-ac59-bcc657cb061a" />
 
+- Insights Gained:
+  
 ```
 WITH by_condition AS (
   SELECT
@@ -97,6 +105,8 @@ ORDER BY total_late DESC;
 ### 1) What is the avg cost per day as LOS increases?
 <img width="374" height="549" alt="Section 2 Q1" src="https://github.com/user-attachments/assets/1dcc4a72-2bb1-454e-baf9-d88962182065" />
 
+- Insights Gained:
+  
 ```
 SELECT 
     v.los,
@@ -116,6 +126,8 @@ ORDER BY v.los;
 ### 2) What conditions drive the longest and most expensive hospital stays?
 <img width="479" height="713" alt="Section 2 Q2" src="https://github.com/user-attachments/assets/bbbb4b0f-222d-4021-827f-fa7798249f3b" />
 
+- Insights Gained:
+  
 ```
 SELECT condition, LOS, SUM(total_charge) AS sum_total_charge
 FROM visit v 
@@ -128,6 +140,8 @@ LIMIT 20;
 ### 3) What is the average LOS for each condition and what is the average cost per visit and day?
 <img width="659" height="614" alt="Section 2 Q3" src="https://github.com/user-attachments/assets/b32b9c58-efc0-4565-8a7e-a0245c3eaeea" />
 
+- Insights Gained:
+  
 ```
 SELECT condition, 
 	ROUND(AVG(LOS),0) AS avg_stay, 
@@ -142,6 +156,8 @@ ORDER BY avg_stay DESC, avg_cost_per_visit DESC, avg_cost_per_day DESC;
 ### 4) Are there hospitals with higher-than-average LOS for the same condition? (inefficient)
 <img width="454" height="713" alt="Section 2 Q4" src="https://github.com/user-attachments/assets/157f4a21-3c74-4185-857a-293a484721e8" />
 
+- Insights Gained:
+  
 ```
 SELECT hospital, COUNT (*) as COUNT
 FROM(SELECT
@@ -183,6 +199,8 @@ LIMIT 20;
 ### 1) Which conditions generate the most follow-ups? Helps hospitals anticipate repeat care and allocate resources
 <img width="335" height="581" alt="Section 3 Q1" src="https://github.com/user-attachments/assets/367739da-b168-4639-989e-52cd77b5bd5b" />
 
+- Insights Gained:
+  
 ```
 SELECT 
 condition, count(follow_up_required) as Followups
@@ -195,6 +213,8 @@ ORDER BY followups DESC;
 ### 2) What is the incremental cost of follow-ups compared to initial visits?
 <img width="1228" height="612" alt="Section 3 Q2" src="https://github.com/user-attachments/assets/a54ea14c-2edb-4073-b202-274b97a18f15" />
 
+- Insights Gained:
+  
 ```
 WITH labeled AS (
   SELECT
@@ -232,6 +252,8 @@ ORDER BY incremental_cost DESC NULLS LAST;
 ### 3) Are certain doctors driving unnecessary repeat visits? (inefficient)
 <img width="765" height="220" alt="Section 3 Q3" src="https://github.com/user-attachments/assets/d096e367-97e7-4fed-8017-db3fb0651de7" />
 
+- Insights Gained:
+  
 ```
 WITH base AS (
   SELECT v.patient_id, v.condition, v.doctor, v.hospital, v.visit_id,
@@ -281,6 +303,8 @@ LIMIT 5;
 ### 1) Which patient demographics drive the highest revenue for the top 3 hospitals?
 <img width="1088" height="154" alt="Section 4 Q1" src="https://github.com/user-attachments/assets/a9caa156-ce06-49d8-8aea-3192a0bef36b" />
 
+- Insights Gained:
+  
 ```
 WITH top5 AS (
   SELECT hospital, COUNT(distinct patient_id) AS cnt_patients
@@ -311,6 +335,8 @@ LIMIT 3;
 ### 2) What are the most prevalent conditions for age ranges 0-18 (children), 19-64 (adults), 65+ (elderly) and what is the sum total of their visits in the last comlpete year of the dataset?
 <img width="457" height="154" alt="Section 4 Q2" src="https://github.com/user-attachments/assets/3546b7f4-41a4-4379-936e-bd9b0524e320" />
 
+- Insights Gained:
+  
 ```
 WITH counts AS (
   SELECT
@@ -343,6 +369,8 @@ ORDER BY age_bracket;
 ### 1A) Which hospitals have the highest patient volume. - workload balancing and staffing optimization
 <img width="454" height="713" alt="Section 5 Q1" src="https://github.com/user-attachments/assets/79f30792-41c5-4780-8df6-25f6e1c833c3" />
 
+- Insights Gained:
+  
 ```
 SELECT
 hospital, COUNT(*) as count
@@ -355,6 +383,8 @@ LIMIT 20;
 ### 1B) For the hospital with the highest patient volume, what percentage of patients are discharged the same day vs. multi-day stays?  and compare that to the rest of the dataset. Informs bed availability forcasting 
 <img width="676" height="121" alt="Section 5 Q2" src="https://github.com/user-attachments/assets/0586ead8-bc49-4f32-b0bd-e1b2fa2f5468" />
 
+- Insights Gained:
+  
 ```
 WITH hosp_counts AS (
   SELECT hospital, COUNT(*) AS visit_cnt
