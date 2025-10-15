@@ -34,7 +34,6 @@ GROUP BY p.insurance_provider
 ORDER BY total_late_exposure DESC;
 ```
 ### 3) Do uninsured/self-pay patients have significantly higher default rates?
-CHATGPT CODE:
 ```
 WITH base AS (
   SELECT 
