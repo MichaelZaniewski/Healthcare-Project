@@ -1,7 +1,7 @@
 #Excel Cleaning
 Patients
 - Format date properly YYYY/MM/DD
-- Clean first_name and concatonize into full_name
+- Clean first_name and concatonize first and last into name
 - trim all leading and trailing spaces
 - remove duplicates
 
