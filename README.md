@@ -5,12 +5,10 @@ A data analytics project focused on helping healthcare organizations identify in
 
 ## Background and Overview
 
-
 The ultimate goal of this project is to analyze patterns in care quality, hospital efficiency, and payment behavior using SQL, demonstrating how data-driven insights can improve both operational performance and patient outcomes.
 
 - EDA strategies in Excel and SQL used to inspect, clean, and quality-check the dataset can be found [here](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/Excel%20Cleaning%20%26%20EDA.md).
 - Targeted SQL queries used to answer business questions and extract insights can be found [here](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/SQL%20Queries%20%26%20Results.md).
-- The custom Healthcare Dataset Generator can be found [here](https://github.com/MichaelZaniewski/Healthcare-Dataset-Generator/blob/main/README.md)
 
 ## ⚙️ Dataset Generator and Structure Overview
 
@@ -18,20 +16,21 @@ This project includes a fully custom Healthcare Dataset Generator that creates r
 
 The dataset simulates how hospitals operate day-to-day: patients are admitted for various conditions, receive treatments of differing severities, and are billed through diverse insurance and payment plans. Each record is generated using probabilistic logic to mimic real-world complexity — from follow-up visits and recurring conditions to late payments and same-day discharges.
 
-Each dataset models real-world hospital operations through three linked tables: Patients, Visits, and Billing.
+Each dataset models real-world hospital operations through three linked tables: `Patients`, `Visits`, and `Billing`.
 
-Generator Logic
-- Condition, treatment, and billing logic follow medically realistic patterns.
-- Payment behavior, insurance coverage, and follow-up care evolve dynamically.
-- All data passes a validation system ensuring consistent ages, conditions, billing rules, and table relationships.
+### Generator Logic
+Realism: Data behaves like a real hospital: visit lengths range from same-day to multi-night, follow-ups occur where they make sense, and charges scale with condition severity and length of stay.
+Customizability: Choose how many patients to generate, set the date window, and target real U.S. ZIP codes. You can also use a fixed seed so results are repeatable.
+Validation: Built-in checks confirm clean links between patients, visits, and billing, enforce age and condition rules, and flag issues before you start analyzing.
 
-To download or learn more about the dataset generator, click [here](https://github.com/MichaelZaniewski/Healthcare-Dataset-Generator/blob/main/README.md)
+To download or learn more about the dataset generator, click [here](https://github.com/MichaelZaniewski/Healthcare-Dataset-Generator/blob/main/README.md).
 
 ## Executive Summary
 ### Overview of Findings
-Paragraph form of main takeaway/how companies should leverage the findings
-  
-  - Highlights where hospitals face the greatest revenue risk, displaying the importance of prioritizing insurer negotiations.
+
+Most cash-flow strain traces back to a few sources. Two insurers account for a large share of late and unpaid balances (by members), and patients without insurance default nearly twice as often as those with coverage. Complex conditions like cancer, kidney failure, and stroke show the highest late-payment rates because care is longer and involves repeat visits. 
+
+Costs also climb quickly as stays get longer, peaking around the eight to ten-night range, which means even a small reduction in length of stay can save money. At the same time, follow-up visits are cheaper but far more frequent, so they make up a large share of the work that fills clinics and drives predictable revenue. Put together, the data points to a focused playbook: work directly with the two insurers linked to the most late balances, give uninsured and high-risk patients clear costs and support up front, tighten pre-authorization and benefits checks for complex care, and expand same-day pathways and strong discharge planning to reduce unnecessary extra days.
 
 ### Findings
 
