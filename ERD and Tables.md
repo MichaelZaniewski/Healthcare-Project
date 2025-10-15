@@ -1,7 +1,7 @@
 # ERD, Tables Explained, Create Code:
 
 ### ERD
-<img width="1309" height="1468" alt="Image" src="https://github.com/user-attachments/assets/f2f946a0-a5a1-412e-b76e-d72b65f2fcab" />
+<img width="1309" height="1468" alt="ERD" src="https://github.com/user-attachments/assets/f2f946a0-a5a1-412e-b76e-d72b65f2fcab" />
 
 
 
