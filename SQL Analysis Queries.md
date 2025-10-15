@@ -4,6 +4,7 @@
 ### 1) Which insurance providers have the highest share of late payments (paid and unpaid)?
 
 <img width="393" height="713" alt="Section 1 Q1" src="https://github.com/user-attachments/assets/2e873a8b-220f-4de7-8fbf-2ce8298f65bb" />
+
 ```
 WITH late AS (SELECT insurance_provider,
 COUNT(*) FILTER (WHERE payment_status = 'Late-Paid') AS late_paid,
@@ -20,6 +21,7 @@ LIMIT 50
 ```
 ### 2) Total financial loss from late/unpaid bills by insurer?
 <img width="1127" height="713" alt="Section 1 Q2" src="https://github.com/user-attachments/assets/69d53451-3893-44b1-9492-d406f1cbaead" />
+
 ```
 SELECT
   p.insurance_provider,
