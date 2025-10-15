@@ -124,7 +124,7 @@ ORDER BY total_late DESC;
 ```
 
 ## Section 2: Length of Stay Costs
-### 1) What is the avg cost per day as LOS increases?
+### 1) What is the average cost per day as LOS increases?
 <img width="374" height="549" alt="Section 2 Q1" src="https://github.com/user-attachments/assets/1dcc4a72-2bb1-454e-baf9-d88962182065" />
 
 - Insights Gained:
