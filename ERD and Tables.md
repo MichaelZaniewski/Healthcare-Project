@@ -12,7 +12,7 @@
 | patient_id    | SERIAL    | email                   | TEXT       |
 | first_name    | TEXT      | address                 | TEXT       |
 | last_name     | TEXT      | city                    | TEXT       |
-| name          | TEXT      | state                   | TEXT (3)   |
+| name          | TEXT      | state                   | TEXT (2)   |
 | date_of_birth | DATE      | zipcode                 | VARCHAR(5) |
 | age           | INT       | insurance_provider      | TEXT       |
 | gender        | TEXT      | insurance_policy_number | TEXT       |
@@ -28,7 +28,7 @@
 | patient_id    | INT       | test_results       | TEXT       |
 | name          | TEXT      | doctor             | TEXT       |
 | date_of_birth | DATE      | hospital           | TEXT       |
-| age           | INT       | hospital_state     | TEXT (3)   |
+| age           | INT       | hospital_state     | TEXT (2)   |
 | gender        | TEXT      | hospital_zipcode   | VARCHAR(5) |
 | condition     | TEXT      | room_number        | INT        |
 | severity      | TEXT      | date_of_admission  | DATE       |
