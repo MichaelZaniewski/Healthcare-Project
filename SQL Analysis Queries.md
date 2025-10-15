@@ -332,25 +332,41 @@ ORDER BY count DESC
 ### 1B) For the hospital with the highest patient volume, what percentage of patients are discharged the same day vs. multi-day stays?  and compare that to the rest of the dataset. Informs bed availability forcasting 
 
 ```
-WITH Top_Hospital AS (SELECT (SELECT hospital
-	FROM visit
-	GROUP BY hospital
-	ORDER BY count(*) DESC
-	LIMIT 1) AS scope,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los = 0) / COUNT(*)::NUMERIC),2),'999D99%') AS sameday,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los = 1) / COUNT(*)::NUMERIC),2),'999D99%') AS one_night,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los > 1) / COUNT(*)::NUMERIC),2),'999D99%') AS multi_night
-FROM visit),
-
-National AS (SELECT 'Nationally' AS scope,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los = 0) / COUNT(*)::NUMERIC),2),'999D99%') AS sameday,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los = 1) / COUNT(*)::NUMERIC),2),'999D99%') AS one_night,
-TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE los > 1) / COUNT(*)::NUMERIC),2),'999D99%') AS multi_night
-FROM visit)
-
-SELECT scope, sameday, one_night, multi_night
-FROM Top_Hospital
-UNION
-SELECT scope, sameday, one_night, multi_night
-FROM National
+WITH hosp_counts AS (
+  SELECT hospital, COUNT(*) AS visit_cnt
+  FROM visit
+  GROUP BY hospital
+),
+top_hospitals AS (
+  SELECT hospital
+  FROM hosp_counts
+  WHERE visit_cnt = (SELECT MAX(visit_cnt) FROM hosp_counts)
+),
+scoped AS (
+  SELECT
+    v.*,
+    CASE WHEN v.hospital IN (SELECT hospital FROM top_hospitals)
+         THEN 'Top hospital'
+         ELSE 'Nationally'
+    END AS scope
+  FROM visit v
+),
+agg AS (
+  SELECT
+    scope,
+    COUNT(*)::numeric AS n_visits,
+    COUNT(*) FILTER (WHERE los = 0)::numeric AS n_sameday,
+    COUNT(*) FILTER (WHERE los = 1)::numeric AS n_one_night,
+    COUNT(*) FILTER (WHERE los > 1)::numeric AS n_multi_night
+  FROM scoped
+  GROUP BY scope
+)
+SELECT
+  scope,
+  TO_CHAR(100 * n_sameday / NULLIF(n_visits,0), 'FM999D00%')   AS sameday,
+  TO_CHAR(100 * n_one_night / NULLIF(n_visits,0), 'FM999D00%') AS one_night,
+  TO_CHAR(100 * n_multi_night / NULLIF(n_visits,0), 'FM999D00%') AS multi_night,
+  n_visits::int AS visit_volume
+FROM agg
+ORDER BY CASE WHEN scope = 'Top hospital(s)' THEN 0 ELSE 1 END;
 ```
