@@ -34,11 +34,18 @@ Paragraph form of main takeaway/how companies should leverage the findings
   - Highlights where hospitals face the greatest revenue risk, displaying the importance of prioritizing insurer negotiations.
 
 ### Findings
-- Finding 1
-- 2
-- 3
-- 4
-- 5
+
+1) Late-payment risk is concentrated by two insurers.
+   - Brown LLC and Williams LLC lead both in the count of late payments and in late revenue exposure, totaling about $2.6M and $1.7M respectively, with roughly 35–45% of that exposure still unpaid. This concentration indicates that a small number of payers disproportionately drive cash-flow drag.
+2) Uninsured patients default almost twice as often.
+   - Default rate is 20.36% for uninsured patients vs 11.89% for insured, meaning insurance status is a major driver of nonpayment. Bad-debt risk increases whenever the payer mix shifts toward self-pay.
+3) Complex conditions drive the highest late-payment rates.
+   - Cancer (49%), Kidney failure (47%), and Stroke (46%) combine high visit volume with high lateness, creating the largest delayed-cash exposure. These conditions typically involve multi-day care and repeated encounters, which extend billing and reimbursement timelines.
+4) Costs climb quickly with longer stays
+   - Average charges rise from same-day visits to $63K+ around 8–10 nights; per-day costs are highest for Kidney failure, Stroke, and Cancer (~$17–18K/day). Small changes in length of stay for these groups translate into large swings in total cost.
+5) Follow-ups cost less but make up much of the workload
+   - Follow-ups are typically 35–65% of the cost of initial visits (often ~$30K less for complex cases) and occur more often, so they represent a large share of total care.
+As a result, capacity planning should account for steady follow-up demand even when initial visits fluctuate.
 
 ### Recommendations
 Section 1 :(Recommendation: Negotiate with underperforming insurers)
