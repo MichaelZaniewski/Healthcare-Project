@@ -5,10 +5,4 @@ Patients
 - trim all leading and trailing spaces
 - remove duplicates
 
-Visits
-
-
-Billing
-- changed to full_name
-- Consider removing payment_status and manually calculating it?
 
