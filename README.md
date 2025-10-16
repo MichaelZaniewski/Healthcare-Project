@@ -56,7 +56,7 @@ Costs also climb quickly as stays get longer, peaking around the eight to ten-ni
 ### Findings
 
 1) Late-payment risk is concentrated by two insurers.
-   - Brown LLC and Williams LLC lead both in the count of late payments bu insurer members and in late revenue exposure, totaling about $2.6M and $1.7M respectively, with roughly 35–45% of that exposure still unpaid. This concentration indicates that a small number of payers disproportionately drive cash-flow drag. [Query](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/SQL%20Queries%20&%20Results.md#2-what-is-the-total-financial-loss-from-lateunpaid-bills-by-insurer-members)
+   - Brown LLC and Williams LLC lead both in the count of late payments by insurer members and in late revenue exposure, totaling about $2.6M and $1.7M respectively, with roughly 35–45% of that exposure still unpaid. This concentration indicates that a small number of payers disproportionately drive cash-flow drag. [Query](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/SQL%20Queries%20&%20Results.md#2-what-is-the-total-financial-loss-from-lateunpaid-bills-by-insurer-members)
 2) Uninsured patients default almost twice as often.
    - Default rate is 20.36% for uninsured patients vs 11.89% for insured, meaning insurance status is a major driver of nonpayment. Bad-debt risk increases whenever the payer mix shifts toward self-pay. [Query](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/SQL%20Queries%20&%20Results.md#3-do-uninsuredself-pay-patients-have-significantly-higher-default-rates)
 3) Complex conditions drive the highest late-payment rates.
@@ -67,8 +67,8 @@ Costs also climb quickly as stays get longer, peaking around the eight to ten-ni
    - Follow-ups are typically 35–65% of the cost of initial visits (often ~$30K less for complex cases) and occur more often, so they represent a large share of total care. As a result, capacity planning should account for steady follow-up demand even when initial visits fluctuate. [Query](https://github.com/MichaelZaniewski/Healthcare-Project/edit/main/SQL%20Queries%20%26%20Results.md#2-what-is-the-incremental-cost-of-follow-ups-compared-to-initial-visits)
 6) Majority of the patients are discharged after a night spent in the hospital
    - Statistics: 7.29% same-day, 63.51% one-night, 29.20% multi-night from 262,664 visits. [Query](https://github.com/MichaelZaniewski/Healthcare-Project/edit/main/SQL%20Queries%20%26%20Results.md#1b-for-the-hospital-with-the-highest-patient-volume-what-percentage-of-patients-are-discharged-the-same-day-vs-multi-day-stays-compare-to-the-rest-of-the-dataset)
-7) The longest LOS are attributed to cancer, but the most expensive condition is cancer (in the last full year of the dataset, 2024)
-   - COVID has a max of 14 LOS while cancer has 10, but the total charge for COVID at 14 LOS is only 3.5 million whereas cancer at 10 LOS is 78 million. [Query](https://github.com/MichaelZaniewski/Healthcare-Project/edit/main/SQL%20Queries%20%26%20Results.md#2-what-conditions-drive-the-longest-and-most-expensive-hospital-stays)
+7) The longest LOS is attributed to cancer, but the most expensive condition is cancer (in the last full year of the dataset, 2024)
+   - COVID has a maximum LOS of 14 while cancer has 10, but the total charge for COVID at 14 LOS is only 3.5 million whereas cancer at 10 LOS is 78 million. [Query](https://github.com/MichaelZaniewski/Healthcare-Project/edit/main/SQL%20Queries%20%26%20Results.md#2-what-conditions-drive-the-longest-and-most-expensive-hospital-stays)
 
 ## Recommendations
 1) Partner with insurers associated with the most late payments to cut bad debt 
@@ -91,7 +91,7 @@ Costs also climb quickly as stays get longer, peaking around the eight to ten-ni
    - Moving appropriate patients home the same day frees beds and reduces cost.
      
 4) Optimize discharge planning for conditions with high LOS
-   - Since cost rises drastically as LOS increases, plan the discharge path from day 1.
+   - Since cost rises drastically as LOS increases, plan the discharge path from day one.
    - Line up rehab or home-care early (have pre-generated lists to pull from) and remove common blockers: earlier imaging reads, faster transportation scheduling, and clear weekend and holiday handoffs.
 
 ## Assumptions, Limitations, and Caveats
@@ -100,7 +100,7 @@ Costs also climb quickly as stays get longer, peaking around the eight to ten-ni
 - Business rules remained stable. Payer rules, common care pathways, and charging practices did not change during the analysis window to invalidate comparisons.
   
 ### Limitations
-- Synthetica data—despite realistic rules— may not capture true clinical variation like seasonal spikes. Real‑world behavior (patients, providers, payers) can differ.
+- Synthetic data, despite realistic rules, may not capture true clinical variation like seasonal spikes. Real‑world behavior (patients, providers, payers) can differ.
 - Simplified payer behavior. Denials, appeals, carve‑outs, and clawbacks are not modeled, so “revenue at risk” may be conservative or optimistic.
   
 ### Caveats
