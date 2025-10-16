@@ -1,56 +1,56 @@
 # Creating the Dataset
-The dataset is comprised of three tables: Patient Information, Visit Information, and Billing Information.
-All data is generated.
+## Overview:
 
+This healthcare dataset generator was designed in tandem with OpenAI GPT 5 - Thinking Model; implimenting realistic clinical, operational, and billing rules, then translating them into a single Python generator that produces a linked `patients`, `visits`, and `billing` tables with a validation summary report to ensure data accuracy and efficacy. 
 
+The generator is a reproducible, seed-driven engine that builds a U.S.-style hospital dataset end-to-end with configurable geography and time windows. It assigns facilities and patients using a ZIP/state pool, enforces pediatric/adult gating, and bounds length-of-stay by condition-specific ranges rather than one-size averages. Visit timelines are constructed first, then downstream billing is derived deterministically from those timelines (e.g., plan = Full vs Incremental → expected dates → status transitions), so payment outcomes are explainable from inputs. Severity tiers influence tests vs. procedures, and recurrence rules drive whether a case becomes a single episode or a series of returns. The generator emits clean, SQL, excel, and tableau friendly CSVs plus a validation JSON that checks ID integrity, visit-billing 1:1 mapping, age logic, LOS fences, and payment status consistency. Runs are tunable via CLI flags (patients, anchor date, ZIP diversity, seed), letting you create bite-size samples for demos or larger datasets for analytics and dashboarding. **The data is always synthetic, never real personal information.**
 
-Generation Process:
-ChatGPT was used to generate the python script that subsequently generated the dataset.
+## Generation Logic:
+1) Multi-table Relational Design
+- Three linked tables — Patients → Visits ↔ Billing (1:1) — mirror a hospital EHR + revenue cycle flow.
+- Stable primary/foreign keys enable clean SQL joins and BI modeling (star-schema friendly).
 
-I designed this synthetic healthcare dataset with ChatGPT as a co-pilot: we debated realistic clinical, operational, and billing rules, then translated them into a single Python generator that produces linked patients, visits, and billing tables plus a validation summary. We separated treatment from medication (with life-like drug names, doses, and frequencies), modeled follow-ups and “Monitoring” (including a small no-show rate for minor conditions), tightened provider continuity (same doctor/hospital preferred; otherwise same hospital or at least same state), and made same-day discharges more common only for mild severities with minor conditions. Billing was kept strictly 1:1 with visits, with sensible coverage and charge behavior, and we moved billing_date into the billing table where it belongs.
+2) Realistic Patient Demographics
+- U.S.-style names (with optional prefixes), phones, addresses, ZIP/state/city from a configurable ZIP pool CSV (flexible column names detected: zipcode|zip|postal_code, state|state_id, city).
+- Age distributions and gender alignment are enforced; insurance coverage ≈ 78% insured with thousands of realistic provider names.
 
+3) Condition, Severity, and Treatment Logic
+- 17+ conditions with age/clinical gating and severity tiers (Normal/Mild/Moderate/Severe).
+- Treatments are separate from medications (life-like drug names, dosage, frequency).
+- Recurrence rules: chronic (e.g., diabetes) tend toward multiple visits; acute (e.g., flu) resolve quickly.
+- Continuity of care: follow-ups prefer same doctor + hospital; if not, same hospital or at least same state.
 
+4) Dynamic Visit & LOS Behavior
+- Visit counts vary by condition/severity; LOS bounded by condition-specific ranges.
+- Same-day discharges are probabilistic and concentrated in mild/minor cases (tunable).
+- Final column order in Visits is normalized to: ... hospital → hospital_state → hospital_zipcode → room_number ....
 
-The Healthcare Dataset Generator is the engine behind this project’s analytics. It programmatically creates a large, realistic U.S.-based healthcare dataset that mirrors the complexity of real hospital systems — while containing no real or sensitive data. Each run produces unique, randomized data built on controlled logic, meaning no two datasets are ever the same.
+5) Realistic Billing System (strict 1:1 with Visits)
+- Each visit yields exactly one billing record with total charge, insurance coverage, and patient responsibility (follow-ups generally billed lower than initial visits, with small realistic “bumps”).
+- Payment plan logic: Full (30-day window) vs Incremental (12 months) → deterministic expected/actual dates → status (Paid, Late-Paid, In-progress, Late-Unpaid).
+- Final cleanups: billing_date is in the Billing table (not Visits) and the name column is removed from Billing post-export to prevent dimension duplication.
 
+6) Controlled Randomness (Reproducible but Varied)
+- Seed-driven (--seed, default 42) via NumPy RNG: same inputs + seed ⇒ identical dataset; change seed ⇒ new, realistic variation.
+- Subtle per-run shifts in hospital profiles, doctor behavior, billing bias, and severity patterns.
 
-1. Multi-table Relational Design
-- Patients, Visits, and Billing tables mirror an actual healthcare database schema.
-- Built with consistent primary and foreign keys for seamless SQL joins and BI analysis.
+7) Built-in Validation Framework
+- A JSON validation summary is printed and saved (validation_summary.json), checking:
+- Unique IDs and Visits↔Billing 1:1 mapping (no misses or doubles).
+- LOS/age logic, pediatric gating, and insurance consistency.
+- Date sanity (no future/invalid dates relative to --today).
+- Distribution sanity checks (e.g., late/unpaid by insured status).
 
-2. Realistic Patient Demographics
-- Generates authentic U.S. names (with prefixes), phone numbers, and addresses.
-- Includes realistic age distributions, gender alignment, and insurance coverage rates (≈78% insured).
-- Insurance provider list drawn from thousands of unique company names.
+8) Export & File Hygiene
+- Post-generation normalizations (non-destructive to upstream logic):
+- Patients: city is placed immediately after address.
+- Visits: date_of_birth is removed (it lives in Patients); hospital fields are ordered as noted above.
+- Billing: name is removed to avoid duplication.
+- CSVs are Postgres-friendly with ISO-like dates (YYYY/MM/DD) and stable column order.
 
-3. Condition and Treatment Logic
-- Over 17 medical conditions with realistic severity levels and age restrictions.
-- Severity progression and recurrence follow natural clinical patterns — e.g. chronic conditions like diabetes have multiple visits, while acute ones like flu resolve quickly.
-- Pediatric gating prevents impossible pairings (e.g. children with heart disease).
-- Follow-up visits retain the same doctor and hospital to simulate continuity of care.
-
-4. Dynamic Visit and LOS Behavior
-- Visit counts vary by condition and severity (1–18 possible visits per patient).
-- Realistic length of stay (LOS) logic based on condition complexity.
-- Includes probabilistic same-day discharges for mild or minor conditions, tunable per dataset.
-
-5. Realistic Billing System
-- Each visit generates one billing record with total charges, insurance coverage, and patient responsibility.
-- Payment plans (Full or Incremental) influence expected and actual payment timelines.
-- Deterministic payment status rules produce Paid, Late-Paid, In-progress, or Late-Unpaid outcomes.
-- Follow-up visits are billed less than the initial visit to reflect patient recovery — with small random “bumps” for realism.
-
-6. Controlled Randomness
-- Every run uses seeded randomization for reproducibility — but built-in stochastic variation ensures no two datasets are identical.
-- Hospital profiles, doctor behavior, billing bias, and severity patterns all vary subtly between runs.
-
-7. Built-in Validation Framework
-- Automatic validation checks ensure internal consistency before export:
-- No missing foreign keys.
-- Logical LOS and age alignment.
-- Insurance-policy integrity.
-- Proper follow-up scaling and doctor/hospital consistency.
-- No future or invalid dates.
+9) CLI Controls
+--patients, --today, --zip-target, --zip-pool-file, --outdir, --seed.
+- Works without a ZIP pool, but distinct ZIPs/states are richer when you provide one.
 
 
 
