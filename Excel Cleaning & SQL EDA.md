@@ -16,8 +16,8 @@
 - Filtering for nulls in primary key and essential columns
 - Normalize caseing
 
-# Exploratory Data Analysis
-Below are the queries used to explore and familiarize with the dataset
+# Exploratory Data Analysis - SQL
+Below are the queries used to explore and familiarize with the dataset and its relationships
 
 1) Frequency of LOS
 <img width="230" height="548" alt="eda1" src="https://github.com/user-attachments/assets/b3f26708-3093-445e-b12b-5b24d02d68f7" />
