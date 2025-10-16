@@ -5,7 +5,7 @@ A data analytics project focused on helping healthcare organizations identify in
 
 ## Background and Overview
 
-The ultimate goal of this project is to analyze patterns in care quality, hospital efficiency, and payment behavior using SQL, demonstrating how data-driven insights can improve both operational performance and patient outcomes.
+The goal of this project is to leverage SQL to analyze utilization, length of stay, and payment behavior so leaders can improve capacity planning, streamline care pathways, and strengthen financial performance.
 
 - EDA strategies in Excel and SQL used to inspect, clean, and quality-check the dataset can be found [here](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/Excel%20Cleaning%20%26%20EDA.md).
 - Targeted SQL queries used to answer business questions and extract insights can be found [here](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/SQL%20Queries%20%26%20Results.md).
