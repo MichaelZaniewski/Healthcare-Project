@@ -47,16 +47,19 @@ Costs also climb quickly as stays get longer, peaking around the eight to ten-ni
 ### Findings
 
 1) Late-payment risk is concentrated by two insurers.
-   - Brown LLC and Williams LLC lead both in the count of late payments bu insurer members and in late revenue exposure, totaling about $2.6M and $1.7M respectively, with roughly 35–45% of that exposure still unpaid. This concentration indicates that a small number of payers disproportionately drive cash-flow drag.
+   - Brown LLC and Williams LLC lead both in the count of late payments bu insurer members and in late revenue exposure, totaling about $2.6M and $1.7M respectively, with roughly 35–45% of that exposure still unpaid. This concentration indicates that a small number of payers disproportionately drive cash-flow drag. [Query](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/SQL%20Queries%20&%20Results.md#2-what-is-the-total-financial-loss-from-lateunpaid-bills-by-insurer-members)
 2) Uninsured patients default almost twice as often.
-   - Default rate is 20.36% for uninsured patients vs 11.89% for insured, meaning insurance status is a major driver of nonpayment. Bad-debt risk increases whenever the payer mix shifts toward self-pay.
+   - Default rate is 20.36% for uninsured patients vs 11.89% for insured, meaning insurance status is a major driver of nonpayment. Bad-debt risk increases whenever the payer mix shifts toward self-pay. [Query](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/SQL%20Queries%20&%20Results.md#3-do-uninsuredself-pay-patients-have-significantly-higher-default-rates)
 3) Complex conditions drive the highest late-payment rates.
-   - Cancer (49%), Kidney failure (47%), and Stroke (46%) combine high visit volume with high lateness, creating the largest delayed-cash exposure. These conditions typically involve multi-day care and repeated encounters, which extend billing and reimbursement timelines.
+   - Cancer (49%), Kidney failure (47%), and Stroke (46%) combine high visit volume with high lateness, creating the largest delayed-cash exposure. These conditions typically involve multi-day care and repeated encounters, which extend billing and reimbursement timelines. [Query](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/SQL%20Queries%20&%20Results.md#4-what-is-the-rate-of-late-payments-by-condition)
 4) Costs climb quickly with longer stays
-   - Average charges rise from same-day visits to $63K+ around 8–10 nights; per-day costs are highest for Kidney failure, Stroke, and Cancer (~$17–18K/day). Small changes in length of stay for these groups translate into large swings in total cost.
+   - Average charges rise from same-day visits to $63K+ around 8–10 nights; per-day costs are highest for Kidney failure, Stroke, and Cancer (~$17–18K/day). Small changes in length of stay for these groups translate into large swings in total cost. [Query](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/SQL%20Queries%20&%20Results.md#1-what-is-the-average-cost-per-day-as-los-increases)
 5) Follow-ups cost less but make up much of the workload
-   - Follow-ups are typically 35–65% of the cost of initial visits (often ~$30K less for complex cases) and occur more often, so they represent a large share of total care.
-As a result, capacity planning should account for steady follow-up demand even when initial visits fluctuate.
+   - Follow-ups are typically 35–65% of the cost of initial visits (often ~$30K less for complex cases) and occur more often, so they represent a large share of total care. As a result, capacity planning should account for steady follow-up demand even when initial visits fluctuate. [Query](https://github.com/MichaelZaniewski/Healthcare-Project/edit/main/SQL%20Queries%20%26%20Results.md#2-what-is-the-incremental-cost-of-follow-ups-compared-to-initial-visits)
+6) Majority of the patients are discharged after a night spent in the hospital
+   - Statistics: 7.29% same-day, 63.51% one-night, 29.20% multi-night from 262,664 visits. [Query](https://github.com/MichaelZaniewski/Healthcare-Project/edit/main/SQL%20Queries%20%26%20Results.md#1b-for-the-hospital-with-the-highest-patient-volume-what-percentage-of-patients-are-discharged-the-same-day-vs-multi-day-stays-compare-to-the-rest-of-the-dataset)
+7) The longest LOS are attributed to cancer, but the most expensive condition is cancer (in the last full year of the dataset, 2024)
+   - COVID has a max of 14 LOS while cancer has 10, but the total charge for COVID at 14 LOS is only 3.5 million whereas cancer at 10 LOS is 78 million. [Query](https://github.com/MichaelZaniewski/Healthcare-Project/edit/main/SQL%20Queries%20%26%20Results.md#2-what-conditions-drive-the-longest-and-most-expensive-hospital-stays)
 
 ## Recommendations
 1) Partner with insurers associated with the most late payments to cut bad debt 
