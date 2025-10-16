@@ -19,9 +19,11 @@ The dataset simulates how hospitals operate day-to-day: patients are admitted fo
 Each dataset models real-world hospital operations through three linked tables: `Patients`, `Visits`, and `Billing`.
 
 ### Generator Logic
-Realism: Data behaves like a real hospital: visit lengths range from same-day to multi-night, follow-ups occur where they make sense, and charges scale with condition severity and length of stay.
-Customizability: Choose how many patients to generate, set the date window, and target real U.S. ZIP codes. You can also use a fixed seed so results are repeatable.
-Validation: Built-in checks confirm clean links between patients, visits, and billing, enforce age and condition rules, and flag issues before you start analyzing.
+**Realism:** Data behaves like a real hospital: visit lengths range from same-day to multi-night, follow-ups occur where they make sense, and charges scale with condition severity and length of stay.
+
+**Customizability:** Choose how many patients to generate, set the date window, and target real U.S. ZIP codes. You can also use a fixed seed so results are repeatable.
+
+**Validation:** Built-in checks confirm clean links between patients, visits, and billing, enforce age and condition rules, and flag issues before you start analyzing.
 
 To download or learn more about the dataset generator, click [here](https://github.com/MichaelZaniewski/Healthcare-Dataset-Generator/blob/main/README.md).
 
