@@ -15,7 +15,7 @@ Insights and recommendations are provided on the following key areas:
 - High and low risk financial exposure per condition and strategies for combating late payments
 - Reducing average LOS to improve operational efficiency, turnover, and revenue performance
 
-EDA strategies in Excel and SQL used to inspect, clean, and quality-check the dataset can be found [here](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/Excel%20Cleaning%20%26%20EDA.md).
+EDA strategies in Excel and SQL used to inspect, clean, and quality-check the dataset can be found [here](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/Excel%20Cleaning%20&%20SQL%20EDA.md).
 
 Targeted SQL queries used to answer business questions and extract insights can be found [here](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/SQL%20Queries%20%26%20Results.md).
 
