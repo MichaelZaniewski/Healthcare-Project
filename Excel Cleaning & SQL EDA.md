@@ -1,5 +1,7 @@
 # Excel Data Cleaning
 
+The dataset generator is designed to be analysis-ready after generation so not much, if any, data cleaning needed to be completed before importing into SQL. Though, there is an intentional data formatting error in the `first_name` column of the patient table (the salutation is included) that needs to be removed or split to have a 100% clean dataset. This error was intentionally put in a low importance column as it is not meant to be an obstacle for analysis; it's purely for educational purposes, if desired. With that in mind, the following data checks were done to ensure no messy data was generated.
+
 ## Patients
 ### Date formatting  
 <img width="637" height="486" alt="dateformat" src="https://github.com/user-attachments/assets/e3f1ed89-95de-49b3-ade1-28a6e4167dfa" />
