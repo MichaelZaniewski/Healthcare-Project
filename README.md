@@ -28,6 +28,16 @@ Each dataset models real-world hospital operations through three linked tables: 
 To download or learn more about the dataset generator, click [here](https://github.com/MichaelZaniewski/Healthcare-Dataset-Generator/blob/main/README.md).
 
 ## Executive Summary
+### Glossary
+
+- **LOS (Length of Stay) -** The number of nights a patient spends in the hospital for a visit.
+- **Late-Paid -** A patient-responsibility balance that was eventually paid, but after the due date.
+- **Late-Unpaid -** A patient-responsibility balance that is past due and still unpaid.
+- **Follow-up -** A return visit for the same condition after an initial visit, typically for monitoring, treatment progression, or recovery checks.
+- **Same-day -** A visit where the patient is admitted and discharged on the same day (LOS = 0).
+- **One-night -** A visit with one overnight stay (LOS = 1).
+- **Multi-night -** A visit with two or more overnight stays (LOS ≥ 2).
+
 ### Overview of Findings
 
 Most cash-flow strain traces back to a few sources. Two insurers account for a large share of late and unpaid balances (by members), and patients without insurance default nearly twice as often as those with coverage. Complex conditions like cancer, kidney failure, and stroke show the highest late-payment rates because care is longer and involves repeat visits. 
@@ -37,7 +47,7 @@ Costs also climb quickly as stays get longer, peaking around the eight to ten-ni
 ### Findings
 
 1) Late-payment risk is concentrated by two insurers.
-   - Brown LLC and Williams LLC lead both in the count of late payments and in late revenue exposure, totaling about $2.6M and $1.7M respectively, with roughly 35–45% of that exposure still unpaid. This concentration indicates that a small number of payers disproportionately drive cash-flow drag.
+   - Brown LLC and Williams LLC lead both in the count of late payments bu insurer members and in late revenue exposure, totaling about $2.6M and $1.7M respectively, with roughly 35–45% of that exposure still unpaid. This concentration indicates that a small number of payers disproportionately drive cash-flow drag.
 2) Uninsured patients default almost twice as often.
    - Default rate is 20.36% for uninsured patients vs 11.89% for insured, meaning insurance status is a major driver of nonpayment. Bad-debt risk increases whenever the payer mix shifts toward self-pay.
 3) Complex conditions drive the highest late-payment rates.
@@ -54,7 +64,7 @@ As a result, capacity planning should account for steady follow-up demand even w
    - Exchange data with those insurers to flag high-risk conditions and patients who are most likely to fall behind, and allocate special attention and education to that cohort.
    - Align on faster explanations of benefits and clearer member letters so patients know exactly what they owe and when.
 
-2) Preemptive financial clearance with support & stronger collection strategies to reduce defaulting and late payments
+3) Preemptive financial clearance with support & stronger collection strategies to reduce defaulting and late payments
    - Create condition-focused pre-authorization & benefits checks for high-risk cohorts
      - A short, mandatory, front-end checklist before treatment to confirm coverage, authorizations, and patient financial setup. The hospital will provide a transparent estimate of charges, explain copay and coinsurance, available payment plans, and frequent payment reminders for high-risk late-payment conditions to reduce the frequency of late payments.
      - Roll out where risk and cost are highest:
@@ -64,11 +74,11 @@ As a result, capacity planning should account for steady follow-up demand even w
    - Offer a short follow-up call within two to three days to answer billing questions and confirm the plan.
    - Make it easy to pay: one-click links, saved payment methods, and clear instructions on how to get help.
           
-3) Create a "same-day criteria" bundle to reduce LOS from one night to same day
+4) Create a "same-day criteria" bundle to reduce LOS from one night to same day
    - For a small list of low-risk, high-volume conditions (asthma, migraine, allergies, flu), set clear go-home-today rules. If the patient has stable vitals, controlled pain with medication, no warning signs, a safe ride home, and basic support at home, they meet the criteria for same-day release.
    - Moving appropriate patients home the same day frees beds and reduces cost.
      
-4) Optimize discharge planning for conditions with high LOS
+5) Optimize discharge planning for conditions with high LOS
    - Since cost rises drastically as LOS increases, plan the discharge path from day 1.
    - Line up rehab or home-care early (have pre-generated lists to pull from) and remove common blockers: earlier imaging reads, faster transportation scheduling, and clear weekend and holiday handoffs.
 
