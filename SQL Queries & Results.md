@@ -25,7 +25,7 @@ GROUP BY insurance_provider
 ORDER BY total_late DESC
 LIMIT 20
 ```
-### 2) Total financial loss from late/unpaid bills by insurer (member balance)?
+### 2) What is the total financial loss from late/unpaid bills by insurer members?
 <img width="1127" height="713" alt="Section 1 Q2" src="https://github.com/user-attachments/assets/69d53451-3893-44b1-9492-d406f1cbaead" />
 
 - Calculation Logic:
