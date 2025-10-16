@@ -7,6 +7,14 @@ A data analytics project focused on helping healthcare organizations identify in
 
 The goal of this project is to leverage SQL to analyze utilization, length of stay, and payment behavior so leaders can improve capacity planning, streamline care pathways, and strengthen financial performance.
 
+Insights and recommendations are provided on the following key areas:
+
+- The relationships between condition, LOS, and total charge
+- Hospital and doctor efficiency in treating patients in terms of followup visits and 7-day bouncebacks
+- Insurance provider members performance: late payments, defaults 
+- High and low risk financial exposure per condition and strategies for combating late payments
+- Reducing average LOS to improve operational efficiency, turnover, and revenue performance
+
 - EDA strategies in Excel and SQL used to inspect, clean, and quality-check the dataset can be found [here](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/Excel%20Cleaning%20%26%20EDA.md).
 - Targeted SQL queries used to answer business questions and extract insights can be found [here](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/SQL%20Queries%20%26%20Results.md).
 
@@ -67,7 +75,7 @@ Costs also climb quickly as stays get longer, peaking around the eight to ten-ni
    - Exchange data with those insurers to flag high-risk conditions and patients who are most likely to fall behind, and allocate special attention and education to that cohort.
    - Align on faster explanations of benefits and clearer member letters so patients know exactly what they owe and when.
 
-3) Preemptive financial clearance with support & stronger collection strategies to reduce defaulting and late payments
+2) Preemptive financial clearance with support & stronger collection strategies to reduce defaulting and late payments
    - Create condition-focused pre-authorization & benefits checks for high-risk cohorts
      - A short, mandatory, front-end checklist before treatment to confirm coverage, authorizations, and patient financial setup. The hospital will provide a transparent estimate of charges, explain copay and coinsurance, available payment plans, and frequent payment reminders for high-risk late-payment conditions to reduce the frequency of late payments.
      - Roll out where risk and cost are highest:
@@ -77,14 +85,13 @@ Costs also climb quickly as stays get longer, peaking around the eight to ten-ni
    - Offer a short follow-up call within two to three days to answer billing questions and confirm the plan.
    - Make it easy to pay: one-click links, saved payment methods, and clear instructions on how to get help.
           
-4) Create a "same-day criteria" bundle to reduce LOS from one night to same day
+3) Create a "same-day criteria" bundle to reduce LOS from one night to same day
    - For a small list of low-risk, high-volume conditions (asthma, migraine, allergies, flu), set clear go-home-today rules. If the patient has stable vitals, controlled pain with medication, no warning signs, a safe ride home, and basic support at home, they meet the criteria for same-day release.
    - Moving appropriate patients home the same day frees beds and reduces cost.
      
-5) Optimize discharge planning for conditions with high LOS
+4) Optimize discharge planning for conditions with high LOS
    - Since cost rises drastically as LOS increases, plan the discharge path from day 1.
    - Line up rehab or home-care early (have pre-generated lists to pull from) and remove common blockers: earlier imaging reads, faster transportation scheduling, and clear weekend and holiday handoffs.
-
 
 ## Assumptions, Limitations, and Caveats
 ### Assumptions
