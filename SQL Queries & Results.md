@@ -522,23 +522,36 @@ Cost saving recommendations are anticipated to decrease outstanding debt by betw
 
 In order to measure revenue recoupment properly, certain baselines, scopes, and assumptions needed to be made.
 
-### Baseline & Scope:
+#### Baseline & Scope:
 - **Timeframe:** 2024 - The last full year the dataset holds.
 - **Billing:** Total patient responsibility sill unpaid at the cutoff date (the dollars most at risk).
 - **Type Selected:** Why patient responsibility? It's the portion of revenue most influenced by clear estimates, plan options, reminders, and outreach.
 - **Scope:** The hospital with the largest outstanding balance as of December 31st, 2024.
 
-
-### Recommendations implemented: 
+#### Assumptions For Calculation
+- Bills unpaid by year-end 2024 (`late_unpaid` and `in-progress`) were denoted as outstanding debt for counts and sums.
+- The recovery lift applies only to the unpaid balance; it does not change original charges or coverage.
+- This is a pilot-level estimate; it’s intentionally conservative and excludes denials/appeals nuance
+  
+#### Recommendations Implemented: 
 A practical bundle that healthcare organizations can implement quickly
 1) Pre-service cost clarity
 2) Friction-lite payment options
 3) Focused outreach
 4) Benefits & pre-auth hardening
 
-More details about recommendations are present in the [Readme]().
+More details about recommendations are present in the [Readme](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/README.md#recommendations).
 
-How much revenue would have been collected by the hospital with the most outstanding debt had the debt-prevention strategies been in place? 
+#### What was Compared:
+- **Baseline Lost:** Unpaid balance at 12/31/2024
+- **Recovered with Recommendations:** Applying a lift (modeled with 5%, 8%, and 10% to show sensitivity)
+- **Remaining Risk:** Baseline minus recovered
+
+#### Why 8%?
+It’s a conservative, “doable” improvement for a 30–60 day pilot that combines clearer estimates, easier payments, and short targeted outreach. Include 5% and 10% to bracket lower/higher execution.
+
+
+### How much revenue would have been collected by the hospital with the most outstanding debt had the debt-prevention strategies been in place? 
 
 <img width="1213" height="169" alt="Implemented Recommendations" src="https://github.com/user-attachments/assets/c0e90c5a-6c8e-43ef-bf47-07fbd33ab0d4" />
 
@@ -608,12 +621,6 @@ FROM top_hospital th
 CROSS JOIN rates r
 ORDER BY r.recovery_rate;
 ```
-
-### Assumptions For Calculation
-- Bills unpaid by year-end 2024 (`late_unpaid` and `in-progress`) were denoted as outstanding debt for counts and sums.
-- The recovery lift applies only to the unpaid balance; it does not change original charges or coverage.
-- This is a pilot-level estimate; it’s intentionally conservative and excludes denials/appeals nuance
-
 
 ## Next Actions
 
