@@ -516,13 +516,32 @@ FROM agg
 ORDER BY CASE WHEN scope = 'Top hospital(s)' THEN 0 ELSE 1 END;
 ```
 
-## Simulating Recommendations (Cost Saving Figures)
+## Implementation of Recommendations — Revenue Recovery Focus
 
-Cost saving recommendations are anticipated to decrease outstanding debt by between 5-10% with 8% being most likely.
+Cost saving recommendations are anticipated to decrease outstanding debt by between 5-10% with 8% being the most likely lift.  
+
+In order to measure revenue recoupment properly, certain baselines, scopes, and assumptions needed to be made.
+
+### Baseline & Scope:
+- **Timeframe:** 2024 - The last full year the dataset holds.
+- **Billing:** Total patient responsibility sill unpaid at the cutoff date (the dollars most at risk).
+- **Type Selected:** Why patient responsibility? It's the portion of revenue most influenced by clear estimates, plan options, reminders, and outreach.
+- **Scope:** The hospital with the largest outstanding balance as of December 31st, 2024.
 
 
+### Recommendations implemented: 
+A practical bundle that healthcare organizations can implement quickly
+1) Pre-service cost clarity
+2) Friction-lite payment options
+3) Focused outreach
+4) Benefits & pre-auth hardening
+
+More details about recommendations are present in the [Readme]().
 
 How much revenue would have been collected by the hospital with the most outstanding debt had the debt-prevention strategies been in place? 
+
+<img width="1213" height="169" alt="Implemented Recommendations" src="https://github.com/user-attachments/assets/c0e90c5a-6c8e-43ef-bf47-07fbd33ab0d4" />
+
 ```
 WITH params AS (
   SELECT
@@ -590,6 +609,22 @@ CROSS JOIN rates r
 ORDER BY r.recovery_rate;
 ```
 
+### Assumptions For Calculation
+- Bills unpaid by year-end 2024 (`late_unpaid` and `in-progress`) were denoted as outstanding debt for counts and sums.
+- The recovery lift applies only to the unpaid balance; it does not change original charges or coverage.
+- This is a pilot-level estimate; it’s intentionally conservative and excludes denials/appeals nuance
+
+
+## Next Actions
+
+Healthcare organizations stand to collect thousands in revenue by preventing defaults/late payments. Not only would revenue be collected at an increased rate, but default rates would decrease netting organizations substantial cashflow. 
+
+The following are actionable steps to take to implement these revenue saving measures:
+
+1) Start small: Run the pilot at the top hospital for 4-8 weeks
+2) Track three numbers weekly: New estimates delivered, payment-plan uptake, balances cured
+3) Scale what works: Extend to the next two hospitals or highest-risk service lines (ex, cancer)
+4) Close the loop: Add a short post-visit call/text for high-risk accounts within 2-3 days
 
 
 
