@@ -529,7 +529,7 @@ In order to measure revenue recoupment properly, certain baselines, scopes, and 
 - **Scope:** The hospital with the largest outstanding balance as of December 31st, 2024.
 
 #### Assumptions For Calculation
-- Bills unpaid by year-end 2024 (`late_unpaid` and `in-progress`) were denoted as outstanding debt for counts and sums.
+- Bills unpaid by year-end 2024 (`late-unpaid` and `in-progress`) were denoted as outstanding debt for counts and sums.
 - The recovery lift applies only to the unpaid balance; it does not change original charges or coverage.
 - This is a pilot-level estimate; it’s intentionally conservative and excludes denials/appeals nuance
   
