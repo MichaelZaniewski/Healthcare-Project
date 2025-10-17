@@ -515,3 +515,86 @@ SELECT
 FROM agg
 ORDER BY CASE WHEN scope = 'Top hospital(s)' THEN 0 ELSE 1 END;
 ```
+
+## Simulating Recommendations (Cost Saving Figures)
+
+Cost saving recommendations are anticipated to decrease outstanding debt by between 5-10% with 8% being most likely.
+
+
+
+How much revenue would have been collected by the hospital with the most outstanding debt had the debt-prevention strategies been in place? 
+```
+WITH params AS (
+  SELECT
+    DATE '2024-01-01' AS start_yr,
+    DATE '2025-01-01' AS next_yr,
+    DATE '2024-12-31' AS cutoff
+),
+cohort AS (
+  SELECT
+    b.billing_id,
+    b.visit_id,
+    b.patient_id,
+    b.billing_date,
+    b.expected_payment_date,
+    b.actual_payment_date,
+    b.payment_status,
+    b.patient_responsibility_amount::numeric AS patient_resp,
+    v.hospital
+  FROM billing b
+  JOIN visit v ON v.visit_id = b.visit_id
+  CROSS JOIN params p
+  WHERE b.billing_date >= p.start_yr
+    AND b.billing_date <  p.next_yr
+),
+outstanding AS (
+  SELECT
+    hospital,
+    billing_id,
+    patient_resp,
+    CASE
+      WHEN payment_status IN ('Late-Unpaid','In-progress')
+           AND (actual_payment_date IS NULL OR actual_payment_date > (SELECT cutoff FROM params))
+      THEN patient_resp
+      ELSE 0::numeric
+    END AS outstanding_amt
+  FROM cohort
+),
+by_hospital AS (
+  SELECT
+    hospital,
+    COUNT(*) FILTER (WHERE outstanding_amt > 0) AS n_outstanding_bills,
+    SUM(outstanding_amt)                         AS outstanding_total
+  FROM outstanding
+  GROUP BY hospital
+),
+top_hospital AS (
+  SELECT *
+  FROM by_hospital
+  ORDER BY outstanding_total DESC NULLS LAST
+  LIMIT 1
+),
+rates AS (
+  SELECT UNNEST(ARRAY[0.05::numeric, 0.08::numeric, 0.10::numeric]) AS recovery_rate
+)
+SELECT
+  th.hospital,
+  th.n_outstanding_bills,
+  th.outstanding_total                                 AS baseline_outstanding,
+  r.recovery_rate,
+  ROUND(th.outstanding_total * r.recovery_rate, 2)     AS estimated_recovery,
+  ROUND(th.outstanding_total
+        - th.outstanding_total * r.recovery_rate, 2)   AS remaining_after_recovery
+FROM top_hospital th
+CROSS JOIN rates r
+ORDER BY r.recovery_rate;
+```
+
+
+
+
+
+
+
+
+
