@@ -94,6 +94,9 @@ Costs also climb quickly as stays get longer, peaking around the eight to ten-ni
    - Since cost rises drastically as LOS increases, plan the discharge path from day one.
    - Line up rehab or home-care early (have pre-generated lists to pull from) and remove common blockers: earlier imaging reads, faster transportation scheduling, and clear weekend and holiday handoffs.
 
+### Cost Saving Projection After Implementation
+
+
 ## Assumptions, Limitations, and Caveats
 ### Assumptions
 - Follow‑ups are correctly linked to the original visit. “Follow‑up” ties back to the initial episode for the same patient and condition.
