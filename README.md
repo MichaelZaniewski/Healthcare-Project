@@ -96,7 +96,7 @@ Costs also climb quickly as stays get longer, peaking around the eight to ten-ni
 
 ### Cost Saving Projection After Implementation
 
-Cost saving recommendations are anticipated to decrease outstanding debt by 8%. 5% and 10% figures were included in the calculation to show sensitivity. 
+Cost saving recommendations are anticipated to **decrease outstanding debt by 8%**. 5% and 10% figures were included in the calculation to show sensitivity. The hospital with the highest outstanding debt stands to **earn over $100k+ in lost revenue**
 
 <img width="1213" height="169" alt="Implemented Recommendations" src="https://github.com/user-attachments/assets/c0e90c5a-6c8e-43ef-bf47-07fbd33ab0d4" />
 
