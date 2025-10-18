@@ -96,7 +96,16 @@ Costs also climb quickly as stays get longer, peaking around the eight to ten-ni
 
 ### Cost Saving Projection After Implementation
 
-[here](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/SQL%20Queries%20%26%20Results.md#implementation-of-recommendations--revenue-recovery-focus)
+Cost saving recommendations are anticipated to decrease outstanding debt by 8%. 5% and 10% figures were included in the calculation to show sensitivity. 
+
+<img width="1213" height="169" alt="Implemented Recommendations" src="https://github.com/user-attachments/assets/c0e90c5a-6c8e-43ef-bf47-07fbd33ab0d4" />
+
+#### Projection Explanation
+- Scope: The hospital with the highest outstanding debt was used for comparison
+- Timeframe: 2024 - the last full year of the dataset
+- Billing type selected: Patient responsibility amount - The portion of revenue most influenced by implementation 
+
+More information about the projection can be found [here](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/SQL%20Queries%20%26%20Results.md#implementation-of-recommendations--revenue-recovery-focus).
 
 ## Assumptions, Limitations, and Caveats
 ### Assumptions
