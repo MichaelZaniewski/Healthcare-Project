@@ -96,6 +96,7 @@ Costs also climb quickly as stays get longer, peaking around the eight to ten-ni
 
 ### Cost Saving Projection After Implementation
 
+[here](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/SQL%20Queries%20%26%20Results.md#implementation-of-recommendations--revenue-recovery-focus)
 
 ## Assumptions, Limitations, and Caveats
 ### Assumptions
