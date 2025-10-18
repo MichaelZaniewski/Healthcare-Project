@@ -10,7 +10,7 @@ The goal of this project is to leverage SQL to analyze utilization, length of st
 Insights and recommendations are provided on the following key areas:
 
 - The relationships between condition, LOS, and total charge
-- Hospital and doctor efficiency in treating patients in terms of followup visits and 7-day bouncebacks
+- Hospital and doctor efficiency in treating patients in terms of follow-up visits and 7-day bounce backs
 - Insurance provider members performance: late payments, defaults 
 - High and low risk financial exposure per condition and strategies for combating late payments
 - Reducing average LOS to improve operational efficiency, turnover, and revenue performance
@@ -96,14 +96,14 @@ Costs also climb quickly as stays get longer, peaking around the eight to ten-ni
 
 ### Cost Saving Projection After Implementation
 
-Cost saving recommendations are anticipated to **decrease outstanding debt by 8%**. 5% and 10% figures were included in the calculation to show sensitivity. The hospital with the highest outstanding debt stands to **earn over $100k+ in lost revenue**
+Cost saving recommendations are anticipated to **decrease outstanding debt by 8%**. 5% and 10% figures were included in the calculation to show sensitivity. The hospital with the highest outstanding debt stands to **earn over $100k+ in lost revenue.**
 
 <img width="1213" height="169" alt="Implemented Recommendations" src="https://github.com/user-attachments/assets/c0e90c5a-6c8e-43ef-bf47-07fbd33ab0d4" />
 
 #### Projection Explanation
-- **Scope:** The hospital with the highest outstanding debt was used for comparison
-- **Timeframe:** 2024 - the last full year of the dataset
-- **Billing type selected:** Patient responsibility amount - The portion of revenue most influenced by implementation 
+- **Scope:** The hospital with the highest outstanding debt was used for comparison.
+- **Timeframe:** 2024 - the last full year of the dataset.
+- **Billing type selected:** Patient responsibility amount - The portion of revenue most influenced by implementation.
 
 More information about the projection can be found [here](https://github.com/MichaelZaniewski/Healthcare-Project/blob/main/SQL%20Queries%20%26%20Results.md#implementation-of-recommendations--revenue-recovery-focus).
 
@@ -114,7 +114,7 @@ More information about the projection can be found [here](https://github.com/Mic
   
 ### Limitations
 - Synthetic data, despite realistic rules, may not capture true clinical variation like seasonal spikes. Real‑world behavior (patients, providers, payers) can differ.
-- Simplified payer behavior. Denials, appeals, carve‑outs, and clawbacks are not modeled, so “revenue at risk” may be conservative or optimistic.
+- Simplified payer behavior. Denials, appeals, carve‑outs, and claw backs are not modeled, so “revenue at risk” may be conservative or optimistic.
   
 ### Caveats
 - "Unnecessary repeat visits" should be risk-adjusted to avoid penalizing complex-case physicians.
